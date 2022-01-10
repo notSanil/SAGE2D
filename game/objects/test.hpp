@@ -7,30 +7,13 @@
 
 class Dummy : public GameObject{
 private:
-    Animator animator = Animator("src/assets/images/alien.png");
+    Animator animator = Animator("game/assets/images/alien.png");
 
 public:
-    Dummy(Point const pos){
-        this -> pos = pos;
-        animator.setFrameColumnsRows(6, 4);
-    }
-
-    void draw() override{
-        animator.renderCurrentFrameWithCamera(pos);
-        animator.nextFrame();
-    }
-
-    void step(float deltaTime) override{
-    }
-
-    void event() override{
-    }
-
-    static __stdcall GameObject* CreateObjectFn(Point const pos){
-        return new Dummy(pos);
-    }
-
-    ~Dummy() override{
-        animator.free();
-    }
+    Dummy(Point const pos);
+    void draw() override;
+    void step(float deltaTime) override;
+    void event() override;
+    static GameObject* __stdcall CreateObjectFn(Point const pos);
+    ~Dummy() override;
 };

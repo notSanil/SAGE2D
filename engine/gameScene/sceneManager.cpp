@@ -42,7 +42,6 @@ void sceneManager::changeCurrent(scenes newScene){
     delete currentScene;
     currentScene = factory -> createScene(newScene);
     currentSceneName = newScene;
-    std::cout << "Scene Changed to " << (int)currentSceneName << "\n";
 }
 
 void sceneManager::quit(){
