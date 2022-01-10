@@ -17,7 +17,6 @@ GameObject* GameObjectFactory::create(objects const object, Point const pos){
     if (it != FactoryMap.end()){
         return it -> second(pos);
     }
-
     return NULL;
 }
 

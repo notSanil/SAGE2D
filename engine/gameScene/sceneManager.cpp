@@ -1,5 +1,11 @@
 #include "sceneManager.hpp"
 
+
+sceneManager* sceneManager::get(){
+    static sceneManager instance;
+    return &instance;
+}
+
 sceneManager::sceneManager(){
     currentSceneName = (scenes)0;
     setSceneFromName();
@@ -38,17 +44,13 @@ void sceneManager::handle_step(){
     currentScene -> on_step();
 }
 
-void sceneManager::changeCurrent(scenes newScene){
+void sceneManager::quit(){
+    delete currentScene;
+}
+
+void sceneManager::changeCurrentScene(scenes newScene){
     delete currentScene;
     currentScene = factory -> createScene(newScene);
     currentSceneName = newScene;
 }
 
-void sceneManager::quit(){
-    delete currentScene;
-}
-
-sceneManager* sceneManager::get(){
-    static sceneManager instance;
-    return &instance;
-}

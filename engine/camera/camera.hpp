@@ -16,13 +16,14 @@ private:
     int min(int a, int b);
     void setPosX(int val);
     void setPosY(int val);
-    Camera(Point const gameDimensions, Point const windowDims);
+    Camera(Point const &gameDimensions, Point const &windowDims);
 
 public:
     static Camera* create(Point gameDimensions, Point windowDims);
     static Camera* get();
     Point convertToGameCoords(Point const &objPos) const;
-    void move(Point const &delPos);
+    void moveBy(Point const &delPos);
+    void moveTo(Point const &pos);
     static void destroyCamera();
     Point getPos();
 };
