@@ -46,7 +46,8 @@ int main(int argv, char **argc){
     const std::string windowName = "Game Engine";
     window = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
         WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
-    if (window == NULL){
+    
+	if (window == NULL){
         throw SDLException(Window_Failed);
     }
 

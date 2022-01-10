@@ -26,4 +26,3 @@ public:
     }
 };
 
-SDL_Renderer* Renderer::renderer = nullptr;
