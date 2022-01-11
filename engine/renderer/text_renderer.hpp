@@ -12,8 +12,9 @@
 class Font{
 public:
     SDL_Texture* getGlyph(int const ind) const;
-    static Font* get(std::string path, int size);
+    static Font* get(std::string const &path, int const size);
     void free();
+    static void freeAllFonts();
 
 private:
     static std::unordered_map<std::string, Font*> loadedFonts;

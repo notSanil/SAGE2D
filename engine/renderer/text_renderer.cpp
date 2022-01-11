@@ -1,7 +1,7 @@
 #include "text_renderer.hpp"
 
 
-Font* Font::get(std::string path, int size){
+Font* Font::get(std::string const &path, int const size){
     auto location = loadedFonts.find(path);
     if (location != loadedFonts.end()){
         return location -> second;
@@ -43,6 +43,13 @@ void Font::free(){
         delete loadedFonts.at(path);
         loadedFonts.erase(it);
     }
+}
+
+void Font::freeAllFonts(){
+    for (auto &element: loadedFonts){
+        element.second -> free();
+    }
+    loadedFonts.clear();
 }
 std::unordered_map<std::string, Font*> Font::loadedFonts;
 
