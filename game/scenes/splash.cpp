@@ -27,22 +27,29 @@ void splash::on_event(SDL_Event &e){
         switch (e.key.keysym.sym)
         {
         case SDLK_d:
-            cam -> move(Point{speed, 0});
+            cam -> moveBy(Point{speed, 0});
             break;
         
         case SDLK_w:
-            cam -> move(Point{0, -speed});
+            cam -> moveBy(Point{0, -speed});
             break;
 
         case SDLK_a:
-            cam -> move(Point{-speed, 0});
+            cam -> moveBy(Point{-speed, 0});
             break;
         
         case SDLK_s:
-            cam -> move(Point{0, speed});
+            cam -> moveBy(Point{0, speed});
             break;
+
         case SDLK_l:
-            sceneManager::get() -> changeCurrent(scenes::LEVEL1);
+            sceneManager::get() -> changeCurrentScene(scenes::LEVEL1);
+            break;
+
+        case SDLK_i:
+            cam -> moveTo(Point(800, 800));
+            break;
+        
         default:
             break;
         }

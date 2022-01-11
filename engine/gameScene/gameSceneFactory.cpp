@@ -1,16 +1,12 @@
 #include "gameSceneFactory.hpp"
 
 
-GameSceneFactory::GameSceneFactory(){};
-
-GameSceneFactory::~GameSceneFactory(){
-    FactoryMap.clear();
-}
-
 GameSceneFactory* GameSceneFactory::get(){
     static GameSceneFactory instance;
     return &instance;
 }
+
+GameSceneFactory::GameSceneFactory(){};
 
 void GameSceneFactory::Register(scenes const scene, CreateInstanceFn const create){
     FactoryMap[scene] = create;
@@ -23,4 +19,8 @@ GameScene* GameSceneFactory::createScene(const scenes scene){
     
     //This should ideally return an exception
     return NULL;
+}
+
+GameSceneFactory::~GameSceneFactory(){
+    FactoryMap.clear();
 }

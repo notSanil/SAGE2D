@@ -8,7 +8,7 @@ Dummy::Dummy(Point const pos){
 
 void Dummy::draw(){
     animator.renderCurrentFrameWithCamera(pos);
-    animator.nextFrame();
+    animator.moveToNextFrame();
 }
 
 void Dummy::step(float deltaTime){

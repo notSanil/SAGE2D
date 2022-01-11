@@ -12,10 +12,11 @@ private:
     int targetFrameRate = 24;
     float timePerFrame = 1000.0f / targetFrameRate;
     bool running = false;
+    
+    GameSceneFactory *factory = GameSceneFactory::get();
 
     sceneManager();    
     void setSceneFromName();
-    GameSceneFactory *factory = GameSceneFactory::get();
     void quit();
     void handle_event(SDL_Event &e);
     void handle_step();
@@ -23,6 +24,5 @@ private:
 public:
     static sceneManager* get();
     void run();
-    void changeCurrent(scenes newScene);
-
+    void changeCurrentScene(scenes newScene);
 };

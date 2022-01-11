@@ -16,7 +16,7 @@ private:
     SDL_Rect texSize{0, 0, 0, 0};
     SDL_Rect renderPosition{0, 0, 0, 0};
 
-    int cols = 0, rows = 0;
+    int cols = 1, rows = 1;
     int currentFrame = 0;
     
 
@@ -26,6 +26,6 @@ public:
     void renderCurrentFrameWithCamera(Point const &pos);
     void setFrameColumnsRows(int const totalColumns, int const totalRows);
     void loadAndSetTexMap(std::string path);
-    void nextFrame();
+    void moveToNextFrame();
     void free();
 };
