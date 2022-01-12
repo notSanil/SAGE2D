@@ -1,24 +1,17 @@
 SOURCE = ./src/main.o
-SCENE_MANAGER = ./engine/gameScene/sceneManager.o
-ANIMATOR = ./engine/animator/animator.o
 OUTPUT = ./build/game.exe
-CAMERA = ./engine/camera/camera.o
-RENDERER = ./engine/renderer/renderer.o
-OBJECTFACTORY = ./engine/gameObject/gameObjectFactory.o
-SCENEFACTORY = ./engine/gameScene/gameSceneFactory.o
-TEXT = ./engine/renderer/text_renderer.o
-POINT = ./engine/transform/point.o
-TEXTURE = ./engine/texture/texture.o
-
-OBJECTS = $(wildcard ./game/objects/*.o)
-SCENES = $(wildcard ./game/scenes/*.o)
-
+ENGINE_COMPONENTS_SRC = $(wildcard engine/*/*.cpp)
+ENGINE_COMPONENTS = $(ENGINE_COMPONENTS_SRC:.cpp=.o)
 ENGINE = ./engine/engine.o
+
+OBJECTSRC = $(wildcard game/objects/*.cpp)
+OBJECTS = $(OBJECTSRC:.cpp=.o)
+SCENESSRC = $(wildcard game/scenes/*.cpp)
+SCENES = $(SCENESSRC:.cpp=.o)
 
 CXXFLAGS = -Idependencies/include/ -Wall
 
 LINKER = -Ldependencies/lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf
 
-all: $(SOURCE) $(SCENE_MANAGER) $(ANIMATOR) $(CAMERA) $(RENDERER) $(OBJECTFACTORY) $(SCENEFACTORY) $(TEXT) $(POINT) $(TEXTURE) $(ENGINE)
-	g++ -o $(OUTPUT) $(SOURCE) $(SCENE_MANAGER) $(ANIMATOR) $(CAMERA) \
-$(RENDERER) $(TEXT) $(OBJECTFACTORY) $(SCENEFACTORY) $(POINT) $(OBJECTS) $(SCENES) $(TEXTURE) $(ENGINE) $(LINKER)
+all: $(SOURCE) $(ENGINE_COMPONENTS) $(OBJECTS) $(SCENES) $(ENGINE)
+	g++ -o $(OUTPUT) $(SOURCE) $(ENGINE_COMPONENTS) $(OBJECTS) $(SCENES) $(ENGINE) $(LINKER)
