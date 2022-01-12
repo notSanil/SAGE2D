@@ -6,17 +6,8 @@ Animator::Animator(std::string texMapPath){
     loadAndSetTexMap(texMapPath);
 }
 
-void Animator::loadAndSetTexMap(std::string path){
-    SDL_Texture* newTex = NULL;
-    newTex = IMG_LoadTexture(renderer, path.c_str());
-    if (newTex == NULL){
-        std::cout << "The texture was not loaded. " << IMG_GetError();
-    }
-    
-    if (texMap != NULL){
-        SDL_DestroyTexture(texMap);
-    }
-    texMap = newTex;
+void Animator::loadAndSetTexMap(std::string const &path){
+    texMap = Texture::loadTexture(path);
     
     int w, h;
     SDL_QueryTexture(texMap, NULL, NULL, &w, &h);
@@ -55,8 +46,4 @@ void Animator::moveToNextFrame(){
 
     frameSize.x = currCol * frameSize.w;
     frameSize.y = currRow * frameSize.h;
-}
-
-void Animator::free(){
-    SDL_DestroyTexture(texMap);
 }

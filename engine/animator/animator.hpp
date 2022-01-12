@@ -1,11 +1,10 @@
 #pragma once
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <iostream>
 
 #include "../renderer/renderer.hpp"
 #include "../transform/point.hpp"
 #include "../camera/camera.hpp"
+#include "../texture/texture.hpp"
 
 class Animator{
 private:
@@ -25,7 +24,6 @@ public:
     void renderCurrentFrame(Point const &pos);
     void renderCurrentFrameWithCamera(Point const &pos);
     void setFrameColumnsRows(int const totalColumns, int const totalRows);
-    void loadAndSetTexMap(std::string path);
+    void loadAndSetTexMap(std::string const &path);
     void moveToNextFrame();
-    void free();
 };

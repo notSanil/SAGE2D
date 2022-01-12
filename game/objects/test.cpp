@@ -15,6 +15,7 @@ void Dummy::step(float deltaTime){
 }
 
 void Dummy::event(){
+    std::cout << "I'm still alive asshole\n";
 }
 
 GameObject* __stdcall Dummy::CreateObjectFn(Point const pos){
@@ -22,6 +23,6 @@ GameObject* __stdcall Dummy::CreateObjectFn(Point const pos){
 }
 
 Dummy::~Dummy(){
-    animator.free();
+
 }
 

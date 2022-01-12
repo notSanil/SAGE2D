@@ -62,6 +62,7 @@ Engine::~Engine(){
     SDL_DestroyWindow(gameWindow);
     Renderer::destroy();
     Font::freeAllFonts();
+    Texture::destroyAllTextures();
     IMG_Quit();
     TTF_Quit();
     SDL_Quit();
