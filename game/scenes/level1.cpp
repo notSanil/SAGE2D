@@ -27,8 +27,9 @@ void Level1::on_exit(){
 }
 
 Level1::~Level1(){
-    for (auto object: objects){
+    for (auto &object: objects){
         delete object;
     }
+    objects.clear();
     font -> free();
 }

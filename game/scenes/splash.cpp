@@ -1,12 +1,16 @@
 #include "splash.hpp"
 
 
-
 splash::splash(){
     GameObject* test = f -> create(objects::dummy, Point{500, 0});
     GameObject* test2 = f -> create(objects::dummy, Point{500, 300});
     objects.push_back(test2);
     objects.push_back(test);
+
+    for (int i = 0; i < 5000; ++i){
+        GameObject* obj = f -> create(objects::dummy, Point(i / 600, i % 600));
+        objects.push_back(obj);
+    }
     
     renderer = Renderer::get();
     SDL_GetRendererOutputSize(renderer, &dispWidth, &dispHeight);
@@ -67,8 +71,9 @@ GameScene* __stdcall splash::CreateSceneFn(){
 }
 
 splash::~splash(){
-    for (auto object: objects){
+    for (auto &object: objects){
         delete object;
     }
+    objects.clear();
     Camera::destroyCamera();
 }
