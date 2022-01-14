@@ -11,10 +11,10 @@ void Dummy::draw(){
     animator.moveToNextFrame();
 }
 
-void Dummy::step(float deltaTime){
+void Dummy::step(const float deltaTime){
 }
 
-void Dummy::event(){
+void Dummy::event(const SDL_Event &e){
     std::cout << "I'm still alive asshole\n";
 }
 

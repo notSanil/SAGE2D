@@ -42,15 +42,15 @@ void Camera::setPosY(int val){
     pos.y = min(pos.y, maxHeight - viewPortHeight);
 }
 
-int Camera::max(int a, int b){
+int Camera::max(int a, int b) const{
     return a > b ? a : b;
 }
 
-int Camera::min(int a, int b){
+int Camera::min(int a, int b) const{
     return a > b ? b : a;
 }
 
-Point Camera::getPos(){
+Point Camera::getPos() const{
     return pos;
 }
 

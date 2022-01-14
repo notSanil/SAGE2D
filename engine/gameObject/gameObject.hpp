@@ -12,6 +12,6 @@ public:
     GameObject(){};
     virtual ~GameObject(){};
     virtual void draw() = 0;
-    virtual void step(float dt) = 0;
-    virtual void event() = 0;
+    virtual void step(const float dt) = 0;
+    virtual void event(const SDL_Event &e) = 0;
 };

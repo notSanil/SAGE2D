@@ -25,7 +25,7 @@ void splash::on_render(){
     SDL_RenderPresent(renderer);
 }
 
-void splash::on_event(SDL_Event &e){
+void splash::on_event(const SDL_Event &e){
     int const speed = 20;
     if (e.type == SDL_KEYDOWN){
         switch (e.key.keysym.sym)
@@ -60,10 +60,7 @@ void splash::on_event(SDL_Event &e){
     }
 }
 
-void splash::on_step(){
-}
-
-void splash::on_exit(){
+void splash::on_step(const float deltaTime){
 }
 
 GameScene* __stdcall splash::CreateSceneFn(){

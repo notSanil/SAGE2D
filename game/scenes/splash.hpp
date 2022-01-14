@@ -14,9 +14,8 @@ private:
 public:
     splash();
     void on_render() override;
-    void on_event(SDL_Event &e) override;
-    void on_step() override;
-    void on_exit() override;
+    void on_event(const SDL_Event &e) override;
+    void on_step(const float dt) override;
     static  GameScene* __stdcall CreateSceneFn();
     ~splash();
 };

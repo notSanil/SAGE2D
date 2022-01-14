@@ -31,17 +31,20 @@ void sceneManager::run(){
     quit();
 }
 
-void sceneManager::handle_event(SDL_Event &e){
+void sceneManager::handle_event(const SDL_Event &e){
     if (e.type == SDL_QUIT){
-        running = false;
+        stopGame();
     }
     currentScene -> on_event(e);
 }
 
 void sceneManager::handle_step(){
     float deltaTime = (SDL_GetTicks() - ticksCount) / 1000.0f;
+    if (deltaTime > 0.5){
+        deltaTime = 0.5f;
+    }
     ticksCount = SDL_GetTicks();
-    currentScene -> on_step();
+    currentScene -> on_step(deltaTime);
 }
 
 void sceneManager::quit(){
@@ -52,5 +55,9 @@ void sceneManager::changeCurrentScene(scenes newScene){
     delete currentScene;
     currentScene = factory -> createScene(newScene);
     currentSceneName = newScene;
+}
+
+void sceneManager::stopGame(){
+    running = false;
 }
 

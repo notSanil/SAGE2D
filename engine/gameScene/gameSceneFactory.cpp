@@ -8,7 +8,7 @@ GameSceneFactory* GameSceneFactory::get(){
 
 GameSceneFactory::GameSceneFactory(){};
 
-void GameSceneFactory::Register(scenes const scene, CreateInstanceFn const create){
+void GameSceneFactory::Register(scenes const scene, const CreateInstanceFn create){
     FactoryMap[scene] = create;
 }
 

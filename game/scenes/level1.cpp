@@ -1,4 +1,5 @@
 #include "level1.hpp"
+#include <iostream>
 
 
 Level1::Level1(){
@@ -10,7 +11,7 @@ GameScene* __stdcall Level1::CreateSceneFn(){
     return new Level1;
 }
 
-void Level1::on_step(){    
+void Level1::on_step(const float deltaTime){
 }
 
 void Level1::on_render(){
@@ -20,10 +21,7 @@ void Level1::on_render(){
     SDL_RenderPresent(renderer);
 }
 
-void Level1::on_event(SDL_Event &e){    
-}
-
-void Level1::on_exit(){    
+void Level1::on_event(const SDL_Event &e){    
 }
 
 Level1::~Level1(){

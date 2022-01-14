@@ -19,7 +19,7 @@ private:
 
 public:
     static GameSceneFactory* get();    
-    void Register(scenes const scene, CreateInstanceFn const create);
+    void Register(scenes const scene, const CreateInstanceFn create);
     GameScene* createScene(const scenes scene);
     ~GameSceneFactory();
 };
