@@ -20,7 +20,7 @@ private:
     
 
 public:
-    Animator(std::string texMapPath);
+    Animator(const std::string &texMapPath);
     void renderCurrentFrame(Point const &pos);
     void renderCurrentFrameWithCamera(Point const &pos);
     void setFrameColumnsRows(int const totalColumns, int const totalRows);

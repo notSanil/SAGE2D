@@ -20,6 +20,6 @@ private:
 
 public:
     static GameObjectFactory* get();    
-    void registerObject(objects const object, CreateObjectFn const func);
+    void registerObject(objects const object, const CreateObjectFn func);
     GameObject* create(objects const object, Point const pos);
 };

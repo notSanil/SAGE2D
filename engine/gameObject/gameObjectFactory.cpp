@@ -8,7 +8,7 @@ GameObjectFactory* GameObjectFactory::get(){
     return &instance;
 }    
 
-void GameObjectFactory::registerObject(objects const object, CreateObjectFn const func){
+void GameObjectFactory::registerObject(objects const object, const CreateObjectFn func){
     FactoryMap[object] = func;
 }
 

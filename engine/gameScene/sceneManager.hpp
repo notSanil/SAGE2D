@@ -9,8 +9,8 @@ private:
     GameScene *currentScene;
     
     Uint32 ticksCount = 0;
-    int targetFrameRate = 24;
-    float timePerFrame = 1000.0f / targetFrameRate;
+    const int targetFrameRate = 60;
+    const float timePerFrame = 1000.0f / targetFrameRate;
     bool running = false;
     
     GameSceneFactory *factory = GameSceneFactory::get();
@@ -18,11 +18,12 @@ private:
     sceneManager();    
     void setSceneFromName();
     void quit();
-    void handle_event(SDL_Event &e);
+    void handle_event(const SDL_Event &e);
     void handle_step();
 
 public:
     static sceneManager* get();
     void run();
     void changeCurrentScene(scenes newScene);
+    void stopGame();
 };

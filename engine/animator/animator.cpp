@@ -1,7 +1,7 @@
 #include "animator.hpp"
 
 
-Animator::Animator(std::string texMapPath){
+Animator::Animator(const std::string &texMapPath){
     renderer = Renderer::get();
     loadAndSetTexMap(texMapPath);
 }

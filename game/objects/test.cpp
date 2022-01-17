@@ -11,11 +11,10 @@ void Dummy::draw(){
     animator.moveToNextFrame();
 }
 
-void Dummy::step(float deltaTime){
+void Dummy::step(const float deltaTime){
 }
 
-void Dummy::event(){
-    std::cout << "I'm still alive asshole\n";
+void Dummy::event(const SDL_Event &e){
 }
 
 GameObject* __stdcall Dummy::CreateObjectFn(Point const pos){

@@ -19,7 +19,7 @@
 
 class Engine{
 public:
-    Engine(int const width, int const height, std::string const &name);
+    Engine(int const width, int const height, const std::string &name);
     ~Engine();
 
 private:

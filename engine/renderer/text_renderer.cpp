@@ -12,7 +12,7 @@ Font* Font::get(std::string const &path, int const size){
     return newFont;
 }
 
-Font::Font(std::string path, int size): path(path){
+Font::Font(const std::string &path, int size): path(path){
     glyphs.reserve(128);
     TTF_Font* font = TTF_OpenFont(path.c_str(), size);
     for (int i = 0; i < 128;++i){
@@ -61,7 +61,7 @@ TextRenderer* TextRenderer::get(){
 
 TextRenderer::TextRenderer(){};
 
-void TextRenderer::renderText(Font* const font, std::string const &text, SDL_Color const &col, Point const pos){
+void TextRenderer::renderText(const Font *font, std::string const &text, SDL_Color const &col, Point const pos){
     Point lastPos = pos;
     for (int i = 0; i < text.size();++i){
         SDL_Texture* glyph = font -> getGlyph(int(text.at(i)));

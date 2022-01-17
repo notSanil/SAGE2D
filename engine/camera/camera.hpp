@@ -12,8 +12,8 @@ private:
     int maxWidth, maxHeight;
     int viewPortWidth, viewPortHeight;
 
-    int max(int a, int b);
-    int min(int a, int b);
+    int max(int a, int b) const;
+    int min(int a, int b) const;
     void setPosX(int val);
     void setPosY(int val);
     Camera(Point const &gameDimensions, Point const &windowDims);
@@ -25,5 +25,5 @@ public:
     void moveBy(Point const &delPos);
     void moveTo(Point const &pos);
     static void destroyCamera();
-    Point getPos();
+    Point getPos() const;
 };

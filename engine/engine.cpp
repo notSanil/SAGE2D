@@ -1,7 +1,7 @@
 #include "engine.hpp"
 
 
-Engine::Engine(int const width, int const height, std::string const &name): 
+Engine::Engine(int const width, int const height, const std::string &name): 
 wWidth(width), 
 wHeight(height),
 gameName(name){
