@@ -1,4 +1,5 @@
 #include "texture.hpp"
+#include "Sage/renderer/renderer.hpp"
 
 
 std::unordered_map<std::string, SDL_Texture*> Texture::loadedTextures;

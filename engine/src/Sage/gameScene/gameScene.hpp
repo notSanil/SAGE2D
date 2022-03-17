@@ -3,7 +3,7 @@
 #include <SDL2/SDL.h>
 #include <vector>
 
-#include "../gameObject/gameObject.hpp"
+#include "Sage/gameObject/gameObject.hpp"
 
 
 class GameScene{

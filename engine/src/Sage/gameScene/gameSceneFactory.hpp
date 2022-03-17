@@ -1,7 +1,7 @@
 #pragma once
 #include <unordered_map>
 
-#include "gameScene.hpp"
+#include "Sage/gameScene/gameScene.hpp"
 
 enum class scenes{
     SPLASH,

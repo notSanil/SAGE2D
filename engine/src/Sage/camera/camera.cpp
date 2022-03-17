@@ -1,4 +1,5 @@
 #include "camera.hpp"
+#include <iostream>
 
 
 Camera* Camera::create(Point gameDimensions, Point windowDims){

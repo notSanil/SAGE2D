@@ -2,20 +2,7 @@
 #include <string>
 
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
 
-#include "exceptions/sdlException.hpp"
-
-#include "renderer/renderer.hpp"
-#include "gameScene/gameSceneFactory.hpp"
-#include "gameObject/gameObjectFactory.hpp"
-#include "gameScene/sceneManager.hpp"
-
-#include "../game/scenes/level1.hpp"
-#include "../game/scenes/splash.hpp"
-
-#include "../game/objects/test.hpp"
 
 class Engine{
 public:

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../engine/gameObject/gameObject.hpp"
-#include "../../engine/animator/animator.hpp"
-#include "../../engine/transform/point.hpp"
+#include "Sage/gameObject/gameObject.hpp"
+#include "Sage/animator/animator.hpp"
+#include "Sage/transform/point.hpp"
 
 
 class Dummy : public GameObject{

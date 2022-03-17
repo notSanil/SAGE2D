@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-#include "../exceptions/sdlException.hpp"
 
 class Renderer{
 private:

@@ -2,8 +2,7 @@
 #include <unordered_map>
 
 #include "gameObject.hpp"
-#include "../transform/point.hpp"
-#include "../gameScene/gameScene.hpp"
+#include "Sage/transform/point.hpp"
 
 enum class objects{
     dummy,

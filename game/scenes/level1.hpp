@@ -1,7 +1,7 @@
 #pragma once
-#include "../../engine/gameScene/gameScene.hpp"
-#include "../../engine/renderer/renderer.hpp"
-#include "../../engine/renderer/text_renderer.hpp"
+#include "Sage/gameScene/gameScene.hpp"
+#include "Sage/renderer/renderer.hpp"
+#include "Sage/renderer/text_renderer.hpp"
 
 class Level1: public GameScene{
 private:

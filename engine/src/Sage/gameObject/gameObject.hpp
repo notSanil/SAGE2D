@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL2/SDL.h>
-#include "../transform/point.hpp"
+#include "Sage/transform/point.hpp"
 
 
 class GameObject{

@@ -1,5 +1,7 @@
 #include "renderer.hpp"
 
+#include "Sage/exceptions/sdlException.hpp"
+
 
 void Renderer::init(SDL_Window *window){
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);

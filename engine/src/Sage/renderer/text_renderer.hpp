@@ -6,8 +6,7 @@
 
 #include <SDL2/SDL_ttf.h>
 
-#include "../transform/point.hpp"
-#include "renderer.hpp"
+#include "Sage/transform/point.hpp"
 
 class Font{
 public:
@@ -21,7 +20,6 @@ private:
     std::vector<SDL_Texture*> glyphs;
     std::string path;
 
-    SDL_Renderer* renderer = Renderer::get();
     SDL_Texture* create_glyph(int alphabet, TTF_Font* font);
     Font(const std::string &path, int size);
 };
@@ -32,6 +30,5 @@ public:
     static TextRenderer* get();
 
 private:
-    SDL_Renderer* renderer = Renderer::get();
     TextRenderer();
 };

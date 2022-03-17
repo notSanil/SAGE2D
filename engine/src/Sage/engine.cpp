@@ -1,5 +1,19 @@
 #include "engine.hpp"
 
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
+
+#include "Sage/exceptions/sdlException.hpp"
+
+#include "Sage/renderer/renderer.hpp"
+#include "Sage/gameScene/gameSceneFactory.hpp"
+#include "Sage/gameObject/gameObjectFactory.hpp"
+#include "Sage/gameScene/sceneManager.hpp"
+
+#include "scenes/level1.hpp"
+#include "scenes/splash.hpp"
+
+#include "objects/test.hpp"
 
 Engine::Engine(int const width, int const height, const std::string &name): 
 wWidth(width), 

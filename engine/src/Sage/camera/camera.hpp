@@ -1,7 +1,6 @@
 #pragma once
-#include <iostream>
 
-#include "../transform/point.hpp"
+#include "Sage/transform/point.hpp"
 
 class Camera{
 private:

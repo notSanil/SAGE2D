@@ -1,10 +1,10 @@
 #pragma once
-#include "../../engine/gameScene/gameScene.hpp"
-#include "../../engine/gameScene/sceneManager.hpp"
-#include "../../engine/renderer/renderer.hpp"
-#include "../../engine/transform/point.hpp"
-#include "../../engine/camera/camera.hpp"
-#include "../../engine/gameObject/gameObjectFactory.hpp"
+#include "Sage/gameScene/gameScene.hpp"
+#include "Sage/gameScene/sceneManager.hpp"
+#include "Sage/renderer/renderer.hpp"
+#include "Sage/transform/point.hpp"
+#include "Sage/camera/camera.hpp"
+#include "Sage/gameObject/gameObjectFactory.hpp"
 
 class splash : public GameScene{
 private:

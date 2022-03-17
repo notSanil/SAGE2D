@@ -1,15 +1,12 @@
 #pragma once
 #include <SDL2/SDL.h>
 
-#include "../renderer/renderer.hpp"
-#include "../transform/point.hpp"
-#include "../camera/camera.hpp"
-#include "../texture/texture.hpp"
+#include "Sage/transform/point.hpp"
+#include "Sage/texture/texture.hpp"
 
 class Animator{
 private:
     SDL_Texture* texMap = nullptr;
-    SDL_Renderer* renderer = nullptr;
 
     SDL_Rect frameSize{0, 0, 0, 0};
     SDL_Rect texSize{0, 0, 0, 0};
