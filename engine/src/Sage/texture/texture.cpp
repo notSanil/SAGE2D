@@ -10,9 +10,9 @@ SDL_Texture* Texture::loadTexture(std::string const &path){
         return location -> second;
     }
 
-    SDL_Texture* texture = IMG_LoadTexture(Renderer::get(), path.c_str());
+    SDL_Texture* texture = IMG_LoadTexture(Renderer::GetSDLRenderer(), path.c_str());
     if (texture == NULL){
-        //return an exception
+        //Return an exception
     }
     loadedTextures[path] = texture;
     return texture;

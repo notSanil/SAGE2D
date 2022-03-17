@@ -1,10 +1,11 @@
 #include "level1.hpp"
 #include <iostream>
-
+#include "Sage/renderer/renderer.hpp"
+#include "Sage/gameObject/gameObjectFactory.hpp"
 
 Level1::Level1(){
-    renderer = Renderer::get();
-    SDL_GetRendererOutputSize(renderer, &dispWidth, &dispHeight);
+    font = Font::get("game/assets/fonts/Roboto-Regular.ttf", 24);
+    objects.push_back(GameObjectFactory::get()->create(objects::texTest, {100, 100}));
 };
 
 GameScene* __stdcall Level1::CreateSceneFn(){
@@ -15,10 +16,13 @@ void Level1::on_step(const float deltaTime){
 }
 
 void Level1::on_render(){
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    SDL_RenderClear(renderer);
-    tr -> renderText(font, "Hello", SDL_Color{255, 255, 255}, Point(10, 10));
-    SDL_RenderPresent(renderer);
+    Renderer::StartScene();
+    Renderer::RenderText(font, "Hello", SDL_Color{255, 255, 255}, Point(10, 10));
+    for (auto& object: objects)
+    {
+        object->draw();
+    }
+    Renderer::EndScene();
 }
 
 void Level1::on_event(const SDL_Event &e){    

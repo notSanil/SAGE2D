@@ -27,7 +27,7 @@ Font::Font(const std::string &path, int size): path(path){
 SDL_Texture* Font::create_glyph(int alphabet, TTF_Font* font){
     SDL_Color col{255, 255, 255};
     SDL_Surface* text = TTF_RenderGlyph_Blended(font, alphabet, col);
-    SDL_Texture* text_texture = SDL_CreateTextureFromSurface(Renderer::get(), text);
+    SDL_Texture* text_texture = SDL_CreateTextureFromSurface(Renderer::GetSDLRenderer(), text);
     SDL_FreeSurface(text);
     return text_texture;
 }
@@ -79,7 +79,8 @@ void TextRenderer::renderText(const Font *font, std::string const &text, SDL_Col
 
         SDL_SetTextureColorMod(glyph, col.r, col.g, col.b);
         SDL_Rect dest{lastPos.x, lastPos.y, w, h};
-        SDL_RenderCopy(Renderer::get(), glyph, NULL, &dest);
+        Renderer::RenderTexture(glyph, Point{lastPos.x, lastPos.y}, {w, h});
+        //SDL_RenderCopy(Renderer::get(), glyph, NULL, &dest);
 
         lastPos.x += w;
     }

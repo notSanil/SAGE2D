@@ -1,28 +1,27 @@
 #include "splash.hpp"
+#include "Sage/renderer/renderer.hpp"
+
 
 
 splash::splash(){
-    GameObject* test = f -> create(objects::dummy, Point{500, 0});
-    GameObject* test2 = f -> create(objects::dummy, Point{500, 300});
+    GameObject* test = GameObjectFactory::get() -> create(objects::dummy, Point{500, 0});
+    GameObject* test2 = GameObjectFactory::get() -> create(objects::dummy, Point{500, 300});
     objects.push_back(test2);
     objects.push_back(test);
 
     for (int i = 0; i < 5000; ++i){
-        GameObject* obj = f -> create(objects::dummy, Point(i / 600, i % 600));
+        GameObject* obj = GameObjectFactory::get() -> create(objects::dummy, Point(i / 600, i % 600));
         objects.push_back(obj);
     }
-    
-    renderer = Renderer::get();
-    SDL_GetRendererOutputSize(renderer, &dispWidth, &dispHeight);
 }
 
 void splash::on_render(){
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    SDL_RenderClear(renderer);
+    Renderer::StartScene();
+
     for (auto &object: objects){
         object -> draw();
     }
-    SDL_RenderPresent(renderer);
+    Renderer::EndScene();
 }
 
 void splash::on_event(const SDL_Event &e){

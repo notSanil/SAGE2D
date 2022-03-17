@@ -6,6 +6,7 @@
 
 enum class objects{
     dummy,
+    texTest
 };
 
 typedef GameObject* (__stdcall *CreateObjectFn) (Point);

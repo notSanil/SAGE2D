@@ -1,7 +1,6 @@
 #pragma once
 #include "Sage/gameScene/gameScene.hpp"
 #include "Sage/gameScene/sceneManager.hpp"
-#include "Sage/renderer/renderer.hpp"
 #include "Sage/transform/point.hpp"
 #include "Sage/camera/camera.hpp"
 #include "Sage/gameObject/gameObjectFactory.hpp"
@@ -9,7 +8,6 @@
 class splash : public GameScene{
 private:
     Camera* cam = Camera::create(Point{800, 800}, Point{600, 600});
-    GameObjectFactory* f = GameObjectFactory::get();
 
 public:
     splash();

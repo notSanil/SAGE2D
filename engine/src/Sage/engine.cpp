@@ -14,6 +14,7 @@
 #include "scenes/splash.hpp"
 
 #include "objects/test.hpp"
+#include "objects/textureTest.hpp"
 
 Engine::Engine(int const width, int const height, const std::string &name): 
 wWidth(width), 
@@ -65,6 +66,7 @@ void Engine::initialiseSceneFactory(){
 void Engine::initialiseObjectFactory(){
     GameObjectFactory* f = GameObjectFactory::get();
     f -> registerObject(objects::dummy, &Dummy::CreateObjectFn);
+    f -> registerObject(objects::texTest, &TextureTest::CreateObjectFn);
 }
 
 void Engine::startGame(){

@@ -19,14 +19,14 @@ void Animator::loadAndSetTexMap(std::string const &path){
 void Animator::renderCurrentFrame(Point const &pos){
     renderPosition.x = pos.x;
     renderPosition.y = pos.y;
-    SDL_RenderCopy(Renderer::get(), texMap, &frameSize, &renderPosition);
+    Renderer::RenderTexture(texMap, frameSize, renderPosition);
 }
 
 void Animator::renderCurrentFrameWithCamera(Point const &pos){
     Point gameCoords = Camera::get() -> convertToGameCoords(pos);
     renderPosition.x = gameCoords.x;
     renderPosition.y = gameCoords.y;
-    SDL_RenderCopy(Renderer::get(), texMap, &frameSize, &renderPosition);
+    Renderer::RenderTexture(texMap, frameSize, renderPosition);
 }
 
 void Animator::setFrameColumnsRows(int const totalColumns, int const totalRows){

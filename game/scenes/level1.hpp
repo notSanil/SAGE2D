@@ -1,12 +1,10 @@
 #pragma once
 #include "Sage/gameScene/gameScene.hpp"
-#include "Sage/renderer/renderer.hpp"
 #include "Sage/renderer/text_renderer.hpp"
 
 class Level1: public GameScene{
 private:
-    Font* font = Font::get("game/assets/fonts/Roboto-Regular.ttf", 24);
-    TextRenderer* tr = TextRenderer::get();
+    Font* font = nullptr;
 
 public:
     Level1();
