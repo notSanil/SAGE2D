@@ -6,7 +6,6 @@
 class GameObject{
 protected:
     Point pos;
-    SDL_Renderer *renderer;
 
 public:
     GameObject(){};

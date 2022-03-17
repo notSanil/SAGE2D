@@ -78,7 +78,6 @@ void TextRenderer::renderText(const Font *font, std::string const &text, SDL_Col
         }
 
         SDL_SetTextureColorMod(glyph, col.r, col.g, col.b);
-        SDL_Rect dest{lastPos.x, lastPos.y, w, h};
         Renderer::RenderTexture(glyph, Point{lastPos.x, lastPos.y}, {w, h});
         //SDL_RenderCopy(Renderer::get(), glyph, NULL, &dest);
 
