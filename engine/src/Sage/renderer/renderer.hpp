@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include "Sage/transform/point.hpp"
-#include "Sage/renderer/text_renderer.hpp"
+#include "Sage/renderer/font.hpp"
 
 class Renderer{
 private:

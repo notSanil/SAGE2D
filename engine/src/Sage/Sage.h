@@ -1,7 +1,7 @@
 /////////////Rendering///////////////
 #include "Sage/animator/animator.hpp"
 #include "Sage/renderer/renderer.hpp"
-#include "Sage/renderer/text_renderer.hpp"
+#include "Sage/renderer/font.hpp"
 #include "Sage/texture/texture.hpp"
 
 ////////////GameObject//////////////
