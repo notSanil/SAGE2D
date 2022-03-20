@@ -1,6 +1,5 @@
 #pragma once
-#include "Sage/gameScene/gameScene.hpp"
-#include "Sage/renderer/text_renderer.hpp"
+#include "Sage/Sage.h"
 
 class Level1: public GameScene{
 private:

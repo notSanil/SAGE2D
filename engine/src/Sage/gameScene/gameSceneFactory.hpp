@@ -2,11 +2,8 @@
 #include <unordered_map>
 
 #include "Sage/gameScene/gameScene.hpp"
+#include "Sage/gameScene/scenes.hpp"
 
-enum class scenes{
-    SPLASH,
-    LEVEL1
-};
 
 typedef GameScene* (__stdcall *CreateInstanceFn) (void);
 

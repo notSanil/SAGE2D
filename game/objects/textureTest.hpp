@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Sage/gameObject/gameObject.hpp"
+#include "Sage/Sage.h"
 
 class TextureTest : public GameObject
 {

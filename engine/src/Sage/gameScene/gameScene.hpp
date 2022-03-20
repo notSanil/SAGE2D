@@ -10,10 +10,6 @@ class GameScene{
 protected:
     std::vector <GameObject*> objects;
 
-    int dispHeight, dispWidth;
-
-    SDL_Renderer *renderer;
-
 public:
     GameScene(){};
     virtual ~GameScene(){};

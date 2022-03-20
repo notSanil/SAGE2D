@@ -1,7 +1,7 @@
 #pragma once
 
 #include "gameScene.hpp"
-#include "gameSceneFactory.hpp"
+#include "Sage/gameScene/scenes.hpp"
 
 class sceneManager{
 private:
@@ -12,8 +12,6 @@ private:
     const int targetFrameRate = 60;
     const float timePerFrame = 1000.0f / targetFrameRate;
     bool running = false;
-    
-    GameSceneFactory *factory = GameSceneFactory::get();
 
     sceneManager();    
     void setSceneFromName();

@@ -1,9 +1,5 @@
 #pragma once
-#include "Sage/gameScene/gameScene.hpp"
-#include "Sage/gameScene/sceneManager.hpp"
-#include "Sage/transform/point.hpp"
-#include "Sage/camera/camera.hpp"
-#include "Sage/gameObject/gameObjectFactory.hpp"
+#include "Sage/Sage.h"
 
 class splash : public GameScene{
 private:
