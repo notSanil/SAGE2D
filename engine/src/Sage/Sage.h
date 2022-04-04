@@ -6,7 +6,6 @@
 
 ////////////GameObject//////////////
 #include "Sage/gameObject/gameObject.hpp"
-#include "Sage/gameObject/gameObjectFactory.hpp"
 
 ///////////GameScene///////////////
 #include "Sage/gameScene/gameScene.hpp"

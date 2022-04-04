@@ -1,16 +1,18 @@
 #include "splash.hpp"
-#include "Sage/renderer/renderer.hpp"
-
+#include "level1.hpp"
+#include "../game/objects/test.hpp"
 
 
 splash::splash(){
-    GameObject* test = GameObjectFactory::get() -> create(objects::dummy, Point{500, 0});
-    GameObject* test2 = GameObjectFactory::get() -> create(objects::dummy, Point{500, 300});
+
+
+    GameObject* test = new Dummy(Point{500, 0});
+    GameObject* test2 = new Dummy(Point{500, 300});
     objects.push_back(test2);
     objects.push_back(test);
 
     for (int i = 0; i < 5000; ++i){
-        GameObject* obj = GameObjectFactory::get() -> create(objects::dummy, Point(i / 600, i % 600));
+        GameObject* obj = new Dummy(Point(i / 600, i % 600));
         objects.push_back(obj);
     }
 }
@@ -46,7 +48,7 @@ void splash::on_event(const SDL_Event &e){
             break;
 
         case SDLK_l:
-            sceneManager::get() -> changeCurrentScene(scenes::LEVEL1);
+            sceneManager::get() -> changeCurrentScene<Level1>();
             break;
 
         case SDLK_i:
@@ -60,10 +62,6 @@ void splash::on_event(const SDL_Event &e){
 }
 
 void splash::on_step(const float deltaTime){
-}
-
-GameScene* __stdcall splash::CreateSceneFn(){
-    return new splash;
 }
 
 splash::~splash(){

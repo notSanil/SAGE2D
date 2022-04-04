@@ -1,15 +1,9 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-#include <vector>
-
-#include "Sage/gameObject/gameObject.hpp"
 
 
 class GameScene{
-protected:
-    std::vector <GameObject*> objects;
-
 public:
     GameScene(){};
     virtual ~GameScene(){};

@@ -17,8 +17,6 @@ private:
     void initialiseSDL();
     SDL_Window* createWindow();
     void initialiseComponents();
-    void initialiseSceneFactory();
-    void initialiseObjectFactory();
     void startGame();
 
 };

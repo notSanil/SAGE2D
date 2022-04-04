@@ -1,16 +1,10 @@
 #include "level1.hpp"
-#include <iostream>
-#include "Sage/renderer/renderer.hpp"
-#include "Sage/gameObject/gameObjectFactory.hpp"
+#include "../game/objects/textureTest.hpp"
 
 Level1::Level1(){
     font = Font::get("game/assets/fonts/Roboto-Regular.ttf", 24);
-    objects.push_back(GameObjectFactory::get()->create(objects::texTest, {100, 100}));
+    objects.push_back(new TextureTest(Point(100, 100)));
 };
-
-GameScene* __stdcall Level1::CreateSceneFn(){
-    return new Level1;
-}
 
 void Level1::on_step(const float deltaTime){
 }

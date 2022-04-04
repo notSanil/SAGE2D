@@ -6,15 +6,9 @@
 #include "Sage/exceptions/sdlException.hpp"
 
 #include "Sage/renderer/renderer.hpp"
-#include "Sage/gameScene/gameSceneFactory.hpp"
-#include "Sage/gameObject/gameObjectFactory.hpp"
 #include "Sage/gameScene/sceneManager.hpp"
 
-#include "scenes/level1.hpp"
 #include "scenes/splash.hpp"
-
-#include "objects/test.hpp"
-#include "objects/textureTest.hpp"
 
 Engine::Engine(int const width, int const height, const std::string &name): 
 wWidth(width), 
@@ -51,27 +45,13 @@ SDL_Window* Engine::createWindow(){
 }
 
 void Engine::initialiseComponents(){
-	Renderer::init(gameWindow);    
-    
-    initialiseSceneFactory();
-    initialiseObjectFactory();
-}
-
-void Engine::initialiseSceneFactory(){
-	GameSceneFactory* f = GameSceneFactory::get();
-    f -> Register(scenes::SPLASH, &splash::CreateSceneFn);
-    f -> Register(scenes::LEVEL1, &Level1::CreateSceneFn);
-}
-
-void Engine::initialiseObjectFactory(){
-    GameObjectFactory* f = GameObjectFactory::get();
-    f -> registerObject(objects::dummy, &Dummy::CreateObjectFn);
-    f -> registerObject(objects::texTest, &TextureTest::CreateObjectFn);
+	Renderer::init(gameWindow);
 }
 
 void Engine::startGame(){
     sceneManager* manager = sceneManager::get();
-    manager -> run();
+    manager->changeCurrentScene<splash>();
+    manager->run();
 }
 
 Engine::~Engine(){

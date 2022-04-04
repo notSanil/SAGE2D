@@ -1,5 +1,4 @@
 #include "sceneManager.hpp"
-#include "gameSceneFactory.hpp"
 
 
 sceneManager* sceneManager::get(){
@@ -8,13 +7,7 @@ sceneManager* sceneManager::get(){
 }
 
 sceneManager::sceneManager(){
-    currentSceneName = (scenes)0;
-    setSceneFromName();
     running = true;
-}
-
-void sceneManager::setSceneFromName(){
-    currentScene = GameSceneFactory::get() -> createScene(currentSceneName);
 }
 
 void sceneManager::run(){
@@ -50,12 +43,6 @@ void sceneManager::handle_step(){
 
 void sceneManager::quit(){
     delete currentScene;
-}
-
-void sceneManager::changeCurrentScene(scenes newScene){
-    delete currentScene;
-    currentScene = GameSceneFactory::get() -> createScene(newScene);
-    currentSceneName = newScene;
 }
 
 void sceneManager::stopGame(){
