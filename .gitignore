@@ -1,3 +1,8 @@
-game.exe
+*.exe
 **/.vscode
 **/*.o
+.vs
+**.sln
+**.vcxproj*
+*.obj
+x64

@@ -7,7 +7,7 @@
 TextureTest::TextureTest(Point pos)
 {
     this->pos = pos;
-    this->texture = Texture::loadTexture("game/assets/images/alien.png");
+    this->texture = Texture::loadTexture("assets/images/alien.png");
 }
 
 TextureTest::~TextureTest()

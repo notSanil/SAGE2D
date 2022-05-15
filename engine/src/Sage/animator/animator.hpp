@@ -1,5 +1,5 @@
 #pragma once
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 #include "Sage/transform/point.hpp"
 #include "Sage/texture/texture.hpp"

@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 
 class Engine{
@@ -18,5 +18,4 @@ private:
     SDL_Window* createWindow();
     void initialiseComponents();
     void startGame();
-
 };

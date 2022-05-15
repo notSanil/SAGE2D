@@ -5,7 +5,7 @@
 
 class Dummy : public GameObject{
 private:
-    Animator animator = Animator("game/assets/images/alien.png");
+    Animator animator = Animator("assets/images/alien.png");
 
 public:
     Dummy(Point const pos);

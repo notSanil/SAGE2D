@@ -1,0 +1,9 @@
+[submodule "engine/dependencies/SDL"]
+	path = engine/dependencies/SDL
+	url = https://github.com/notSanil/SDL.git
+[submodule "engine/dependencies/SDL_image"]
+	path = engine/dependencies/SDL_image
+	url = https://github.com/notSanil/SDL_image.git
+[submodule "engine/dependencies/SDL_ttf"]
+	path = engine/dependencies/SDL_ttf
+	url = https://github.com/notSanil/SDL_ttf.git

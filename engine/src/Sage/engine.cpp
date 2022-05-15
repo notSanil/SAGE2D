@@ -1,14 +1,13 @@
 #include "engine.hpp"
 
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
 
 #include "Sage/exceptions/sdlException.hpp"
 
 #include "Sage/renderer/renderer.hpp"
 #include "Sage/gameScene/sceneManager.hpp"
-
-#include "scenes/splash.hpp"
+#include "Sage/texture/texture.hpp"
 
 Engine::Engine(int const width, int const height, const std::string &name): 
 wWidth(width), 
@@ -17,7 +16,6 @@ gameName(name){
     initialiseSDL();
     gameWindow = createWindow();
 	initialiseComponents();
-    startGame();
 }
 
 void Engine::initialiseSDL(){
@@ -49,9 +47,7 @@ void Engine::initialiseComponents(){
 }
 
 void Engine::startGame(){
-    sceneManager* manager = sceneManager::get();
-    manager->changeCurrentScene<splash>();
-    manager->run();
+
 }
 
 Engine::~Engine(){

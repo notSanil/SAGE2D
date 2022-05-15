@@ -2,7 +2,7 @@
 #include "../game/objects/textureTest.hpp"
 
 Level1::Level1(){
-    font = Font::get("game/assets/fonts/Roboto-Regular.ttf", 24);
+    font = Font::get("assets/fonts/Roboto-Regular.ttf", 24);
     objects.push_back(new TextureTest(Point(100, 100)));
 };
 

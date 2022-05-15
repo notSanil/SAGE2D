@@ -1,6 +1,6 @@
 #pragma once
 
-#include<exception>
+#include <exception>
 
 enum SDL_EXCEPTIONS{
     SDL_Uninitialised,
