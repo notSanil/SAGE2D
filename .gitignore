@@ -6,3 +6,5 @@
 **.vcxproj*
 *.obj
 x64
+bin
+bin-int
