@@ -1,5 +1,5 @@
 #include "level1.hpp"
-#include "../game/objects/textureTest.hpp"
+#include "objects/textureTest.hpp"
 
 Level1::Level1(){
     font = Font::get("assets/fonts/Roboto-Regular.ttf", 24);

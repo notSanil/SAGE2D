@@ -3,16 +3,16 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 
-#include "Sage/exceptions/sdlException.hpp"
-
 #include "Sage/renderer/renderer.hpp"
 #include "Sage/gameScene/sceneManager.hpp"
 #include "Sage/texture/texture.hpp"
+#include "Sage/Core/Log.h"
 
 Engine::Engine(int const width, int const height, const std::string &name): 
 wWidth(width), 
 wHeight(height),
 gameName(name){
+    Sage::Log::Init();
     initialiseSDL();
     gameWindow = createWindow();
 	initialiseComponents();
@@ -20,15 +20,15 @@ gameName(name){
 
 void Engine::initialiseSDL(){
     if (SDL_Init(SDL_INIT_VIDEO) < 0){
-        throw SDLException(SDL_Uninitialised);
+        SAGE_CORE_CRIT("SDL Failed to initialise!");
     }
 
     if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)){
-        throw SDLException(Image_Failed);
+        SAGE_CORE_CRIT("SDL Image Failed to initialise!");
     }
 
     if (TTF_Init() < 0){
-        throw SDLException(Font_Failed);
+        SAGE_CORE_CRIT("SDL TTF Failed to initialise!");
     }
 }
 
@@ -37,7 +37,7 @@ SDL_Window* Engine::createWindow(){
         wWidth, wHeight, SDL_WINDOW_SHOWN);
 
 	if (win == NULL){
-        throw SDLException(Window_Failed);
+        SAGE_CORE_CRIT("Window failed to create!");
     }
 	return win;
 }

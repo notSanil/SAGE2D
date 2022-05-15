@@ -1,6 +1,6 @@
 #pragma once
 #include "Sage/Sage.h"
-#include "vector"
+#include <vector>
 
 class splash : public GameScene{
 private:

@@ -1,13 +1,13 @@
 #include "renderer.hpp"
 
-#include "Sage/exceptions/sdlException.hpp"
 #include "Sage/renderer/text_renderer.hpp"
+#include "Sage/Core/Log.h"
 
 
 void Renderer::init(SDL_Window *window){
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if (!renderer){
-        throw SDLException(Renderer_Failed);
+        SAGE_CORE_CRIT("Renderer Failed to initialise!");
     }
 }
 

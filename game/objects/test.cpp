@@ -17,10 +17,6 @@ void Dummy::step(const float deltaTime){
 void Dummy::event(const SDL_Event &e){
 }
 
-GameObject* __stdcall Dummy::CreateObjectFn(Point const pos){
-    return new Dummy(pos);
-}
-
 Dummy::~Dummy(){
 
 }

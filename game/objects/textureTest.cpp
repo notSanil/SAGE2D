@@ -1,8 +1,5 @@
 #include "textureTest.hpp"
 
-#include <Sage/texture/texture.hpp>
-#include <Sage/renderer/renderer.hpp>
-#include <iostream>
 
 TextureTest::TextureTest(Point pos)
 {
@@ -26,9 +23,4 @@ void TextureTest::step(const float dt)
 
 void TextureTest::event(const SDL_Event &e)
 {
-}
-
-GameObject* __stdcall TextureTest::CreateObjectFn(Point const pos)
-{
-    return new TextureTest(pos);
 }

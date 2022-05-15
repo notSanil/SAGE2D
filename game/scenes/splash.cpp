@@ -1,11 +1,10 @@
 #include "splash.hpp"
+
 #include "level1.hpp"
-#include "../game/objects/test.hpp"
+#include "objects/test.hpp"
 
 
 splash::splash(){
-
-
     GameObject* test = new Dummy(Point{500, 0});
     GameObject* test2 = new Dummy(Point{500, 300});
     objects.push_back(test2);

@@ -30,7 +30,8 @@ project "Sage"
         "engine/dependencies/SDL/include",
         "engine/src",
         "engine/dependencies/SDL_image",
-        "engine/dependencies/SDL_ttf"
+        "engine/dependencies/SDL_ttf",
+        "engine/dependencies/spdlog/include/"
     }
     links {
         "SDL",
@@ -57,7 +58,8 @@ project "Game"
         "engine/src",
         "game/",
         "engine/dependencies/SDL_image",
-        "engine/dependencies/SDL_ttf"
+        "engine/dependencies/SDL_ttf",
+        "engine/dependencies/spdlog/include/"
     }
     links {
         "Sage"
