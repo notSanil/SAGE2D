@@ -11,7 +11,7 @@ void Level1::on_step(const float deltaTime){
 
 void Level1::on_render(){
     Renderer::StartScene();
-    Renderer::RenderText(font, "Hello", SDL_Color{255, 255, 255}, Point(10, 10));
+    Renderer::RenderText(font, "Hello", Sage::Vec4{255, 255, 255, 255}, Point(10, 10));
     for (auto& object: objects)
     {
         object->draw();

@@ -1,5 +1,5 @@
 #include "camera.hpp"
-#include <iostream>
+#include "Sage/Core/Log.h"
 
 
 Camera* Camera::create(Point gameDimensions, Point windowDims){
@@ -16,7 +16,7 @@ Camera::Camera(Point const &gameDimensions, Point const &windowDims){
 
     if (viewPortWidth > maxWidth || viewPortHeight > maxHeight){
         //Exception to be thrown here
-        std::cout << "DIMENSIONS OF SCENE SMALLER THAN WINDOW!\n";
+        SAGE_CORE_ERROR("DIMENSIONS OF SCENE SMALLER THAN WINDOW!");
     }
 }
 

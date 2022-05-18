@@ -13,6 +13,7 @@
 
 /////////Transform////////////////
 #include "Sage/transform/point.hpp"
+#include "Sage/transform/Vec4.h"
 
 /////////Camera//////////////////
 #include "Sage/camera/camera.hpp"

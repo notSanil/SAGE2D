@@ -2,39 +2,31 @@
 #include "Sage/camera/camera.hpp"
 #include "Sage/renderer/renderer.hpp"
 
-
 Animator::Animator(const std::string &texMapPath){
-    loadAndSetTexMap(texMapPath);
+    texMap = Sage::TextureManager::load(texMapPath);
 }
 
-void Animator::loadAndSetTexMap(std::string const &path){
-    texMap = Texture::loadTexture(path);
-    
-    int w, h;
-    SDL_QueryTexture(texMap, NULL, NULL, &w, &h);
-    texSize.w = w;
-    texSize.h = h;
-}
 
-void Animator::renderCurrentFrame(Point const &pos){
+void Animator::renderCurrentFrame(Point pos){
     renderPosition.x = pos.x;
     renderPosition.y = pos.y;
-    Renderer::RenderTexture(texMap, frameSize, renderPosition);
+    Renderer::RenderTexture(texMap.get(), frameSize, renderPosition);
 }
 
-void Animator::renderCurrentFrameWithCamera(Point const &pos){
+void Animator::renderCurrentFrameWithCamera(Point pos){
     Point gameCoords = Camera::get() -> convertToGameCoords(pos);
     renderPosition.x = gameCoords.x;
     renderPosition.y = gameCoords.y;
-    Renderer::RenderTexture(texMap, frameSize, renderPosition);
+    Renderer::RenderTexture(texMap.get(), frameSize, renderPosition);
 }
 
-void Animator::setFrameColumnsRows(int const totalColumns, int const totalRows){
+void Animator::setFrameColumnsRows(int totalColumns, int totalRows)
+{
     cols = totalColumns;
     rows = totalRows;
 
-    frameSize.w = texSize.w / cols;
-    frameSize.h = texSize.h / rows;
+    frameSize.w = texMap->getWidth() / totalColumns;
+    frameSize.h = texMap->getHeight() / totalRows;
 
     renderPosition.w = frameSize.w;
     renderPosition.h = frameSize.h;

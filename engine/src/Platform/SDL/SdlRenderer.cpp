@@ -38,20 +38,20 @@ namespace Sage{
 		SDL_RenderPresent(renderer);
 	}
 
-	void SdlRenderer::RenderText(const Font* font, std::string const& text, SDL_Color const& col, Point const pos)
+	void SdlRenderer::RenderText(const Font* font, std::string const& text, Vec4 const& col, Point const pos)
 	{
 		TextRenderer::get()->renderText(font, text, col, pos);
 	}
 
-	void SdlRenderer::RenderTexture(SDL_Texture* texture, Point pos, Point dims)
+	void SdlRenderer::RenderTexture(SdlTexture* texture, Point pos, Point dims)
 	{
 		SDL_Rect destSize{ pos.x, pos.y, dims.x, dims.y };
-		SDL_RenderCopy(renderer, texture, NULL, &destSize);
+		SDL_RenderCopy(renderer, texture->texture, NULL, &destSize);
 	}
 
-	void SdlRenderer::RenderTexture(SDL_Texture* texture, SDL_Rect texSize, SDL_Rect destSize)
+	void SdlRenderer::RenderTexture(SdlTexture* texture, Vec4 texSize, Vec4 destSize)
 	{
-		SDL_RenderCopy(renderer, texture, &texSize, &destSize);
+		SDL_RenderCopy(renderer, texture->texture, (SDL_Rect*)&texSize, (SDL_Rect*)&destSize);
 	}
 
 	void SdlRenderer::RenderRect(Point pos, Point dims, int r, int g, int b)

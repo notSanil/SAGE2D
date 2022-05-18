@@ -1,38 +1,35 @@
 #include "texture.hpp"
 #include "Sage/renderer/renderer.hpp"
 #include "Sage/Core/Log.h"
+#include "Platform/SDL/SdlTexture.h"
 
-std::unordered_map<std::string, SDL_Texture*> Texture::loadedTextures;
-
-SDL_Texture* Texture::loadTexture(std::string const &path){
-    auto location = loadedTextures.find(path);
-    if (location != loadedTextures.end()){
-        return location -> second;
+namespace Sage {
+    std::unique_ptr<Texture> Texture::Create(uint32_t width, uint32_t height)
+    {
+        return std::make_unique<SdlTexture>(width, height);
     }
 
-    SDL_Texture* texture = IMG_LoadTexture(Renderer::GetSDLRenderer(), path.c_str());
-    if (texture == NULL){
-        SAGE_CORE_ERROR("Texture {0} could not be loaded.", path);
-        return nullptr;
+    std::unique_ptr<Texture> Texture::Create(const std::string& path)
+    {
+        return std::make_unique<SdlTexture>(path);
     }
-    loadedTextures[path] = texture;
-    return texture;
+
+
+    //////////////////////Texture Manager////////////////////////////////
+    std::shared_ptr<Texture> TextureManager::load(const std::string& path)
+    {
+        auto it = loadedTextures.find(path);
+        if (it == loadedTextures.end())
+        {
+            std::shared_ptr newTex = Texture::Create(path);
+            loadedTextures[path] = newTex;
+            return newTex;
+        }
+        else
+        {
+            return it->second;
+        }
+    }
+
+    std::unordered_map<std::string, std::shared_ptr<Texture>> TextureManager::loadedTextures;
 }
-
-void Texture::destroyAllTextures(){
-    for (auto &object: loadedTextures){
-        SDL_DestroyTexture(object.second);
-    }
-
-    loadedTextures.clear();
-}
-
-void Texture::destroyTexture(std::string const &path){
-    auto location = loadedTextures.find(path);
-    if (location != loadedTextures.end()){
-        SDL_DestroyTexture(location -> second);
-    }
-    loadedTextures.erase(location);
-}
-
-Texture::Texture(){};

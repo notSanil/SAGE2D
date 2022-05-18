@@ -42,10 +42,9 @@ void Engine::initialiseComponents()
 
 Engine::~Engine()
 {
+    sceneManager::quit();
     Renderer::destroy();
     Font::freeAllFonts();
-    Texture::destroyAllTextures();
-    sceneManager::quit();
 
     IMG_Quit();
     TTF_Quit();

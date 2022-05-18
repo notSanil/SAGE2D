@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Sage/Sage.h"
+#include <memory>
 
 class TextureTest : public GameObject
 {
@@ -13,5 +14,5 @@ public:
 
 
 private:
-    SDL_Texture* texture = nullptr;
+    std::shared_ptr<Sage::Texture> texture;
 };

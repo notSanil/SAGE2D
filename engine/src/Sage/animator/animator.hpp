@@ -1,16 +1,14 @@
 #pragma once
-#include <SDL.h>
-
-#include "Sage/transform/point.hpp"
 #include "Sage/texture/texture.hpp"
+#include "Sage/transform/point.hpp"
+#include "Sage/transform/Vec4.h"
 
 class Animator{
 private:
-    SDL_Texture* texMap = nullptr;
+    std::shared_ptr<Sage::Texture> texMap;
 
-    SDL_Rect frameSize{0, 0, 0, 0};
-    SDL_Rect texSize{0, 0, 0, 0};
-    SDL_Rect renderPosition{0, 0, 0, 0};
+    Sage::Vec4 frameSize{0, 0, 0, 0};
+    Sage::Vec4 renderPosition{0, 0, 0, 0};
 
     int cols = 1, rows = 1;
     int currentFrame = 0;
@@ -18,9 +16,8 @@ private:
 
 public:
     Animator(const std::string &texMapPath);
-    void renderCurrentFrame(Point const &pos);
-    void renderCurrentFrameWithCamera(Point const &pos);
-    void setFrameColumnsRows(int const totalColumns, int const totalRows);
-    void loadAndSetTexMap(std::string const &path);
+    void renderCurrentFrame(Point pos);
+    void renderCurrentFrameWithCamera(Point pos);
+    void setFrameColumnsRows(int totalColumns, int totalRows);
     void moveToNextFrame();
 };

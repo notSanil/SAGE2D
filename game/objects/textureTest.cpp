@@ -4,7 +4,7 @@
 TextureTest::TextureTest(Point pos)
 {
     this->pos = pos;
-    this->texture = Texture::loadTexture("assets/images/alien.png");
+    this->texture = Sage::TextureManager::load("assets/images/alien.png");
 }
 
 TextureTest::~TextureTest()
@@ -13,7 +13,7 @@ TextureTest::~TextureTest()
 
 void TextureTest::draw()
 {
-    Renderer::RenderTexture(texture, Point{10, 10}, {100, 100});
+    Renderer::RenderTexture(texture.get(), Point{10, 10}, {100, 100});
     Renderer::RenderRect({100, 100}, {90, 90}, 200, 100, 100);
 }
 
