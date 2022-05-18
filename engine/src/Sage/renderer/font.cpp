@@ -41,7 +41,6 @@ void Font::free(){
     auto it = loadedFonts.find(path);
     if(it != loadedFonts.end()){
         delete loadedFonts.at(path);
-        loadedFonts.erase(it);
     }
 }
 

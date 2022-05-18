@@ -27,5 +27,4 @@ Level1::~Level1(){
         delete object;
     }
     objects.clear();
-    font -> free();
 }

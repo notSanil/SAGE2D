@@ -3,8 +3,7 @@
 
 int main(int argv, char **argc){
     Engine engine(600, 600, "Game Name");
-    sceneManager* manager = sceneManager::get();
-    manager->changeCurrentScene<splash>();
-    manager->run();
+    sceneManager::changeCurrentScene<splash>();
+    engine.run();
     return 0;
 }

@@ -47,7 +47,7 @@ void splash::on_event(const SDL_Event &e){
             break;
 
         case SDLK_l:
-            sceneManager::get() -> changeCurrentScene<Level1>();
+            sceneManager::changeCurrentScene<Level1>();
             break;
 
         case SDLK_i:

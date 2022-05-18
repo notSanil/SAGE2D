@@ -1,6 +1,6 @@
 #include "texture.hpp"
 #include "Sage/renderer/renderer.hpp"
-
+#include "Sage/Core/Log.h"
 
 std::unordered_map<std::string, SDL_Texture*> Texture::loadedTextures;
 
@@ -12,7 +12,8 @@ SDL_Texture* Texture::loadTexture(std::string const &path){
 
     SDL_Texture* texture = IMG_LoadTexture(Renderer::GetSDLRenderer(), path.c_str());
     if (texture == NULL){
-        //Return an exception
+        SAGE_CORE_ERROR("Texture {0} could not be loaded.", path);
+        return nullptr;
     }
     loadedTextures[path] = texture;
     return texture;

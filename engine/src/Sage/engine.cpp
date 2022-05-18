@@ -8,54 +8,69 @@
 #include "Sage/texture/texture.hpp"
 #include "Sage/Core/Log.h"
 
-Engine::Engine(int const width, int const height, const std::string &name): 
-wWidth(width), 
-wHeight(height),
-gameName(name){
+Engine::Engine(uint32_t width, uint32_t height, const std::string &name)
+{
     Sage::Log::Init();
     initialiseSDL();
-    gameWindow = createWindow();
+    Sage::WindowProperties properties{ width, height, name };
+    window = Sage::Window::Create(properties);
 	initialiseComponents();
 }
 
-void Engine::initialiseSDL(){
-    if (SDL_Init(SDL_INIT_VIDEO) < 0){
+void Engine::initialiseSDL()
+{
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    {
         SAGE_CORE_CRIT("SDL Failed to initialise!");
     }
 
-    if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)){
+    if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
+    {
         SAGE_CORE_CRIT("SDL Image Failed to initialise!");
     }
 
-    if (TTF_Init() < 0){
+    if (TTF_Init() < 0)
+    {
         SAGE_CORE_CRIT("SDL TTF Failed to initialise!");
     }
 }
 
-SDL_Window* Engine::createWindow(){
-    SDL_Window* win = SDL_CreateWindow(gameName.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-        wWidth, wHeight, SDL_WINDOW_SHOWN);
-
-	if (win == NULL){
-        SAGE_CORE_CRIT("Window failed to create!");
-    }
-	return win;
+void Engine::initialiseComponents()
+{
+	Renderer::init(window.get());
 }
 
-void Engine::initialiseComponents(){
-	Renderer::init(gameWindow);
-}
-
-void Engine::startGame(){
-
-}
-
-Engine::~Engine(){
-    SDL_DestroyWindow(gameWindow);
+Engine::~Engine()
+{
     Renderer::destroy();
     Font::freeAllFonts();
     Texture::destroyAllTextures();
+    sceneManager::quit();
+
     IMG_Quit();
     TTF_Quit();
     SDL_Quit();
+}
+
+void Engine::run()
+{
+    while (running)
+    {
+        SDL_Event e;
+        while (SDL_PollEvent(&e))
+        {
+            if (e.type == SDL_QUIT) {
+                running = false;
+                break;
+            }
+            sceneManager::getCurrentScene()->on_event(e);
+        }
+        float deltaTime = (SDL_GetTicks() - ticksCount) / 1000.0f;
+        if (deltaTime > 0.5) {
+            deltaTime = 0.5f;
+        }
+        ticksCount = SDL_GetTicks();
+        sceneManager::getCurrentScene()->on_step(deltaTime);
+        sceneManager::getCurrentScene()->on_render();
+    }
 }

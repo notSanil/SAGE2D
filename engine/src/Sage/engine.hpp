@@ -1,21 +1,26 @@
 #pragma once
 #include <string>
 
-#include <SDL.h>
+#include <memory>
+#include <Sage/Core/Window.h>
 
 
-class Engine{
+class Engine
+{
 public:
-    Engine(int const width, int const height, const std::string &name);
+    Engine(uint32_t width, uint32_t height, const std::string& name);
     ~Engine();
 
-private:
-    int wWidth, wHeight;
-    std::string gameName;
-    SDL_Window* gameWindow;
+    void run();
 
+private:
     void initialiseSDL();
-    SDL_Window* createWindow();
     void initialiseComponents();
-    void startGame();
+
+private:
+    std::unique_ptr<Sage::Window> window;
+    bool running = true;
+    uint32_t ticksCount = 0;
+    const int targetFrameRate = 60;
+    const float timePerFrame = 1000.0f / targetFrameRate;
 };
