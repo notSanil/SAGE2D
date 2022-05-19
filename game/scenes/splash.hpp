@@ -11,6 +11,10 @@ public:
     splash();
     void on_render() override;
     void on_event(const SDL_Event &e) override;
+    virtual void on_event(const Sage::Event& e) override;
     void on_step(const float dt) override;
     ~splash();
+
+private:
+    int const speed = 20;
 };

@@ -14,6 +14,7 @@ namespace Sage {
 		virtual uint32_t getWidth() override { return width; };
 		virtual uint32_t getHeight() override { return height; };
 		virtual void setData(void* data) override;
+		virtual void setData(void* data, Vec4 dimensions) override;
 
 	private:
 		SDL_Texture* texture;

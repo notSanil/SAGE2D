@@ -44,7 +44,7 @@ Engine::~Engine()
 {
     sceneManager::quit();
     Renderer::destroy();
-    Font::freeAllFonts();
+    //Font::freeAllFonts();
 
     IMG_Quit();
     TTF_Quit();

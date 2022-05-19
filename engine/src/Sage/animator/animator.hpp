@@ -1,5 +1,5 @@
 #pragma once
-#include "Sage/texture/texture.hpp"
+#include "Sage/texture/Texture.hpp"
 #include "Sage/transform/point.hpp"
 #include "Sage/transform/Vec4.h"
 

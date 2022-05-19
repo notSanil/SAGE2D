@@ -25,9 +25,10 @@ void splash::on_render(){
     Renderer::EndScene();
 }
 
-void splash::on_event(const SDL_Event &e){
-    int const speed = 20;
-    if (e.type == SDL_KEYDOWN){
+void splash::on_event(const SDL_Event &e)
+{
+    if (e.type == SDL_KEYDOWN)
+    {
         switch (e.key.keysym.sym)
         {
         case SDLK_d:
@@ -60,7 +61,16 @@ void splash::on_event(const SDL_Event &e){
     }
 }
 
-void splash::on_step(const float deltaTime){
+void splash::on_event(const Sage::Event& e)
+{
+    if (e.GetEventType() == Sage::EventType::KeyPressed)
+    {
+        SAGE_INFO("Key Pressed");
+    }
+}
+
+void splash::on_step(const float deltaTime)
+{
 }
 
 splash::~splash(){

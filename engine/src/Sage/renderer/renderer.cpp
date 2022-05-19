@@ -13,11 +13,6 @@ void Renderer::init(Sage::Window* window)
 
 Renderer::Renderer(){};
 
-SDL_Renderer* Renderer::GetSDLRenderer()
-{
-    return Sage::SdlRenderer::GetSDLRenderer();
-}
-
 void Renderer::StartScene()
 {
     Sage::SdlRenderer::StartScene();
@@ -28,10 +23,10 @@ void Renderer::EndScene()
     Sage::SdlRenderer::EndScene();
 }
 
-void Renderer::RenderText(const Font *font, std::string const &text, Sage::Vec4 const &col, Point pos)
-{
-    Sage::SdlRenderer::RenderText(font, text, col, pos);
-}
+//void Renderer::RenderText(const Font *font, std::string const &text, Sage::Vec4 const &col, Point pos)
+//{
+//    Sage::SdlRenderer::RenderText(font, text, col, pos);
+//}
 
 void Renderer::RenderTexture(Sage::Texture* texture, Point pos, Point dims)
 {

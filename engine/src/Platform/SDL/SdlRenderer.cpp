@@ -38,10 +38,10 @@ namespace Sage{
 		SDL_RenderPresent(renderer);
 	}
 
-	void SdlRenderer::RenderText(const Font* font, std::string const& text, Vec4 const& col, Point const pos)
+	/*void SdlRenderer::RenderText(const Font* font, std::string const& text, Vec4 const& col, Point const pos)
 	{
 		TextRenderer::get()->renderText(font, text, col, pos);
-	}
+	}*/
 
 	void SdlRenderer::RenderTexture(SdlTexture* texture, Point pos, Point dims)
 	{

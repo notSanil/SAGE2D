@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SDL.h>
-
+#include "Sage/Events/Event.h"
 
 class GameScene{
 public:
@@ -10,4 +10,5 @@ public:
     virtual void on_render() = 0;
     virtual void on_step(const float dt) = 0;
     virtual void on_event(const SDL_Event &e) = 0;
+    virtual void on_event(const Sage::Event& e) = 0;
 };
