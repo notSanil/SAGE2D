@@ -19,9 +19,12 @@ namespace Sage {
 		virtual uint32_t GetWidth() override;
 		virtual uint32_t GetHeight() override;
 		virtual std::string GetName() override;
+		virtual void SetEventCallback(EventCallbackFn function) override;
+		virtual void PollEvents() override;
 	private:
+		void InitSDL();
 		WindowData windowData;
-
+		EventCallbackFn eventCallback;
 		friend class SdlRenderer;
 	};
 }

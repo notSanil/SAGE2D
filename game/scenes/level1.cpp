@@ -19,10 +19,7 @@ void Level1::on_render(){
     Renderer::EndScene();
 }
 
-void Level1::on_event(const SDL_Event &e){    
-}
-
-void Level1::on_event(const Sage::Event& e)
+void Level1::on_event(Sage::Event& e)
 {
 }
 

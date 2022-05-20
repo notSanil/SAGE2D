@@ -21,6 +21,6 @@ void TextureTest::step(const float dt)
 {
 }
 
-void TextureTest::event(const SDL_Event &e)
+void TextureTest::event(const Sage::Event& e)
 {
 }

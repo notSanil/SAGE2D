@@ -14,7 +14,8 @@ void Dummy::draw(){
 void Dummy::step(const float deltaTime){
 }
 
-void Dummy::event(const SDL_Event &e){
+void Dummy::event(const Sage::Event& e)
+{
 }
 
 Dummy::~Dummy(){

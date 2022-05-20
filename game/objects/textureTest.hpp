@@ -10,7 +10,6 @@ public:
     virtual ~TextureTest();
     virtual void draw() override;
     virtual void step(const float dt) override;
-    virtual void event(const SDL_Event &e) override;
     virtual void event(const Sage::Event& e) override;
 
 

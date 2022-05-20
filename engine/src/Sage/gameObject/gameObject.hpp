@@ -1,5 +1,4 @@
 #pragma once
-#include <SDL.h>
 #include "Sage/transform/point.hpp"
 
 
@@ -12,6 +11,5 @@ public:
     virtual ~GameObject(){};
     virtual void draw() = 0;
     virtual void step(const float dt) = 0;
-    virtual void event(const SDL_Event &e) = 0;
     virtual void event(const Sage::Event& e) = 0;
 };

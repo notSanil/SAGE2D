@@ -2,7 +2,7 @@
 
 #include "level1.hpp"
 #include "objects/test.hpp"
-
+#include "Sage/Events/KeyEvent.h"
 
 splash::splash(){
     GameObject* test = new Dummy(Point{500, 0});
@@ -25,48 +25,10 @@ void splash::on_render(){
     Renderer::EndScene();
 }
 
-void splash::on_event(const SDL_Event &e)
+void splash::on_event(Sage::Event& e)
 {
-    if (e.type == SDL_KEYDOWN)
-    {
-        switch (e.key.keysym.sym)
-        {
-        case SDLK_d:
-            cam -> moveBy(Point{speed, 0});
-            break;
-        
-        case SDLK_w:
-            cam -> moveBy(Point{0, -speed});
-            break;
-
-        case SDLK_a:
-            cam -> moveBy(Point{-speed, 0});
-            break;
-        
-        case SDLK_s:
-            cam -> moveBy(Point{0, speed});
-            break;
-
-        case SDLK_l:
-            sceneManager::changeCurrentScene<Level1>();
-            break;
-
-        case SDLK_i:
-            cam -> moveTo(Point(800, 800));
-            break;
-        
-        default:
-            break;
-        }
-    }
-}
-
-void splash::on_event(const Sage::Event& e)
-{
-    if (e.GetEventType() == Sage::EventType::KeyPressed)
-    {
-        SAGE_INFO("Key Pressed");
-    }
+    Sage::Dispatcher dispatcher(e);
+    dispatcher.Dispatch<Sage::KeyPressedEvent>(std::bind(&splash::KeyPressedCallback, this, std::placeholders::_1));
 }
 
 void splash::on_step(const float deltaTime)
@@ -79,4 +41,38 @@ splash::~splash(){
     }
     objects.clear();
     Camera::destroyCamera();
+}
+
+void splash::KeyPressedCallback(Sage::KeyPressedEvent& e)
+{
+    switch (e.GetKeyCode())
+    {
+    case Sage::KeyCode::d:
+        cam->moveBy(Point{ speed, 0 });
+        break;
+
+    case Sage::KeyCode::w:
+        cam->moveBy(Point{ 0, -speed });
+        break;
+
+    case Sage::KeyCode::a:
+        cam->moveBy(Point{ -speed, 0 });
+        break;
+
+    case Sage::KeyCode::s:
+        cam->moveBy(Point{ 0, speed });
+        break;
+
+    case Sage::KeyCode::l:
+        sceneManager::changeCurrentScene<Level1>();
+        break;
+
+    case Sage::KeyCode::i:
+        cam->moveTo(Point(800, 800));
+        break;
+
+    default:
+        break;
+    }
+    
 }

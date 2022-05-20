@@ -3,6 +3,9 @@
 
 #include <memory>
 #include <Sage/Core/Window.h>
+#include "Sage/Events/Event.h"
+#include "Sage/Events/ApplicationEvent.h"
+#include "Sage/Core/Timer.h"
 
 
 class Engine
@@ -14,8 +17,8 @@ public:
     void run();
 
 private:
-    void initialiseSDL();
-    void initialiseComponents();
+    void EventCallback(Sage::Event& e);
+    void WindowCloseEventCallback(Sage::WindowCloseEvent& e);
 
 private:
     std::unique_ptr<Sage::Window> window;
@@ -23,4 +26,6 @@ private:
     uint32_t ticksCount = 0;
     const int targetFrameRate = 60;
     const float timePerFrame = 1000.0f / targetFrameRate;
+
+    Sage::Timer timer;
 };
