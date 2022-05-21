@@ -9,6 +9,11 @@ namespace Sage {
         return std::make_unique<SdlTexture>(width, height);
     }
 
+    std::unique_ptr<Texture> Texture::Create(uint32_t width, uint32_t height, AccessFormat format)
+    {
+        return std::make_unique<SdlTexture>(width, height, format);
+    }
+
     std::unique_ptr<Texture> Texture::Create(const std::string& path)
     {
         return std::make_unique<SdlTexture>(path);

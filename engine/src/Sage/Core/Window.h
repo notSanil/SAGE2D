@@ -9,6 +9,7 @@
 namespace Sage {
 	struct WindowProperties
 	{
+		bool isFullscreen = false;
 		uint32_t width = 0, height = 0;
 		std::string name;
 	};
@@ -26,5 +27,7 @@ namespace Sage {
 		virtual std::string GetName() = 0;
 		virtual void SetEventCallback(EventCallbackFn function) = 0;
 		virtual void PollEvents() = 0;
+		virtual void SetFullscreen(bool fullscreen) = 0;
+		virtual bool IsFullscreen() = 0;
 	};
 }

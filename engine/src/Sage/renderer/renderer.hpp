@@ -18,7 +18,7 @@ public:
     static void EndScene();
 
     //static void RenderText(const Font* font, std::string const& text, Sage::Vec4 const& col, Point const pos);
-    static void RenderTexture(Sage::Texture* texture, Point pos, Point dims);
-    static void RenderTexture(Sage::Texture* texture, Sage::Vec4 texSize, Sage::Vec4 destSize);
+    static void RenderTexture(Sage::Texture* texture, Point pos, Point dims, Sage::Vec4 color = {255, 255, 255, 255});
+    static void RenderTexture(Sage::Texture* texture, Sage::Vec4 texSize, Sage::Vec4 destSize, Sage::Vec4 color = { 255, 255, 255, 255 });
     static void RenderRect(Point pos, Point dims, int r, int g, int b);
 };

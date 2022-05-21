@@ -1,9 +1,10 @@
 #include "Sage/engine.hpp"
-#include "scenes/splash.hpp"
+
+extern Sage::Engine* CreateApplication();
+
 
 int main(int argv, char **argc){
-    Engine engine(940, 540, "Game Name");
-    sceneManager::changeCurrentScene<splash>();
-    engine.run();
+    Sage::Engine* engine = CreateApplication();
+    engine->run();
     return 0;
 }

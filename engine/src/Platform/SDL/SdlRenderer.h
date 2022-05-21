@@ -19,8 +19,8 @@ namespace Sage {
         static void EndScene();
 
         //static void RenderText(const Font* font, std::string const& text, Vec4 const& col, Point const pos);
-        static void RenderTexture(SdlTexture* texture, Point pos, Point dims);
-        static void RenderTexture(SdlTexture* texture, Vec4 texSize, Vec4 destSize);
+        static void RenderTexture(SdlTexture* texture, Point pos, Point dims, Vec4 color = { 255, 255, 255, 255 });
+        static void RenderTexture(SdlTexture* texture, Vec4 texSize, Vec4 destSize, Vec4 color = { 255, 255, 255, 255 });
         static void RenderRect(Point pos, Point dims, int r, int g, int b);
 	private:
 		static SDL_Renderer* renderer;

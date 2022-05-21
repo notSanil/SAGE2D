@@ -6,10 +6,19 @@
 #include "Sage/transform/Vec4.h"
 
 namespace Sage {
+    enum class AccessFormat
+    {
+        Static,
+        Streaming,
+        Target
+    };
+
+
     class Texture
     {
     public:
         static std::unique_ptr<Texture> Create(uint32_t width, uint32_t height);
+        static std::unique_ptr<Texture> Create(uint32_t width, uint32_t height, AccessFormat format);
         static std::unique_ptr<Texture> Create(const std::string& path);
         virtual ~Texture() = 0 {};
 

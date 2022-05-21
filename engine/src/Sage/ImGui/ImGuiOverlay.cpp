@@ -41,8 +41,8 @@ namespace Sage {
 	void ImGuiOverlay::End()
 	{
 		ImGui::Render();
-		/*SDL_SetRenderDrawColor(SdlRenderer::GetSDLRenderer(), (Uint8)(clear_color.x * 255), (Uint8)(clear_color.y * 255), (Uint8)(clear_color.z * 255), (Uint8)(clear_color.w * 255));
-		SDL_RenderClear(SdlRenderer::GetSDLRenderer());*/
+		SDL_SetRenderDrawColor(SdlRenderer::GetSDLRenderer(), (Uint8)(clear_color.x * 255), (Uint8)(clear_color.y * 255), (Uint8)(clear_color.z * 255), (Uint8)(clear_color.w * 255));
+		SDL_RenderClear(SdlRenderer::GetSDLRenderer());
 		ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
 		ImGuiIO& io = ImGui::GetIO();
 		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)

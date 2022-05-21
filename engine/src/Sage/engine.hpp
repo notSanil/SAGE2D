@@ -7,32 +7,42 @@
 #include "Sage/Events/ApplicationEvent.h"
 #include "Sage/Core/Timer.h"
 #include "Sage/ImGui/ImGuiOverlay.h"
+#include "Sage/renderer/FrameBuffer.h"
+#include "Sage/Core/Layer.h"
 
-class Engine
-{
-public:
-    Engine(uint32_t width, uint32_t height, const std::string& name);
-    ~Engine();
+namespace Sage {
+    class Engine
+    {
+    public:
+        Engine(uint32_t width, uint32_t height, const std::string& name);
+        ~Engine();
 
-    static Engine& Get() { return *instance; }
+        static Engine& Get() { return *instance; }
+        uint32_t GetWindowWidth() { return window->GetWidth(); }
+        uint32_t GetWindowHeight() { return window->GetHeight(); }
+        void SetWindowFullscreen(bool fullscreen) { window->SetFullscreen(fullscreen); }
+        bool IsWindowFullscreen() { return window->IsFullscreen(); }
+        void run();
+        void PushLayer(std::unique_ptr<Layer> layer);
+        void Shutdown() { running = false; };
 
-    void run();
+    private:
+        void EventCallback(Event& e);
+        void WindowCloseEventCallback(Sage::WindowCloseEvent& e);
 
-private:
-    void EventCallback(Sage::Event& e);
-    void WindowCloseEventCallback(Sage::WindowCloseEvent& e);
+    private:
+        std::vector<std::unique_ptr<Layer>> layerStack;
 
-private:
-    static Engine* instance;
+        static Engine* instance;
 
-    std::unique_ptr<Sage::Window> window;
-    bool running = true;
-    uint32_t ticksCount = 0;
-    const int targetFrameRate = 60;
-    const float timePerFrame = 1000.0f / targetFrameRate;
+        std::unique_ptr<Window> window;
+        bool running = true;
+        const int targetFrameRate = 60;
+        const float timePerFrame = 1000.0f / targetFrameRate;
 
-    Sage::Timer timer;
-    Sage::ImGuiOverlay* ImGuiOverlay;
+        Sage::Timer timer;
+        std::unique_ptr<ImGuiOverlay> ImGuiOverlay;
 
-    friend class Sage::ImGuiOverlay;
-};
+        friend class Sage::ImGuiOverlay;
+    };
+}

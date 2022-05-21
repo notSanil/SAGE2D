@@ -1,7 +1,7 @@
 workspace "Sage"
    configurations { "Debug", "Release" }
    platforms { "x64" }
-   startproject "Game"
+   startproject "SageEditor"
 
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
@@ -55,7 +55,6 @@ project "Game"
     files {
         "game/**.cpp",
         "game/**.hpp",
-        "src/main.cpp"
     }
     includedirs {
         "engine/dependencies/SDL/include",
@@ -72,6 +71,32 @@ project "Game"
     targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
     objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
+
+project "SageEditor"
+    language "C++"
+    cppdialect "C++17"
+    location "editor/"
+    staticruntime "Off"
+    kind "ConsoleApp"
+    files {
+        "editor/**.cpp",
+        "editor/**.hpp",
+        "src/main.cpp"
+    }
+    includedirs {
+        "engine/dependencies/SDL/include",
+        "engine/src",
+        "editor/",
+        "engine/dependencies/SDL_image",
+        "engine/dependencies/SDL_ttf",
+        "engine/dependencies/spdlog/include/",
+        "engine/dependencies/imgui/"
+    }
+    links {
+        "Sage"
+    }
+    targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
 externalproject "SDL"
     location "engine/dependencies/SDL/VisualC/SDL"

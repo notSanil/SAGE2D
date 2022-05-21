@@ -28,14 +28,14 @@ void Renderer::EndScene()
 //    Sage::SdlRenderer::RenderText(font, text, col, pos);
 //}
 
-void Renderer::RenderTexture(Sage::Texture* texture, Point pos, Point dims)
+void Renderer::RenderTexture(Sage::Texture* texture, Point pos, Point dims, Sage::Vec4 color)
 {
-    Sage::SdlRenderer::RenderTexture((Sage::SdlTexture*)texture, pos, dims);
+    Sage::SdlRenderer::RenderTexture((Sage::SdlTexture*)texture, pos, dims, color);
 }
 
-void Renderer::RenderTexture(Sage::Texture* texture, Sage::Vec4 texSize, Sage::Vec4 destSize)
+void Renderer::RenderTexture(Sage::Texture* texture, Sage::Vec4 texSize, Sage::Vec4 destSize, Sage::Vec4 color)
 {
-    Sage::SdlRenderer::RenderTexture((Sage::SdlTexture*)texture, texSize, destSize);
+    Sage::SdlRenderer::RenderTexture((Sage::SdlTexture*)texture, texSize, destSize, color);
 }
 
 void Renderer::RenderRect(Point pos, Point dims, int r, int g, int b)

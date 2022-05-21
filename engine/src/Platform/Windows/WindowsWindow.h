@@ -21,6 +21,8 @@ namespace Sage {
 		virtual std::string GetName() override;
 		virtual void SetEventCallback(EventCallbackFn function) override;
 		virtual void PollEvents() override;
+		virtual void SetFullscreen(bool fullscreen) override;
+		virtual bool IsFullscreen() override { return windowData.properties.isFullscreen; };
 
 		SDL_Window* GetNativeWindow() { return windowData.windowContext; }
 	private:

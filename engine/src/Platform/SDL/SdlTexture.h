@@ -9,6 +9,7 @@ namespace Sage {
 	{
 	public:
 		SdlTexture(uint32_t width, uint32_t height);
+		SdlTexture(uint32_t width, uint32_t height, AccessFormat format);
 		SdlTexture(const std::string& path);
 		virtual ~SdlTexture() override;
 		virtual uint32_t getWidth() override { return width; };

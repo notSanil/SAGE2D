@@ -175,7 +175,7 @@ namespace Sage{
 
 		windowData.properties = properties;
 		SDL_Window* window = SDL_CreateWindow(properties.name.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 
-			properties.width, properties.height, SDL_WINDOW_SHOWN);
+			properties.width, properties.height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 		if (window == NULL)
 		{
 			SAGE_CORE_CRIT("Window creation failed!");
@@ -288,6 +288,13 @@ namespace Sage{
 			}
 		}
 	}
+	void WindowsWindow::SetFullscreen(bool fullscreen)
+	{
+		windowData.properties.isFullscreen = fullscreen;
+		Uint32 flag = fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0;
+		SDL_SetWindowFullscreen(windowData.windowContext, flag);
+	}
+
 	void WindowsWindow::InitSDL()
 	{
 		if (SDL_Init(SDL_INIT_VIDEO) < 0)

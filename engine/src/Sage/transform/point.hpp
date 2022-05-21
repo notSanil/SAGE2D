@@ -6,3 +6,10 @@ struct Point
     Point(int x, int y);
     Point();
 };
+
+namespace Sage {
+    struct Vec2
+    {
+        float x, y;
+    };
+}
