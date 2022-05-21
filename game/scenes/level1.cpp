@@ -16,7 +16,6 @@ void Level1::on_render(){
     {
         object->draw();
     }
-    Renderer::EndScene();
 }
 
 void Level1::on_event(Sage::Event& e)

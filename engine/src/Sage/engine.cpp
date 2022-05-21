@@ -6,9 +6,11 @@
 #include "Sage/gameScene/sceneManager.hpp"
 #include "Sage/texture/texture.hpp"
 #include "Sage/Core/Log.h"
+#include <imgui.h>
 
 Engine::Engine(uint32_t width, uint32_t height, const std::string &name)
 {
+	instance = this;
 	Sage::Log::Init();
 
 	Sage::WindowProperties properties{ width, height, name };
@@ -17,6 +19,8 @@ Engine::Engine(uint32_t width, uint32_t height, const std::string &name)
 
 	Renderer::init(window.get());
 	timer.Reset();
+
+	ImGuiOverlay = new Sage::ImGuiOverlay();
 }
 
 void Engine::EventCallback(Sage::Event& e)
@@ -48,5 +52,19 @@ void Engine::run()
 
 		sceneManager::getCurrentScene()->on_step(deltaTime);
 		sceneManager::getCurrentScene()->on_render();
+		ImGuiOverlay->Begin();
+		bool open = true;
+		//ImGui::ShowDemoWindow(&open);
+		ImGui::Begin("Test");
+		std::shared_ptr<Sage::Texture> tex = Sage::TextureManager::load("assets/images/alien.png");
+		ImGui::Image(tex->GetRendererID(), ImVec2{100.0f, 100.0f});
+		ImGui::End();
+		ImGuiOverlay->End();
+
+		Renderer::EndScene();
+
 	}
 }
+
+Engine* Engine::instance = nullptr;
+

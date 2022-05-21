@@ -25,19 +25,23 @@ project "Sage"
         "engine/src/Sage/**.cpp",
         "engine/src/Sage/**.hpp",
         "engine/src/Sage/**.h",
+        "engine/src/Platform/**.h",
+        "engine/src/Platform/**.cpp",
     }
     includedirs {
         "engine/dependencies/SDL/include",
         "engine/src",
         "engine/dependencies/SDL_image",
         "engine/dependencies/SDL_ttf",
-        "engine/dependencies/spdlog/include/"
+        "engine/dependencies/spdlog/include/",
+        "engine/dependencies/imgui/"
     }
     links {
         "SDL",
         "SDLmain",
         "SDL_image",
-        "SDL_ttf"
+        "SDL_ttf",
+        "ImGui"
     }
     targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
     objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
@@ -59,7 +63,8 @@ project "Game"
         "game/",
         "engine/dependencies/SDL_image",
         "engine/dependencies/SDL_ttf",
-        "engine/dependencies/spdlog/include/"
+        "engine/dependencies/spdlog/include/",
+        "engine/dependencies/imgui/"
     }
     links {
         "Sage"
@@ -71,7 +76,7 @@ project "Game"
 externalproject "SDL"
     location "engine/dependencies/SDL/VisualC/SDL"
     uuid "81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68"
-    kind "StaticLib"
+    kind "SharedLib"
     language "C"
 
 externalproject "SDLmain"
@@ -91,3 +96,38 @@ externalproject "SDL_ttf"
     uuid "DDDBD07D-DC76-4AF6-8D02-3E2DEB6EE255"
     kind "StaticLib"
     language "C"
+
+project "ImGui"
+	kind "StaticLib"
+	language "C++"
+    location "engine/dependencies/imgui/"
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files
+	{
+		"engine/dependencies/imgui/imconfig.h",
+		"engine/dependencies/imgui/imgui.h",
+		"engine/dependencies/imgui/imgui.cpp",
+		"engine/dependencies/imgui/imgui_draw.cpp",
+		"engine/dependencies/imgui/imgui_internal.h",
+		"engine/dependencies/imgui/imgui_widgets.cpp",
+		"engine/dependencies/imgui/imgui_tables.cpp",
+		"engine/dependencies/imgui/imstb_rectpack.h",
+		"engine/dependencies/imgui/imstb_textedit.h",
+		"engine/dependencies/imgui/imgui_demo.cpp",
+		"engine/dependencies/imgui/imstb_truetype.h",
+	}
+
+	filter "system:windows"
+		systemversion "latest"
+		cppdialect "C++17"
+		staticruntime "On"
+
+	filter "configurations:Debug"
+		runtime "Debug"
+		symbols "on"
+
+	filter "configurations:Release"
+		runtime "Release"
+		optimize "on"

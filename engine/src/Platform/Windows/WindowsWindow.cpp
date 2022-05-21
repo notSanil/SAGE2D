@@ -8,6 +8,7 @@
 #include "Sage/Events/MouseEvent.h"
 #include "Sage/Core/Keycodes.h"
 #include "Sage/Core/MouseCodes.h"
+#include <backends/imgui_impl_sdl.h>
 
 
 namespace Sage{
@@ -218,6 +219,7 @@ namespace Sage{
 		SDL_Event e;
 		while (SDL_PollEvent(&e))
 		{
+			ImGui_ImplSDL2_ProcessEvent(&e);
 			switch (e.type)
 			{
 				case SDL_KEYDOWN:
@@ -242,7 +244,7 @@ namespace Sage{
 				}
 				case SDL_MOUSEMOTION:
 				{
-					MouseMovedEvent ev(e.motion.x, e.motion.y);
+					MouseMovedEvent ev((float)e.motion.x, (float)e.motion.y);
 					eventCallback(ev);
 					break;
 				}

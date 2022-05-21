@@ -17,6 +17,7 @@ namespace Sage {
         virtual uint32_t getHeight() = 0;
         virtual void setData(void* data) = 0;
         virtual void setData(void* data, Vec4 dimensions) = 0;
+        virtual void* GetRendererID() = 0;
     };
 
     class TextureManager

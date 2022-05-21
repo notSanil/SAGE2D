@@ -21,6 +21,8 @@ namespace Sage {
 		virtual std::string GetName() override;
 		virtual void SetEventCallback(EventCallbackFn function) override;
 		virtual void PollEvents() override;
+
+		SDL_Window* GetNativeWindow() { return windowData.windowContext; }
 	private:
 		void InitSDL();
 		WindowData windowData;

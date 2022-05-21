@@ -22,7 +22,6 @@ void splash::on_render(){
     for (auto &object: objects){
         object -> draw();
     }
-    Renderer::EndScene();
 }
 
 void splash::on_event(Sage::Event& e)
@@ -74,5 +73,5 @@ void splash::KeyPressedCallback(Sage::KeyPressedEvent& e)
     default:
         break;
     }
-    
+    SAGE_INFO("Key {0}, pressed {1} times", (int)e.GetKeyCode(), e.GetRepeatCount());
 }
