@@ -7,42 +7,39 @@
 #include "Sage/Events/ApplicationEvent.h"
 #include "Sage/Core/Timer.h"
 #include "Sage/ImGui/ImGuiOverlay.h"
-#include "Sage/renderer/FrameBuffer.h"
 #include "Sage/Core/Layer.h"
 
 namespace Sage {
-    class Engine
-    {
-    public:
-        Engine(uint32_t width, uint32_t height, const std::string& name);
-        ~Engine();
+	class Engine
+	{
+	public:
+		Engine(uint32_t width, uint32_t height, const std::string& name);
+		~Engine();
 
-        static Engine& Get() { return *instance; }
-        uint32_t GetWindowWidth() { return window->GetWidth(); }
-        uint32_t GetWindowHeight() { return window->GetHeight(); }
-        void SetWindowFullscreen(bool fullscreen) { window->SetFullscreen(fullscreen); }
-        bool IsWindowFullscreen() { return window->IsFullscreen(); }
-        void run();
-        void PushLayer(std::unique_ptr<Layer> layer);
-        void Shutdown() { running = false; };
+		static Engine& Get() { return *instance; }
+		Window& GetWindow() { return *window; }
 
-    private:
-        void EventCallback(Event& e);
-        void WindowCloseEventCallback(Sage::WindowCloseEvent& e);
+		void run();
+		void PushLayer(std::unique_ptr<Layer> layer);
+		void Shutdown() { running = false; };
 
-    private:
-        std::vector<std::unique_ptr<Layer>> layerStack;
+	private:
+		void EventCallback(Event& e);
+		void WindowCloseEventCallback(Sage::WindowCloseEvent& e);
 
-        static Engine* instance;
+	private:
+		std::vector<std::unique_ptr<Layer>> layerStack;
 
-        std::unique_ptr<Window> window;
-        bool running = true;
-        const int targetFrameRate = 60;
-        const float timePerFrame = 1000.0f / targetFrameRate;
+		static Engine* instance;
 
-        Sage::Timer timer;
-        std::unique_ptr<ImGuiOverlay> ImGuiOverlay;
+		std::unique_ptr<Window> window;
+		bool running = true;
+		const int targetFrameRate = 60;
+		const float timePerFrame = 1000.0f / targetFrameRate;
 
-        friend class Sage::ImGuiOverlay;
-    };
+		Sage::Timer timer;
+		std::unique_ptr<ImGuiOverlay> ImGuiOverlay;
+
+		friend class Sage::ImGuiOverlay;
+	};
 }

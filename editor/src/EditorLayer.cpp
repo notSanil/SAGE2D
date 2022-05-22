@@ -3,9 +3,13 @@
 namespace Sage {
 	EditorLayer::EditorLayer()
 	{
-		frameBuffer = Sage::Framebuffer::Create(Engine::Get().GetWindowWidth(), Engine::Get().GetWindowHeight());
+		Window& window = Engine::Get().GetWindow();
+		frameBuffer = Sage::Framebuffer::Create(window.GetWidth(), window.GetHeight());
 		animator.setFrameColumnsRows(6, 4);
 		alienTexture = Texture::Create("assets/images/alien.png");
+		whiteTexture = Texture::Create(1, 1);
+		uint32_t data = 0xffffffff;
+		whiteTexture->setData((void*)&data);
 	}
 
 	EditorLayer::~EditorLayer()
@@ -28,7 +32,9 @@ namespace Sage {
 		Renderer::StartScene();
 		animator.renderCurrentFrame({ 100, 100 });
 		animator.moveToNextFrame();
+		Renderer::RenderRect({ 10, 10 }, { 20, 20 }, 255, 255, 0);
 		Renderer::RenderTexture(alienTexture.get(), Point{ 300, 300 }, Point{ 400, 400 }, {0, 255, 255, 255});
+		Renderer::RenderTexture(whiteTexture.get(), Vec4{ 0, 0, 1, 1 }, Vec4{ 300, 0, 100, 100 }, { 255, 0, 255, 255 });
 		frameBuffer->Unbind();
 	}
 
@@ -57,9 +63,7 @@ namespace Sage {
 		// any change of dockspace/settings would lead to windows being stuck in limbo and never being visible.
 
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-		bool Open = true;
-		ImGui::Begin("DockSpace Demo", &Open, window_flags);
-
+		ImGui::Begin("DockSpace Demo", NULL, window_flags);
 		ImGui::PopStyleVar(3);
 
 		// Submit the DockSpace
@@ -74,10 +78,10 @@ namespace Sage {
 		{
 			if (ImGui::BeginMenu("Options"))
 			{
-				bool isFullscreen = Engine::Get().IsWindowFullscreen();
-				if (ImGui::MenuItem("Fullscreen", NULL, isFullscreen)) 
+				Window& window = Engine::Get().GetWindow();
+				if (ImGui::MenuItem("Fullscreen", NULL, window.IsFullscreen())) 
 				{
-					Engine::Get().SetWindowFullscreen(!isFullscreen);
+					window.SetFullscreen(!window.IsFullscreen());
 				}
 
 				if (ImGui::MenuItem("Exit"))
@@ -98,9 +102,10 @@ namespace Sage {
 		
 		viewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 		
-
-		ImGui::Image(frameBuffer->GetTextureId(), ImVec2{ (float)frameBuffer->GetWidth(), (float)frameBuffer->GetHeight() });
+		ImGui::Image(frameBuffer->GetTextureId(), ImVec2{ (float)viewportSize.x, (float)viewportSize.y });
 		ImGui::End();
+
+		//ImGui::ShowDemoWindow();
 	}
 
 	void EditorLayer::OnEvent(Event& e)

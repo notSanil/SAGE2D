@@ -16,6 +16,7 @@ namespace Sage {
 	private:
 		std::unique_ptr<Framebuffer> frameBuffer;
 		std::unique_ptr<Texture> alienTexture;
+		std::unique_ptr<Texture> whiteTexture;
 		Animator animator = Animator("assets/images/alien.png");
 		Vec2 viewportSize;
 	};

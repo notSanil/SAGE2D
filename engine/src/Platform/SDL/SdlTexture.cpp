@@ -61,16 +61,16 @@ namespace Sage {
 	void SdlTexture::setData(void* data)
 	{
 		//Pitch here is hardcoded to width * 4 bytes which might be incorrect for other formats
-		int success = SDL_UpdateTexture(texture, nullptr, data, width * 4);
-		if (!success)
+		int failed = SDL_UpdateTexture(texture, nullptr, data, width * 4);
+		if (failed)
 			SAGE_CORE_ERROR("Failed to assign data to texture");
 	}
 
 	void SdlTexture::setData(void* data, Vec4 dimensions)
 	{
 		//Pitch here is hardcoded to width * 4 bytes which might be incorrect for other formats
-		int success = SDL_UpdateTexture(texture, (SDL_Rect*)&dimensions, data, width * 4);
-		if (!success)
+		int failed = SDL_UpdateTexture(texture, (SDL_Rect*)&dimensions, data, width * 4);
+		if (failed)
 			SAGE_CORE_ERROR("Failed to assign data to texture");
 	}
 }

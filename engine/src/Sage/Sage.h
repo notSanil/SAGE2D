@@ -1,6 +1,7 @@
 /////////////Rendering///////////////
 #include "Sage/animator/animator.hpp"
 #include "Sage/renderer/renderer.hpp"
+#include "Sage/renderer/FrameBuffer.h"
 //#include "Sage/renderer/font.hpp"
 #include "Sage/texture/Texture.hpp"
 
