@@ -1,15 +1,23 @@
 #include "EditorLayer.h"
+#include <entt.hpp>
+
 
 namespace Sage {
 	EditorLayer::EditorLayer()
 	{
 		Window& window = Engine::Get().GetWindow();
 		frameBuffer = Sage::Framebuffer::Create(window.GetWidth(), window.GetHeight());
-		animator.setFrameColumnsRows(6, 4);
-		alienTexture = Texture::Create("assets/images/alien.png");
-		whiteTexture = Texture::Create(1, 1);
-		uint32_t data = 0xffffffff;
-		whiteTexture->setData((void*)&data);
+		Entity alienEntity = mainScene.CreateEntity();
+		alienEntity.GetComponent<NameComponent>().name = "Alien";
+
+		Entity randomEntity = mainScene.CreateEntity();
+		randomEntity.GetComponent<NameComponent>().name = "Random";
+
+
+		SpriteRendererComponent& src = alienEntity.AddComponent<SpriteRendererComponent>();
+		src.texture = TextureManager::load("assets/images/alien.png");
+
+		entityPanel = EntityPanel(&mainScene);
 	}
 
 	EditorLayer::~EditorLayer()
@@ -30,11 +38,7 @@ namespace Sage {
 	{
 		frameBuffer->Bind();
 		Renderer::StartScene();
-		animator.renderCurrentFrame({ 100, 100 });
-		animator.moveToNextFrame();
-		Renderer::RenderRect({ 10, 10 }, { 20, 20 }, 255, 255, 0);
-		Renderer::RenderTexture(alienTexture.get(), Point{ 300, 300 }, Point{ 400, 400 }, {0, 255, 255, 255});
-		Renderer::RenderTexture(whiteTexture.get(), Vec4{ 0, 0, 1, 1 }, Vec4{ 300, 0, 100, 100 }, { 255, 0, 255, 255 });
+		mainScene.OnRender();
 		frameBuffer->Unbind();
 	}
 
@@ -105,6 +109,7 @@ namespace Sage {
 		ImGui::Image(frameBuffer->GetTextureId(), ImVec2{ (float)viewportSize.x, (float)viewportSize.y });
 		ImGui::End();
 
+		entityPanel.OnImGuiRender();
 		//ImGui::ShowDemoWindow();
 	}
 

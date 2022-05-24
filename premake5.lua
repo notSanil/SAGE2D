@@ -34,7 +34,8 @@ project "Sage"
         "engine/dependencies/SDL_image",
         "engine/dependencies/SDL_ttf",
         "engine/dependencies/spdlog/include/",
-        "engine/dependencies/imgui/"
+        "engine/dependencies/imgui/",
+        "engine/dependencies/entt/"
     }
     links {
         "SDL",
@@ -81,6 +82,7 @@ project "SageEditor"
     files {
         "editor/**.cpp",
         "editor/**.hpp",
+        "editor/**.h",
         "src/main.cpp"
     }
     includedirs {
@@ -90,7 +92,8 @@ project "SageEditor"
         "engine/dependencies/SDL_image",
         "engine/dependencies/SDL_ttf",
         "engine/dependencies/spdlog/include/",
-        "engine/dependencies/imgui/"
+        "engine/dependencies/imgui/",
+        "engine/dependencies/entt/"
     }
     links {
         "Sage"

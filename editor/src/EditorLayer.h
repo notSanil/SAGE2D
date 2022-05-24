@@ -1,6 +1,6 @@
 #pragma once
 #include <Sage/Sage.h>
-
+#include "Panels/EntityPanel.h"
 
 namespace Sage {
 	class EditorLayer : public Layer
@@ -15,9 +15,9 @@ namespace Sage {
 
 	private:
 		std::unique_ptr<Framebuffer> frameBuffer;
-		std::unique_ptr<Texture> alienTexture;
-		std::unique_ptr<Texture> whiteTexture;
-		Animator animator = Animator("assets/images/alien.png");
+		GameScene mainScene;
 		Vec2 viewportSize;
+
+		EntityPanel entityPanel;
 	};
 }

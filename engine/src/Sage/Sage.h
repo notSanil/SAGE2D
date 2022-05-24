@@ -29,5 +29,10 @@
 #include "Sage/Events/MouseEvent.h"
 
 
+////////Scenes/////////////////
+#include "Sage/gameScene/GameScene.h"
+#include "Sage/gameScene/Entity.h"
+#include "Sage/gameScene/Components.h"
+
 #include "engine.hpp"
 
