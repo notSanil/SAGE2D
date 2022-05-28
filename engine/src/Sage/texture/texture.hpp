@@ -25,7 +25,7 @@ namespace Sage {
         virtual uint32_t getWidth() = 0;
         virtual uint32_t getHeight() = 0;
         virtual void setData(void* data) = 0;
-        virtual void setData(void* data, Vec4 dimensions) = 0;
+        virtual void setData(void* data, Vec4<int> dimensions) = 0;
         virtual void* GetRendererID() = 0;
     };
 

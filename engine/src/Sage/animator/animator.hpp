@@ -7,8 +7,8 @@ class Animator{
 private:
     std::shared_ptr<Sage::Texture> texMap;
 
-    Sage::Vec4 frameSize{0, 0, 0, 0};
-    Sage::Vec4 renderPosition{0, 0, 0, 0};
+    Sage::Vec4<int> frameSize{0, 0, 0, 0};
+    Sage::Vec4<int> renderPosition{0, 0, 0, 0};
 
     int cols = 1, rows = 1;
     int currentFrame = 0;

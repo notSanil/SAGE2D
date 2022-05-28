@@ -8,14 +8,14 @@ namespace Sage {
 		Window& window = Engine::Get().GetWindow();
 		frameBuffer = Sage::Framebuffer::Create(window.GetWidth(), window.GetHeight());
 		Entity alienEntity = mainScene.CreateEntity();
-		alienEntity.GetComponent<NameComponent>().name = "Alien";
+		alienEntity.GetComponent<NameComponent>().Name = "Burger";
 
 		Entity randomEntity = mainScene.CreateEntity();
-		randomEntity.GetComponent<NameComponent>().name = "Random";
+		randomEntity.GetComponent<NameComponent>().Name = "Random";
 
 
 		SpriteRendererComponent& src = alienEntity.AddComponent<SpriteRendererComponent>();
-		src.texture = TextureManager::load("assets/images/alien.png");
+		src.texture = TextureManager::load("assets/images/Burger.png");
 
 		entityPanel = EntityPanel(&mainScene);
 	}

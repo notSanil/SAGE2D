@@ -1,18 +1,24 @@
 #pragma once
 
 namespace Sage {
+	template<typename T>
 	struct Vec4
 	{
 		union 
 		{
 			struct
 			{
-				int x, y, w, h;
+				T x, y, w, h;
 			};
 			struct
 			{
-				int r, g, b, a;
+				T r, g, b, a;
 			};
 		};
+
+		operator T* ()
+		{
+			return &x;
+		}
 	};
 }

@@ -14,7 +14,7 @@ namespace Sage {
 		instance = this;
 		Sage::Log::Init();
 
-		Sage::WindowProperties properties{ false, width, height, name };
+		Sage::WindowProperties properties{ true, width, height, name };
 		window = Sage::Window::Create(properties);
 		window->SetEventCallback(std::bind(&Engine::EventCallback, this, std::placeholders::_1));
 

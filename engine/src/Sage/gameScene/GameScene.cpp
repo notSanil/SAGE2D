@@ -30,9 +30,8 @@ namespace Sage {
 		for (auto entity : group)
 		{
 			auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
-
-			Renderer::RenderTexture(sprite.texture.get(), Point{ transform.position.x, transform.position.y },
-				Point{(int)sprite.texture->getWidth(), (int)sprite.texture->getWidth()}, sprite.color);
+			Transform t{ {transform.Position.x, transform.Position.y}, {transform.Scale.x, transform.Scale.y}, transform.Rotation };
+			Renderer::RenderRotatedTexture(sprite.texture.get(), {0, 0, (int)sprite.texture->getWidth(), (int)sprite.texture->getHeight()}, t, sprite.Color);
 		}
 	}
 }

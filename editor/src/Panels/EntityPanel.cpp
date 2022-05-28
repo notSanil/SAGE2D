@@ -34,7 +34,7 @@ namespace Sage {
 	{
 		if (entity.HasComponent<NameComponent>())
 		{
-			const std::string& name = entity.GetComponent<NameComponent>().name;
+			const std::string& name = entity.GetComponent<NameComponent>().Name;
 			
 			ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_OpenOnArrow;
 			if (currentlySelected == entity)

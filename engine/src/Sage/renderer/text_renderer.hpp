@@ -9,7 +9,7 @@
 
 class TextRenderer{
 public:
-    void renderText(const Font *font, std::string const &text, Sage::Vec4 col, Point const pos);
+    void renderText(const Font *font, std::string const &text, Sage::Vec4<int> col, Point const pos);
     static TextRenderer* get();
 
 private:

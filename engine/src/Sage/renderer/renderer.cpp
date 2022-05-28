@@ -28,14 +28,25 @@ void Renderer::EndScene()
 //    Sage::SdlRenderer::RenderText(font, text, col, pos);
 //}
 
-void Renderer::RenderTexture(Sage::Texture* texture, Point pos, Point dims, Sage::Vec4 color)
+void Renderer::RenderTexture(Sage::Texture* texture, Point pos, Point dims, Sage::Vec4<int> color)
 {
     Sage::SdlRenderer::RenderTexture((Sage::SdlTexture*)texture, pos, dims, color);
 }
 
-void Renderer::RenderTexture(Sage::Texture* texture, Sage::Vec4 texSize, Sage::Vec4 destSize, Sage::Vec4 color)
+void Renderer::RenderTexture(Sage::Texture* texture, Sage::Vec4<int> texSize, Sage::Vec4<int> destSize, Sage::Vec4<int> color)
 {
     Sage::SdlRenderer::RenderTexture((Sage::SdlTexture*)texture, texSize, destSize, color);
+}
+
+void Renderer::RenderTexture(Sage::Texture* texture, Sage::Vec4<int> texSize, Sage::Transform& transform, Sage::Vec4<int> color)
+{
+    Sage::SdlRenderer::RenderTexture((Sage::SdlTexture*)texture, texSize, transform, color);
+
+}
+
+void Renderer::RenderRotatedTexture(Sage::Texture* texture, Sage::Vec4<int> texSize, Sage::Transform& transform, Sage::Vec4<int> color)
+{
+    Sage::SdlRenderer::RenderRotatedTexture((Sage::SdlTexture*)texture, texSize, transform, color);
 }
 
 void Renderer::RenderRect(Point pos, Point dims, int r, int g, int b)

@@ -172,15 +172,21 @@ namespace Sage{
 	WindowsWindow::WindowsWindow(WindowProperties& properties)
 	{
 		InitSDL();
-
 		windowData.properties = properties;
+
+		Uint32 flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
+		flags |= properties.isFullscreen ? SDL_WINDOW_MAXIMIZED : 0;
+		
 		SDL_Window* window = SDL_CreateWindow(properties.name.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 
-			properties.width, properties.height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+			properties.width, properties.height, flags);
 		if (window == NULL)
 		{
 			SAGE_CORE_CRIT("Window creation failed!");
-		}
+		}		
 		windowData.windowContext = window;
+		SDL_DisplayMode s;
+		SDL_GetWindowDisplayMode(window, &s);
+		SAGE_CORE_INFO("{0} {1}", s.w, s.h);
 		SetupKeyCodeMap();
 	}
 

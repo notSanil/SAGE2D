@@ -8,7 +8,7 @@ TextRenderer* TextRenderer::get(){
 
 TextRenderer::TextRenderer(){};
 
-void TextRenderer::renderText(const Font *font, std::string const &text, Sage::Vec4 col, Point const pos){
+void TextRenderer::renderText(const Font *font, std::string const &text, Sage::Vec4<int> col, Point const pos){
     Point lastPos = pos;
     for (int i = 0; i < text.size();++i){
         SDL_Texture* glyph = font -> getGlyph(int(text.at(i)));

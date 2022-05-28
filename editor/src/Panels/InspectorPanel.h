@@ -14,6 +14,5 @@ namespace Sage {
 		void OnImGuiRender();
 	private:
 		Entity selected;
-
 	};
 }

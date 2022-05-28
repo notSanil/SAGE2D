@@ -3,8 +3,15 @@
 struct Point
 {
     int x, y;
-    Point(int x, int y);
-    Point();
+    Point(int x, int y) : 
+        x(x), y(y) 
+    {}
+
+    Point() {
+        x = 0;
+        y = 0;
+    }
+
     operator int* ()
     {
         return &x;
@@ -12,10 +19,11 @@ struct Point
 };
 
 namespace Sage {
+    template<typename T>
     struct Vec2
     {
-        float x, y;
-        operator float* ()
+        T x, y;
+        operator T* ()
         {
             return &x;
         }

@@ -8,25 +8,26 @@ namespace Sage {
 	struct SpriteRendererComponent
 	{
 		std::shared_ptr<Texture> texture;
-		Vec4 color{255, 255, 255, 255};
+		Vec4<int> Color{255, 255, 255, 255};
 	};
 
 	struct TransformComponent
 	{
 		TransformComponent() = default;
 		TransformComponent(int x, int y)
-			: position{ x, y }
+			: Position{ x, y }
 		{}
-		Point position{ 0, 0 };
-		Vec2 Scale{ 1, 1 };
+		Vec2<int> Position{ 0, 0 };
+		Vec2<float> Scale{ 1, 1 };
+		float Rotation = 0.0f;
 	};
 
 	struct NameComponent
 	{
 		NameComponent(const std::string& name = "NewEntity")
-			: name(name)
+			: Name(name)
 		{}
-		std::string name;
+		std::string Name;
 	};
 
 }
