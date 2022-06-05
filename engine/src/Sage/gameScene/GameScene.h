@@ -1,6 +1,8 @@
 #pragma once
 
 #include <entt.hpp>
+#include <memory>
+#include "Sage/texture/Texture.hpp"
 
 namespace Sage {
 	class Entity;

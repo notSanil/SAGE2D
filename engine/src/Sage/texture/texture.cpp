@@ -36,5 +36,17 @@ namespace Sage {
         }
     }
 
+    std::shared_ptr<Texture> TextureManager::loadWhiteTexture()
+    {
+        if (whiteTexture)
+            return whiteTexture;
+        
+        uint32_t data = 0xffffffff;
+        whiteTexture = Texture::Create(1, 1);
+        whiteTexture->setData(&data);
+        return whiteTexture;
+    }
+
     std::unordered_map<std::string, std::shared_ptr<Texture>> TextureManager::loadedTextures;
+    std::shared_ptr<Texture> TextureManager::whiteTexture = nullptr;
 }

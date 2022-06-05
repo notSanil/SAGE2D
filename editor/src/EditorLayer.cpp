@@ -1,6 +1,6 @@
 #include "EditorLayer.h"
 #include <entt.hpp>
-
+#include "Sage/System/AnimatorSystem.h"
 
 namespace Sage {
 	EditorLayer::EditorLayer()
@@ -9,15 +9,19 @@ namespace Sage {
 		frameBuffer = Sage::Framebuffer::Create(window.GetWidth(), window.GetHeight());
 		Entity alienEntity = mainScene.CreateEntity();
 		alienEntity.GetComponent<NameComponent>().Name = "Burger";
-
-		Entity randomEntity = mainScene.CreateEntity();
-		randomEntity.GetComponent<NameComponent>().Name = "Random";
-
-
 		SpriteRendererComponent& src = alienEntity.AddComponent<SpriteRendererComponent>();
 		src.texture = TextureManager::load("assets/images/Burger.png");
 
+		Entity randomEntity = mainScene.CreateEntity();
+		randomEntity.GetComponent<NameComponent>().Name = "Random";
+		
+		auto& animator = randomEntity.AddComponent<AnimatorComponent>();
+		animator.SheetGrid = { 6, 4 };
+		auto& sprite = randomEntity.AddComponent<SpriteRendererComponent>();
+		sprite.texture = TextureManager::load("assets/images/alien.png");
 		entityPanel = EntityPanel(&mainScene);
+
+		mainScene.CreateEntity();
 	}
 
 	EditorLayer::~EditorLayer()
@@ -87,7 +91,7 @@ namespace Sage {
 				{
 					window.SetFullscreen(!window.IsFullscreen());
 				}
-
+				ImGui::Separator();
 				if (ImGui::MenuItem("Exit"))
 				{
 					Engine::Get().Shutdown();
@@ -108,7 +112,6 @@ namespace Sage {
 		
 		ImGui::Image(frameBuffer->GetTextureId(), ImVec2{ (float)viewportSize.x, (float)viewportSize.y });
 		ImGui::End();
-
 		entityPanel.OnImGuiRender();
 		//ImGui::ShowDemoWindow();
 	}

@@ -53,6 +53,8 @@ namespace Sage {
 			window->PollEvents();
 
 			float deltaTime = timer.Elapsed();
+			while (deltaTime < timePerFrame)
+				deltaTime = timer.Elapsed();
 			timer.Reset();
 			for (const auto& layer : layerStack)
 			{

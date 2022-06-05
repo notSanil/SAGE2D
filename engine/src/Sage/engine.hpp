@@ -35,7 +35,7 @@ namespace Sage {
 		std::unique_ptr<Window> window;
 		bool running = true;
 		const int targetFrameRate = 60;
-		const float timePerFrame = 1000.0f / targetFrameRate;
+		const float timePerFrame = 1.0f / targetFrameRate;
 
 		Sage::Timer timer;
 		std::unique_ptr<ImGuiOverlay> ImGuiOverlay;

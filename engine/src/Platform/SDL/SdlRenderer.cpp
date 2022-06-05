@@ -14,6 +14,7 @@ namespace Sage{
 			return;
 		}
 		renderer = SDL_CreateRenderer(window->windowData.windowContext, -1, SDL_RENDERER_ACCELERATED);
+		SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
 	}
 
 	void SdlRenderer::destroy()
@@ -65,8 +66,8 @@ namespace Sage{
 	void SdlRenderer::RenderTexture(SdlTexture* texture, Sage::Vec4<int> texSize, Transform& transform, Sage::Vec4<int> color)
 	{
 		SDL_Rect dest_rect = { transform.Position.x, transform.Position.y, 
-			(float)texture->getWidth() * transform.Scale.x, 
-			(float)texture->getHeight() * transform.Scale.y };
+			(float)texSize.w * transform.Scale.x, 
+			(float)texSize.h * transform.Scale.y };
 		Uint8 r, g, b;
 		SDL_GetTextureColorMod(texture->texture, &r, &g, &b);
 		SDL_SetTextureColorMod(texture->texture, color.r, color.g, color.b);
@@ -77,8 +78,8 @@ namespace Sage{
 	void SdlRenderer::RenderRotatedTexture(SdlTexture* texture, Sage::Vec4<int> texSize, Transform& transform, Sage::Vec4<int> color)
 	{
 		SDL_Rect dest_rect = { transform.Position.x, transform.Position.y,
-			(float)texture->getWidth() * transform.Scale.x,
-			(float)texture->getHeight() * transform.Scale.y };
+			(float)texSize.w * transform.Scale.x,
+			(float)texSize.h * transform.Scale.y };
 		Uint8 r, g, b;
 		SDL_GetTextureColorMod(texture->texture, &r, &g, &b);
 		SDL_SetTextureColorMod(texture->texture, color.r, color.g, color.b);

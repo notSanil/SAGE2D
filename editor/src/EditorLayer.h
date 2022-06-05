@@ -1,6 +1,7 @@
 #pragma once
 #include <Sage/Sage.h>
 #include "Panels/EntityPanel.h"
+#include "Sage/animator/animator.hpp"
 
 namespace Sage {
 	class EditorLayer : public Layer
@@ -17,7 +18,6 @@ namespace Sage {
 		std::unique_ptr<Framebuffer> frameBuffer;
 		GameScene mainScene;
 		Vec2<float> viewportSize;
-
 		EntityPanel entityPanel;
 	};
 }

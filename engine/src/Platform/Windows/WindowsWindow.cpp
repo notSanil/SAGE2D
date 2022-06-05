@@ -297,8 +297,10 @@ namespace Sage{
 	void WindowsWindow::SetFullscreen(bool fullscreen)
 	{
 		windowData.properties.isFullscreen = fullscreen;
-		Uint32 flag = fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0;
-		SDL_SetWindowFullscreen(windowData.windowContext, flag);
+		if (fullscreen)
+			SDL_MaximizeWindow(windowData.windowContext);
+		else
+			SDL_RestoreWindow(windowData.windowContext);
 	}
 
 	void WindowsWindow::InitSDL()

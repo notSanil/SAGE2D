@@ -17,11 +17,34 @@ namespace Sage {
 			DrawEntityNode(e);
 		});
 
+
+		bool deleted = false;
+		if (ImGui::IsWindowFocused())
+		{
+			if (ImGui::IsKeyPressed(ImGuiKey_Delete))
+			{
+				deleted = true;
+			}
+		}
+
+		if (ImGui::BeginPopupContextWindow(NULL, ImGuiPopupFlags_NoOpenOverItems | ImGuiPopupFlags_MouseButtonRight))
+		{
+			if (ImGui::MenuItem("Create Empty Entity"))
+				sceneContext->CreateEntity();
+
+			ImGui::EndPopup();
+		}
+
 		/*if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered(ImGuiHoveredFlags_None))
 			SetSelectedEntity({});*/
 		ImGui::End();
-		//ImGui::ShowDemoWindow();
 		inspector.OnImGuiRender();
+
+		if (deleted && currentlySelected)
+		{
+			sceneContext->DestroyEntity(currentlySelected);
+			SetSelectedEntity({});
+		}
 	}
 
 	void EntityPanel::SetSelectedEntity(Entity e)
@@ -39,16 +62,35 @@ namespace Sage {
 			ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_OpenOnArrow;
 			if (currentlySelected == entity)
 				flags |= ImGuiTreeNodeFlags_Selected;
-			if (ImGui::TreeNodeEx((void*)entity, flags, name.c_str()))
+			bool open = ImGui::TreeNodeEx((void*)entity, flags, name.c_str());
+
+			bool deleted = false;
+			if (ImGui::BeginPopupContextItem())
 			{
-				ImGui::TreePop();
+				if (ImGui::Selectable("Delete"))
+				{
+					deleted = true;
+				}
+				ImGui::EndPopup();
 			}
 
 			if (ImGui::IsItemClicked())
 			{
 				SetSelectedEntity(entity);
 			}
-			
+			if (open)
+			{
+				ImGui::TreePop();
+			}
+
+			if (deleted)
+			{
+				if (entity == currentlySelected)
+				{
+					SetSelectedEntity({});
+				}
+				sceneContext->DestroyEntity(entity);				
+			}
 		}
 	}
 }
