@@ -32,7 +32,6 @@ project "Sage"
     includedirs {
         "engine/dependencies/SDL/include",
         "engine/src",
-        "engine/dependencies/SDL_ttf",
         "engine/dependencies/spdlog/include/",
         "engine/dependencies/imgui/",
         "engine/dependencies/entt/",
@@ -41,7 +40,6 @@ project "Sage"
     links {
         "SDL",
         "SDLmain",
-        "SDL_ttf",
         "ImGui"
     }
     targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
@@ -88,7 +86,6 @@ project "SageEditor"
         "engine/dependencies/SDL/include",
         "engine/src",
         "editor/",
-        "engine/dependencies/SDL_ttf",
         "engine/dependencies/spdlog/include/",
         "engine/dependencies/imgui/",
         "engine/dependencies/entt/",
@@ -109,12 +106,6 @@ externalproject "SDL"
 externalproject "SDLmain"
     location "engine/dependencies/SDL/VisualC/SDLmain"
     uuid "DA956FD3-E142-46F2-9DD5-C78BEBB56B7A"
-    kind "StaticLib"
-    language "C"
-
-externalproject "SDL_ttf"
-    location "engine/dependencies/SDL_ttf/VisualC"
-    uuid "DDDBD07D-DC76-4AF6-8D02-3E2DEB6EE255"
     kind "StaticLib"
     language "C"
 

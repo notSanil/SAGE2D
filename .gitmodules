@@ -1,9 +1,6 @@
 [submodule "engine/dependencies/SDL"]
 	path = engine/dependencies/SDL
 	url = https://github.com/notSanil/SDL.git
-[submodule "engine/dependencies/SDL_ttf"]
-	path = engine/dependencies/SDL_ttf
-	url = https://github.com/notSanil/SDL_ttf.git
 [submodule "engine/dependencies/spdlog"]
 	path = engine/dependencies/spdlog
 	url = https://github.com/gabime/spdlog.git

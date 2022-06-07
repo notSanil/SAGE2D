@@ -1,3 +1,5 @@
+#if 0
+
 #pragma once
 
 #include <string>
@@ -23,3 +25,5 @@ private:
     SDL_Texture* create_glyph(int alphabet, TTF_Font* font);
     Font(const std::string &path, int size);
 };
+
+#endif

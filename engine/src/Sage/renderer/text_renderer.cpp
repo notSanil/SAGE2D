@@ -1,3 +1,5 @@
+#if 0
+
 #include "text_renderer.hpp"
 #include "Sage/renderer/renderer.hpp"
 
@@ -28,3 +30,5 @@ void TextRenderer::renderText(const Font *font, std::string const &text, Sage::V
         lastPos.x += w;
     }
 }
+
+#endif

@@ -1,3 +1,5 @@
+#if 0
+
 #include "font.hpp"
 #include "Sage/renderer/renderer.hpp"
 #include "Platform/SDL/SdlRenderer.h"
@@ -53,3 +55,5 @@ void Font::freeAllFonts(){
     loadedFonts.clear();
 }
 std::unordered_map<std::string, Font*> Font::loadedFonts;
+
+#endif

@@ -1,5 +1,4 @@
 #include "WindowsWindow.h"
-#include <SDL_ttf.h>
 #include "Sage/Core/Log.h"
 
 #include "Sage/Events/KeyEvent.h"
@@ -194,7 +193,6 @@ namespace Sage{
 		SDL_DestroyWindow(windowData.windowContext);
 		windowData.windowContext = nullptr;
 
-		TTF_Quit();
 		SDL_Quit();
 	}
 
@@ -306,11 +304,6 @@ namespace Sage{
 		if (SDL_Init(SDL_INIT_VIDEO) < 0)
 		{
 			SAGE_CORE_CRIT("SDL Failed to initialise!");
-		}
-
-		if (TTF_Init() < 0)
-		{
-			SAGE_CORE_CRIT("SDL TTF Failed to initialise!");
 		}
 	}
 }

@@ -1,3 +1,5 @@
+#if 0
+
 #pragma once
 #include <string>
 #include <vector>
@@ -15,3 +17,4 @@ public:
 private:
     TextRenderer();
 };
+#endif
