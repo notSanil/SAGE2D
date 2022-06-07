@@ -2,7 +2,7 @@
 #include "Sage/renderer/renderer.hpp"
 #include "Sage/Core/Log.h"
 #include "Platform/SDL/SdlRenderer.h"
-#include <SDL_image.h>
+#include <stb_image.h>
 
 namespace Sage {
 
@@ -39,15 +39,22 @@ namespace Sage {
 
 	SdlTexture::SdlTexture(const std::string& path)
 	{
-		texture = IMG_LoadTexture(SdlRenderer::GetSDLRenderer(), path.c_str());
-		if (texture == nullptr)
+		int w, h;
+		int noOfChannels;
+		void* data = stbi_load(path.c_str(), &w, &h, &noOfChannels, STBI_rgb_alpha);
+		if (data == nullptr)
 		{
 			SAGE_CORE_ERROR("Failed to load texture. {0}", path);
 		}
-		int w, h;
-		SDL_QueryTexture(texture, nullptr, nullptr, &w, &h);
+		texture = SDL_CreateTexture(SdlRenderer::GetSDLRenderer(),
+			SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STATIC, w, h);
 		width = (uint32_t)w;
 		height = (uint32_t)h;
+
+		setData(data);		
+		SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+
+		stbi_image_free(data);
 	}
 
 	SdlTexture::~SdlTexture()
@@ -61,7 +68,9 @@ namespace Sage {
 	void SdlTexture::setData(void* data)
 	{
 		//Pitch here is hardcoded to width * 4 bytes which might be incorrect for other formats
-		int failed = SDL_UpdateTexture(texture, nullptr, data, width * 4);
+		int pitch = width * 4;
+		pitch = (pitch + 3) & ~3;
+		int failed = SDL_UpdateTexture(texture, nullptr, data, width*4);
 		if (failed)
 			SAGE_CORE_ERROR("Failed to assign data to texture");
 	}
