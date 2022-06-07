@@ -32,7 +32,6 @@ project "Sage"
     includedirs {
         "engine/dependencies/SDL/include",
         "engine/src",
-        "engine/dependencies/SDL_image",
         "engine/dependencies/SDL_ttf",
         "engine/dependencies/spdlog/include/",
         "engine/dependencies/imgui/",
@@ -42,7 +41,6 @@ project "Sage"
     links {
         "SDL",
         "SDLmain",
-        "SDL_image",
         "SDL_ttf",
         "ImGui"
     }
@@ -63,7 +61,6 @@ project "Game"
         "engine/dependencies/SDL/include",
         "engine/src",
         "game/",
-        "engine/dependencies/SDL_image",
         "engine/dependencies/SDL_ttf",
         "engine/dependencies/spdlog/include/",
         "engine/dependencies/imgui/"
@@ -91,7 +88,6 @@ project "SageEditor"
         "engine/dependencies/SDL/include",
         "engine/src",
         "editor/",
-        "engine/dependencies/SDL_image",
         "engine/dependencies/SDL_ttf",
         "engine/dependencies/spdlog/include/",
         "engine/dependencies/imgui/",
@@ -113,12 +109,6 @@ externalproject "SDL"
 externalproject "SDLmain"
     location "engine/dependencies/SDL/VisualC/SDLmain"
     uuid "DA956FD3-E142-46F2-9DD5-C78BEBB56B7A"
-    kind "StaticLib"
-    language "C"
-
-externalproject "SDL_image"
-    location "engine/dependencies/SDL_image/VisualC"
-    uuid "2BD5534E-00E2-4BEA-AC96-D9A92EA24696"
     kind "StaticLib"
     language "C"
 

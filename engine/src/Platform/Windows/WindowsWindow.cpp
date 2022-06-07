@@ -1,5 +1,4 @@
 #include "WindowsWindow.h"
-#include <SDL_image.h>
 #include <SDL_ttf.h>
 #include "Sage/Core/Log.h"
 
@@ -196,7 +195,6 @@ namespace Sage{
 		windowData.windowContext = nullptr;
 
 		TTF_Quit();
-		IMG_Quit();
 		SDL_Quit();
 	}
 
@@ -308,11 +306,6 @@ namespace Sage{
 		if (SDL_Init(SDL_INIT_VIDEO) < 0)
 		{
 			SAGE_CORE_CRIT("SDL Failed to initialise!");
-		}
-
-		if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
-		{
-			SAGE_CORE_CRIT("SDL Image Failed to initialise!");
 		}
 
 		if (TTF_Init() < 0)
