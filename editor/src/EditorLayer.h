@@ -2,6 +2,7 @@
 #include <Sage/Sage.h>
 #include "Panels/EntityPanel.h"
 #include "Sage/animator/animator.hpp"
+#include "Panels/BrowserPanel.h"
 
 namespace Sage {
 	class EditorLayer : public Layer
@@ -19,5 +20,6 @@ namespace Sage {
 		GameScene mainScene;
 		Vec2<float> viewportSize;
 		EntityPanel entityPanel;
+		BrowserPanel browserPanel;
 	};
 }

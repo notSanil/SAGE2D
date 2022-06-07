@@ -113,6 +113,7 @@ namespace Sage {
 		ImGui::Image(frameBuffer->GetTextureId(), ImVec2{ (float)viewportSize.x, (float)viewportSize.y });
 		ImGui::End();
 		entityPanel.OnImGuiRender();
+		browserPanel.OnImGuiRender();
 		//ImGui::ShowDemoWindow();
 	}
 

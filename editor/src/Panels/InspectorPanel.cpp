@@ -2,6 +2,7 @@
 #include "imgui.h"
 #include "Sage/gameScene/Components.h"
 #include "Sage/Core/Log.h"
+#include <filesystem>
 
 namespace Sage {
 	InspectorPanel::InspectorPanel(Entity selectedEntity):
@@ -151,13 +152,25 @@ namespace Sage {
 				component.Color.g = (int)(color.g * 255.0f);
 				component.Color.b = (int)(color.b * 255.0f);
 			}
+			ImGui::Text("Texture:");
+			if (ImGui::BeginDragDropTarget())
+			{
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("Texture_Path"))
+				{
+					const char* data = (const char*)payload->Data;
+					component.texture = TextureManager::load(data);
+				}
+				ImGui::EndDragDropTarget();
+			}
+
 			if (component.texture)
 			{
-				ImGui::Text("Texture:");
 				ImGui::Image(component.texture->GetRendererID(), { 75, 75 });
 			}
 			else
 			{
+				ImGui::SameLine();
+				ImGui::Text("None");
 				if (ImGui::BeginCombo("Mode", "None"))
 				{
 					if (ImGui::Selectable("None"))
