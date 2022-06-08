@@ -1,3 +1,4 @@
+#if 0
 #include "camera.hpp"
 #include "Sage/Core/Log.h"
 
@@ -65,3 +66,4 @@ void Camera::destroyCamera(){
 }
 
 Camera* Camera::instance = nullptr;
+#endif

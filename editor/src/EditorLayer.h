@@ -18,7 +18,7 @@ namespace Sage {
 	private:
 		std::unique_ptr<Framebuffer> frameBuffer;
 		GameScene mainScene;
-		Vec2<float> viewportSize;
+		glm::vec2 viewportSize;
 		EntityPanel entityPanel;
 		BrowserPanel browserPanel;
 	};

@@ -1,3 +1,5 @@
+#if 0
+
 #pragma once
 #include "Sage/transform/point.hpp"
 
@@ -13,3 +15,4 @@ public:
     virtual void step(const float dt) = 0;
     virtual void event(const Sage::Event& e) = 0;
 };
+#endif

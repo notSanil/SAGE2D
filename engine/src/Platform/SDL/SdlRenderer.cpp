@@ -39,12 +39,12 @@ namespace Sage{
 		SDL_RenderPresent(renderer);
 	}
 
-	/*void SdlRenderer::RenderText(const Font* font, std::string const& text, Vec4 const& col, Point const pos)
+	/*void SdlRenderer::RenderText(const Font* font, std::string const& text, Vec4 const& col, glm::ivec2 const pos)
 	{
 		TextRenderer::get()->renderText(font, text, col, pos);
 	}*/
 
-	void SdlRenderer::RenderTexture(SdlTexture* texture, Point pos, Point dims, Vec4<int> color)
+	void SdlRenderer::RenderTexture(SdlTexture* texture, glm::ivec2 pos, glm::ivec2 dims, glm::ivec4 color)
 	{
 		Uint8 r, g, b;
 		SDL_GetTextureColorMod(texture->texture, &r, &g, &b);
@@ -54,7 +54,7 @@ namespace Sage{
 		SDL_SetTextureColorMod(texture->texture, r, g, b);
 	}
 
-	void SdlRenderer::RenderTexture(SdlTexture* texture, Vec4<int> texSize, Vec4<int> destSize, Vec4<int> color)
+	void SdlRenderer::RenderTexture(SdlTexture* texture, glm::ivec4 texSize, glm::ivec4 destSize, glm::ivec4 color)
 	{
 		Uint8 r, g, b;
 		SDL_GetTextureColorMod(texture->texture, &r, &g, &b);
@@ -63,11 +63,11 @@ namespace Sage{
 		SDL_SetTextureColorMod(texture->texture, r, g, b);
 	}
 
-	void SdlRenderer::RenderTexture(SdlTexture* texture, Sage::Vec4<int> texSize, Transform& transform, Sage::Vec4<int> color)
+	void SdlRenderer::RenderTexture(SdlTexture* texture, glm::ivec4 texSize, glm::imat3x2& transform, glm::ivec4 color)
 	{
-		SDL_Rect dest_rect = { transform.Position.x, transform.Position.y, 
-			(float)texSize.w * transform.Scale.x, 
-			(float)texSize.h * transform.Scale.y };
+		SDL_Rect dest_rect = { transform[0][0], transform[0][1], 
+			(float)texSize.z * transform[1][0], 
+			(float)texSize.w * transform[1][1] };
 		Uint8 r, g, b;
 		SDL_GetTextureColorMod(texture->texture, &r, &g, &b);
 		SDL_SetTextureColorMod(texture->texture, color.r, color.g, color.b);
@@ -75,19 +75,19 @@ namespace Sage{
 		SDL_SetTextureColorMod(texture->texture, r, g, b);
 	}
 
-	void SdlRenderer::RenderRotatedTexture(SdlTexture* texture, Sage::Vec4<int> texSize, Transform& transform, Sage::Vec4<int> color)
+	void SdlRenderer::RenderRotatedTexture(SdlTexture* texture, glm::ivec4 texSize, glm::imat3x2& transform, glm::ivec4 color)
 	{
-		SDL_Rect dest_rect = { transform.Position.x, transform.Position.y,
-			(float)texSize.w * transform.Scale.x,
-			(float)texSize.h * transform.Scale.y };
+		SDL_Rect dest_rect = { transform[0][0], transform[0][1],
+			(float)texSize.z * transform[1][0],
+			(float)texSize.w * transform[1][1] };
 		Uint8 r, g, b;
 		SDL_GetTextureColorMod(texture->texture, &r, &g, &b);
 		SDL_SetTextureColorMod(texture->texture, color.r, color.g, color.b);
-		SDL_RenderCopyEx(renderer, texture->texture, (SDL_Rect*)&texSize, &dest_rect, transform.Rotation, NULL, SDL_FLIP_NONE);
+		SDL_RenderCopyEx(renderer, texture->texture, (SDL_Rect*)&texSize, &dest_rect, transform[2][0], NULL, SDL_FLIP_NONE);
 		SDL_SetTextureColorMod(texture->texture, r, g, b);
 	}
 
-	void SdlRenderer::RenderRect(Point pos, Point dims, int r, int g, int b)
+	void SdlRenderer::RenderRect(glm::ivec2 pos, glm::ivec2 dims, int r, int g, int b)
 	{
 		SDL_SetRenderDrawColor(renderer, r, g, b, 255);
 		SDL_Rect dest{ pos.x, pos.y, dims.x, dims.y };

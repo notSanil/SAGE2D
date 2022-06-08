@@ -1,8 +1,7 @@
 #pragma once
 #include <string>
-
 #include <memory>
-#include <Sage/Core/Window.h>
+#include "Sage/Core/Window.h"
 #include "Sage/Events/Event.h"
 #include "Sage/Events/ApplicationEvent.h"
 #include "Sage/Core/Timer.h"
@@ -18,7 +17,7 @@ namespace Sage {
 
 		static Engine& Get() { return *instance; }
 		Window& GetWindow() { return *window; }
-
+		
 		void run();
 		void PushLayer(std::unique_ptr<Layer> layer);
 		void Shutdown() { running = false; };

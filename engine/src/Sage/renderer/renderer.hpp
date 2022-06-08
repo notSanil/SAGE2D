@@ -1,11 +1,9 @@
 #pragma once
 #include <string>
 
-#include "Sage/transform/point.hpp"
 #include "Sage/Core/Window.h"
 #include "Sage/texture/Texture.hpp"
-#include "Sage/transform/Vec4.h"
-#include "Sage/transform/Transform.h"
+#include <glm/glm.hpp>
 
 class Renderer {
 private:
@@ -19,9 +17,9 @@ public:
     static void EndScene();
 
     //static void RenderText(const Font* font, std::string const& text, Sage::Vec4 const& col, Point const pos);
-    static void RenderTexture(Sage::Texture* texture, Point pos, Point dims, Sage::Vec4<int> color = {255, 255, 255, 255});
-    static void RenderTexture(Sage::Texture* texture, Sage::Vec4<int> texSize, Sage::Vec4<int> destSize, Sage::Vec4<int> color = { 255, 255, 255, 255 });
-    static void RenderTexture(Sage::Texture* texture, Sage::Vec4<int> texSize, Sage::Transform& transform, Sage::Vec4<int> color = { 255, 255, 255, 255 });
-    static void RenderRotatedTexture(Sage::Texture* texture, Sage::Vec4<int> texSize, Sage::Transform& transform, Sage::Vec4<int> color = { 255, 255, 255, 255 });
-    static void RenderRect(Point pos, Point dims, int r, int g, int b);
+    static void RenderTexture(Sage::Texture* texture, glm::ivec2 pos, glm::ivec2 dims, glm::ivec4 color = {255, 255, 255, 255});
+    static void RenderTexture(Sage::Texture* texture, glm::ivec4 texSize, glm::ivec4 destSize, glm::ivec4 color = { 255, 255, 255, 255 });
+    static void RenderTexture(Sage::Texture* texture, glm::ivec4 texSize, glm::imat3x2& transform, glm::ivec4 color = { 255, 255, 255, 255 });
+    static void RenderRotatedTexture(Sage::Texture* texture, glm::ivec4 texSize, glm::imat3x2& transform, glm::ivec4 color = { 255, 255, 255, 255 });
+    static void RenderRect(glm::ivec2 pos, glm::ivec2 dims, int r, int g, int b);
 };

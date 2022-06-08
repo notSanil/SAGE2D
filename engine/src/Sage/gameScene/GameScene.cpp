@@ -18,6 +18,12 @@ namespace Sage {
 		return newEntity;
 	}
 
+	Entity GameScene::CreateEntity(uint32_t id)
+	{
+		Entity newEntity = { registry.create((entt::entity)id), this };
+		return newEntity;
+	}
+
 	void GameScene::DestroyEntity(Entity entity)
 	{
 		registry.destroy(entity);
@@ -31,7 +37,6 @@ namespace Sage {
 			for (auto entity : group)
 			{
 				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
-				Transform t{ {transform.Position.x, transform.Position.y}, {transform.Scale.x, transform.Scale.y}, transform.Rotation };
 				std::shared_ptr<Texture> toBeRendered = nullptr;
 				int width = 1;
 				int height = 1;
@@ -46,7 +51,7 @@ namespace Sage {
 					width = (int)sprite.texture->getWidth();
 					height = (int)sprite.texture->getHeight();
 				}
-				Renderer::RenderRotatedTexture(toBeRendered.get(), { 0, 0, width, height }, t, sprite.Color);
+				Renderer::RenderRotatedTexture(toBeRendered.get(), { 0, 0, width, height }, (glm::imat3x2)transform, sprite.Color);
 			}
 		}
 

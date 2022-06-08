@@ -1,3 +1,5 @@
+#if 0
+
 #pragma once
 
 #include "Sage/transform/point.hpp"
@@ -26,3 +28,4 @@ public:
     static void destroyCamera();
     Point getPos() const;
 };
+#endif

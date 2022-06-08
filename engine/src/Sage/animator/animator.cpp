@@ -1,3 +1,5 @@
+#if 0
+
 #include "animator.hpp"
 #include "Sage/camera/camera.hpp"
 #include "Sage/renderer/renderer.hpp"
@@ -40,3 +42,5 @@ void Animator::moveToNextFrame(){
     frameSize.x = currCol * frameSize.w;
     frameSize.y = currRow * frameSize.h;
 }
+
+#endif

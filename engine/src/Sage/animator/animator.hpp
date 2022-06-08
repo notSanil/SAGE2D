@@ -1,7 +1,8 @@
+#if 0
+
 #pragma once
 #include "Sage/texture/Texture.hpp"
 #include "Sage/transform/point.hpp"
-#include "Sage/transform/Vec4.h"
 
 class Animator{
 private:
@@ -21,3 +22,5 @@ public:
     void setFrameColumnsRows(int totalColumns, int totalRows);
     void moveToNextFrame();
 };
+
+#endif

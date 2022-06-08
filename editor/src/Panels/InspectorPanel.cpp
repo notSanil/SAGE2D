@@ -144,9 +144,9 @@ namespace Sage {
 
 		ImGui::Separator();
 		DrawComponent<SpriteRendererComponent>("Sprite Renderer", true, selected, [](auto& component) {
-			Vec4<float> color{ (float)component.Color.r / 255.0f, (float)component.Color.g / 255.0f,
-				(float)component.Color.b / 255.0f, 1.0f };
-			if (ImGui::ColorEdit3("Color", (float*)color))
+			glm::vec3 color{ (float)component.Color.r / 255.0f, (float)component.Color.g / 255.0f,
+				(float)component.Color.b / 255.0f };
+			if (ImGui::ColorEdit3("Color", &color.r))
 			{
 				component.Color.r = (int)(color.r * 255.0f);
 				component.Color.g = (int)(color.g * 255.0f);

@@ -11,6 +11,7 @@ namespace Sage {
 	{
 	public:
 		GameScene();
+		Entity CreateEntity(uint32_t id);
 		Entity CreateEntity();
 		void DestroyEntity(Entity entity);
 

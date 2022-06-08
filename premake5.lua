@@ -27,7 +27,9 @@ project "Sage"
         "engine/src/Sage/**.h",
         "engine/src/Platform/**.h",
         "engine/src/Platform/**.cpp",
-        "engine/dependencies/stb_image/stb_image.cpp"
+        "engine/dependencies/stb_image/stb_image.cpp",
+        "engine/dependencies/glm/glm/**.hpp",
+        "engine/dependencies/glm/glm/**.inl",
     }
     includedirs {
         "engine/dependencies/SDL/include",
@@ -36,6 +38,7 @@ project "Sage"
         "engine/dependencies/imgui/",
         "engine/dependencies/entt/",
         "engine/dependencies/stb_image/",
+        "engine/dependencies/glm/",
     }
     links {
         "SDL",
@@ -90,6 +93,7 @@ project "SageEditor"
         "engine/dependencies/imgui/",
         "engine/dependencies/entt/",
         "engine/dependencies/stb_image/",
+        "engine/dependencies/glm/",
     }
     links {
         "Sage"
