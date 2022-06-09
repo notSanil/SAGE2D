@@ -10,3 +10,6 @@
 [submodule "engine/dependencies/glm"]
 	path = engine/dependencies/glm
 	url = https://github.com/g-truc/glm.git
+[submodule "engine/dependencies/yaml-cpp"]
+	path = engine/dependencies/yaml-cpp
+	url = https://github.com/jbeder/yaml-cpp.git

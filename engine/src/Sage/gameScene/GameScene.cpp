@@ -9,6 +9,11 @@ namespace Sage {
 	GameScene::GameScene()
 	{
 	}
+	
+	GameScene::GameScene(const std::string& sceneName):
+		name(sceneName)
+	{
+	}
 
 	Entity GameScene::CreateEntity()
 	{

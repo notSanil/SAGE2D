@@ -4,6 +4,9 @@
 
 
 namespace Sage {
+	static bool openSceneTree = false;
+
+
 	EntityPanel::EntityPanel(GameScene* currentActiveScene)
 		:sceneContext(currentActiveScene)
 	{
@@ -12,11 +15,20 @@ namespace Sage {
 	void EntityPanel::OnImGuiRender()
 	{
 		ImGui::Begin("Scene");
-		sceneContext->registry.each([&](entt::entity entity) {
-			Entity e{ entity, sceneContext };
-			DrawEntityNode(e);
-		});
+		if (openSceneTree)
+		{
+			ImGui::SetNextItemOpen(openSceneTree);
+			openSceneTree = false;
+		}
+		if (ImGui::TreeNode(sceneContext->GetName().c_str()))
+		{
+			sceneContext->registry.each([&](entt::entity entity) {
+				Entity e{ entity, sceneContext };
+				DrawEntityNode(e);
+				});
 
+			ImGui::TreePop();
+		}
 
 		bool deleted = false;
 		if (ImGui::IsWindowFocused())
@@ -30,7 +42,10 @@ namespace Sage {
 		if (ImGui::BeginPopupContextWindow(NULL, ImGuiPopupFlags_NoOpenOverItems | ImGuiPopupFlags_MouseButtonRight))
 		{
 			if (ImGui::MenuItem("Create Empty Entity"))
+			{
 				sceneContext->CreateEntity();
+				openSceneTree = true;
+			}
 
 			ImGui::EndPopup();
 		}
@@ -51,6 +66,12 @@ namespace Sage {
 	{
 		currentlySelected = e;
 		inspector.SetSelectedEntity(e);		
+	}
+
+	void EntityPanel::SetSceneContext(GameScene* currentScene)
+	{
+		SetSelectedEntity({});
+		sceneContext = currentScene;
 	}
 
 	void EntityPanel::DrawEntityNode(Entity entity)

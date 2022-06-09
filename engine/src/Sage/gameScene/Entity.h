@@ -53,6 +53,11 @@ namespace Sage {
 			return (void*)(uint64_t)(uint32_t)entityId;
 		}
 
+		operator uint32_t() const
+		{
+			return (uint32_t)entityId;
+		}
+
 	private:
 		entt::entity entityId = entt::null;
 		GameScene* scene = nullptr;

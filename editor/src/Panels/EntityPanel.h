@@ -15,6 +15,8 @@ namespace Sage {
 		void SetSelectedEntity(Entity e);
 		Entity GetSelectedEntity() const { return currentlySelected; }
 		bool IsEntitySelected() const { return (bool)currentlySelected; }
+
+		void SetSceneContext(GameScene* currentScene);
 	private:
 		void DrawEntityNode(Entity entity);
 

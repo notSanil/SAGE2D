@@ -1,27 +1,16 @@
 #include "EditorLayer.h"
 #include <entt.hpp>
 #include "Sage/System/AnimatorSystem.h"
+#include "Sage/gameScene/Serialiser.h"
 
 namespace Sage {
 	EditorLayer::EditorLayer()
 	{
+		mainScene = std::make_unique<GameScene>("Sample Scene");
+
 		Window& window = Engine::Get().GetWindow();
 		frameBuffer = Sage::Framebuffer::Create(window.GetWidth(), window.GetHeight());
-		Entity alienEntity = mainScene.CreateEntity();
-		alienEntity.GetComponent<NameComponent>().Name = "Burger";
-		SpriteRendererComponent& src = alienEntity.AddComponent<SpriteRendererComponent>();
-		src.texture = TextureManager::load("assets/images/Burger.png");
-
-		Entity randomEntity = mainScene.CreateEntity();
-		randomEntity.GetComponent<NameComponent>().Name = "Random";
-		
-		auto& animator = randomEntity.AddComponent<AnimatorComponent>();
-		animator.SheetGrid = { 6, 4 };
-		auto& sprite = randomEntity.AddComponent<SpriteRendererComponent>();
-		sprite.texture = TextureManager::load("assets/images/alien.png");
-		entityPanel = EntityPanel(&mainScene);
-
-		mainScene.CreateEntity();
+		entityPanel = EntityPanel(mainScene.get());
 	}
 
 	EditorLayer::~EditorLayer()
@@ -42,7 +31,7 @@ namespace Sage {
 	{
 		frameBuffer->Bind();
 		Renderer::StartScene();
-		mainScene.OnRender();
+		mainScene->OnRender();
 		frameBuffer->Unbind();
 	}
 
@@ -99,10 +88,34 @@ namespace Sage {
 				ImGui::EndMenu();
 			}
 
+			if (ImGui::BeginMenu("File"))
+			{
+				if (ImGui::MenuItem("New"))
+				{
+					mainScene = std::make_unique<GameScene>("New Scene");
+					entityPanel.SetSceneContext(mainScene.get());
+				}
+
+				if (ImGui::MenuItem("Save"))
+				{
+					Serialiser::SerialiseScene(mainScene.get(), "assets/scenes/mainScene.sge");
+				}
+
+				if (ImGui::MenuItem("Open"))
+				{
+					mainScene = std::make_unique<GameScene>();
+					Serialiser::DeserialiseScene("assets/scenes/mainScene.sge", mainScene.get());
+
+					entityPanel.SetSceneContext(mainScene.get());
+				}
+				ImGui::EndMenu();
+			}
+
 			ImGui::EndMenuBar();
 		}
 
 		ImGui::End();
+
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
 		ImGui::Begin("Viewport");
 		ImGui::PopStyleVar();
@@ -112,6 +125,7 @@ namespace Sage {
 		
 		ImGui::Image(frameBuffer->GetTextureId(), ImVec2{ (float)viewportSize.x, (float)viewportSize.y });
 		ImGui::End();
+
 		entityPanel.OnImGuiRender();
 		browserPanel.OnImGuiRender();
 		//ImGui::ShowDemoWindow();

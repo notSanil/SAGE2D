@@ -2,7 +2,7 @@ workspace "Sage"
    configurations { "Debug", "Release" }
    platforms { "x64" }
    startproject "SageEditor"
-
+   defines{ "YAML_CPP_STATIC_DEFINE" }
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
    
@@ -39,11 +39,15 @@ project "Sage"
         "engine/dependencies/entt/",
         "engine/dependencies/stb_image/",
         "engine/dependencies/glm/",
+        "engine/dependencies/Glad/include/",
+        "engine/dependencies/yaml-cpp/include/",
     }
     links {
         "SDL",
         "SDLmain",
-        "ImGui"
+        "ImGui",
+        "Glad",
+        "yaml-cpp"
     }
     targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
     objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
@@ -94,6 +98,7 @@ project "SageEditor"
         "engine/dependencies/entt/",
         "engine/dependencies/stb_image/",
         "engine/dependencies/glm/",
+        "engine/dependencies/Glad/include/",
     }
     links {
         "Sage"
@@ -101,6 +106,7 @@ project "SageEditor"
     targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
     objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
+group "Dependencies"
 externalproject "SDL"
     location "engine/dependencies/SDL/VisualC/SDL"
     uuid "81CE8DAF-EBB2-4761-8E45-B71ABCCA8C68"
@@ -112,6 +118,21 @@ externalproject "SDLmain"
     uuid "DA956FD3-E142-46F2-9DD5-C78BEBB56B7A"
     kind "StaticLib"
     language "C"
+
+project "Glad"
+    location "engine/dependencies/Glad/"
+    kind "StaticLib"
+    language "C"
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+    files {
+        "engine/dependencies/Glad/include/glad/glad.h",
+        "engine/dependencies/Glad/include/KHR/khrplatform.h",
+        "engine/dependencies/Glad/src/glad.c"
+    }
+    includedirs{
+        "engine/dependencies/Glad/include/",
+    }
 
 project "ImGui"
 	kind "StaticLib"
@@ -147,3 +168,18 @@ project "ImGui"
 	filter "configurations:Release"
 		runtime "Release"
 		optimize "on"
+
+project "yaml-cpp"
+    kind "StaticLib"
+    location "engine/dependencies/yaml-cpp"
+    language "C++"
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+    files{
+        "engine/dependencies/yaml-cpp/src/**.h",
+        "engine/dependencies/yaml-cpp/src/**.cpp",
+        "engine/dependencies/yaml-cpp/include/**.h",
+    }
+    includedirs {
+        "engine/dependencies/yaml-cpp/include",
+    }
