@@ -52,7 +52,8 @@ namespace Sage {
 			else
 			{
 				ImGui::PushID(dir_entry.path().string().c_str());
-				ImGui::ImageButton(fileIcon->GetRendererID(), {thumbnailSize, thumbnailSize});
+				float aspectRatio = (float)fileIcon->getWidth() / (float)fileIcon->getHeight();
+				ImGui::ImageButton(fileIcon->GetRendererID(), {thumbnailSize, thumbnailSize / aspectRatio});
 
 				if (name.extension().string() == ".png")
 				{

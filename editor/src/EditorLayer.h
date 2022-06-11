@@ -19,7 +19,10 @@ namespace Sage {
 		std::unique_ptr<Framebuffer> frameBuffer;
 		std::unique_ptr<GameScene> mainScene;
 		glm::vec2 viewportSize;
+
 		EntityPanel entityPanel;
 		BrowserPanel browserPanel;
+		bool entityPanelVisible = true;
+		bool browserPanelVisible = true;
 	};
 }

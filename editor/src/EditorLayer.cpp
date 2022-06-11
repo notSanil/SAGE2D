@@ -73,21 +73,6 @@ namespace Sage {
 
 		if (ImGui::BeginMenuBar())
 		{
-			if (ImGui::BeginMenu("Options"))
-			{
-				Window& window = Engine::Get().GetWindow();
-				if (ImGui::MenuItem("Fullscreen", NULL, window.IsFullscreen())) 
-				{
-					window.SetFullscreen(!window.IsFullscreen());
-				}
-				ImGui::Separator();
-				if (ImGui::MenuItem("Exit"))
-				{
-					Engine::Get().Shutdown();
-				}
-				ImGui::EndMenu();
-			}
-
 			if (ImGui::BeginMenu("File"))
 			{
 				if (ImGui::MenuItem("New"))
@@ -108,9 +93,29 @@ namespace Sage {
 
 					entityPanel.SetSceneContext(mainScene.get());
 				}
+
+				ImGui::Separator();
+				if (ImGui::MenuItem("Exit"))
+				{
+					Engine::Get().Shutdown();
+				}
 				ImGui::EndMenu();
 			}
 
+			if (ImGui::BeginMenu("View"))
+			{
+				if (ImGui::MenuItem("Scene Explorer", nullptr, entityPanelVisible))
+				{
+					entityPanelVisible = !entityPanelVisible;
+				}
+
+				if (ImGui::MenuItem("Browser", nullptr, browserPanelVisible))
+				{
+					browserPanelVisible = !browserPanelVisible;
+				}
+
+				ImGui::EndMenu();
+			}
 			ImGui::EndMenuBar();
 		}
 
@@ -126,8 +131,11 @@ namespace Sage {
 		ImGui::Image(frameBuffer->GetTextureId(), ImVec2{ (float)viewportSize.x, (float)viewportSize.y });
 		ImGui::End();
 
-		entityPanel.OnImGuiRender();
-		browserPanel.OnImGuiRender();
+		if (entityPanelVisible)
+			entityPanel.OnImGuiRender();
+		
+		if (browserPanelVisible)
+			browserPanel.OnImGuiRender();
 		//ImGui::ShowDemoWindow();
 	}
 

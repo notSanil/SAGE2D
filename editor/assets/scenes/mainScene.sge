@@ -1,28 +1,5 @@
-Scene: SceneName
+Scene: Sample Scene
 Entities:
-  - Entity: [2]
-    NameComponent:
-      Name: Burger
-    TransformComponent:
-      Position: [273, 171]
-      Scale: [1, 1]
-      Rotation: 149
-    SpriteRendererComponent:
-      Texture: TextureID
-      Color: [255, 255, 255, 255]
-  - Entity: [1]
-    NameComponent:
-      Name: Cat
-    TransformComponent:
-      Position: [289, 0]
-      Scale: [1, 1]
-      Rotation: 0
-    SpriteRendererComponent:
-      Texture: TextureID
-      Color: [0, 255, 31, 255]
-    AnimatorComponent:
-      SheetGrid: [2, 4]
-      Speed: 1
   - Entity: [0]
     NameComponent:
       Name: Alien
@@ -34,5 +11,5 @@ Entities:
       Texture: TextureID
       Color: [255, 255, 255, 255]
     AnimatorComponent:
-      SheetGrid: [6, 4]
+      SheetGrid: [2, 4]
       Speed: 1

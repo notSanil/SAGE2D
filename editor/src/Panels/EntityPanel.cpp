@@ -60,6 +60,8 @@ namespace Sage {
 			sceneContext->DestroyEntity(currentlySelected);
 			SetSelectedEntity({});
 		}
+
+		//ImGui::ShowDemoWindow();
 	}
 
 	void EntityPanel::SetSelectedEntity(Entity e)

@@ -224,7 +224,8 @@ namespace Sage {
 		YAML::Node entities = sceneData["Entities"];
 		std::string sceneName = sceneData["Scene"].as<std::string>();
 		outScene->SetName(sceneName);
-
+		
+		//The entities are saved in reverse order so we iterate backwards
 		for (int i = entities.size() - 1; i >= 0; --i)
 		{
 			uint32_t id = entities[i]["Entity"][0].as<uint32_t>();
