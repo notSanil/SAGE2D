@@ -12,7 +12,6 @@ namespace Sage {
         Target
     };
 
-
     class Texture
     {
     public:
@@ -28,6 +27,7 @@ namespace Sage {
         virtual void* GetRendererID() = 0;
     };
 
+    class Serialiser;
     class TextureManager
     {
     public:
@@ -36,6 +36,8 @@ namespace Sage {
     private:
         static std::unordered_map<std::string, std::shared_ptr<Texture>> loadedTextures;
         static std::shared_ptr<Texture> whiteTexture;
+        
+        friend class Serialiser;
     };
 
 }

@@ -1,5 +1,28 @@
-Scene: Sample Scene
+Scene: New Scene
 Entities:
+  - Entity: [2]
+    NameComponent:
+      Name: Tiger
+    TransformComponent:
+      Position: [460, 86]
+      Scale: [1, 1]
+      Rotation: 0
+    SpriteRendererComponent:
+      Texture: 1588839950
+      Color: [255, 255, 255, 255]
+    AnimatorComponent:
+      SheetGrid: [2, 4]
+      Speed: 1
+  - Entity: [1]
+    NameComponent:
+      Name: Burger
+    TransformComponent:
+      Position: [287, 72]
+      Scale: [1, 1]
+      Rotation: 73
+    SpriteRendererComponent:
+      Texture: -514579486
+      Color: [255, 0, 75, 255]
   - Entity: [0]
     NameComponent:
       Name: Alien
@@ -8,8 +31,12 @@ Entities:
       Scale: [1, 1]
       Rotation: 0
     SpriteRendererComponent:
-      Texture: TextureID
+      Texture: -251647936
       Color: [255, 255, 255, 255]
     AnimatorComponent:
-      SheetGrid: [2, 4]
+      SheetGrid: [6, 4]
       Speed: 1
+Assets:
+  -514579486: assets\images\Burger.png
+  -251647936: assets\images\alien.png
+  1588839950: assets\images\runningcat.png

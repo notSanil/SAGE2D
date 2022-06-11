@@ -159,6 +159,8 @@ namespace Sage {
 				{
 					const char* data = (const char*)payload->Data;
 					component.texture = TextureManager::load(data);
+					std::hash<std::string> hasher;
+					component.hash = hasher(data);
 				}
 				ImGui::EndDragDropTarget();
 			}

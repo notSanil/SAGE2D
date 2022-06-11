@@ -139,7 +139,7 @@ namespace Sage {
 
 			auto& spriteRenderer = entity.GetComponent<SpriteRendererComponent>();
 			out << YAML::Key << "Texture";
-			out << YAML::Value << "TextureID";
+			out << YAML::Value << spriteRenderer.hash;
 
 			out << YAML::Key << "Color";
 			out << YAML::Value << spriteRenderer.Color;		
@@ -178,13 +178,25 @@ namespace Sage {
 		});
 
 		out << YAML::EndSeq;
+
+		out << YAML::Key << "Assets";
+		
+		out << YAML::BeginMap;
+		std::hash <std::string> hasher;
+		for (auto& [path, texture] : TextureManager::loadedTextures)
+		{
+			int id = hasher(path);
+			out << YAML::Key << id << YAML::Value << path;
+		}
+		out << YAML::EndMap;
+
 		out << YAML::EndMap;
 
 		std::ofstream file(path);
 		file << out.c_str();
 	}
 
-	void DeserialiseEntity(Entity entity, YAML::Node& data)
+	void DeserialiseEntity(Entity entity, YAML::Node& data, YAML::Node& assets)
 	{
 		if (data["NameComponent"])
 		{
@@ -206,6 +218,9 @@ namespace Sage {
 			YAML::Node spriteRendererData = data["SpriteRendererComponent"];
 			auto& spriteRenderer = entity.AddComponent<SpriteRendererComponent>();
 			spriteRenderer.Color = spriteRendererData["Color"].as<glm::ivec4>();
+			spriteRenderer.hash = spriteRendererData["Texture"].as<int>();
+			std::string texturePath = assets[spriteRenderer.hash].as<std::string>();
+			spriteRenderer.texture = TextureManager::load(texturePath);
 		}
 
 		if (data["AnimatorComponent"])
@@ -222,6 +237,8 @@ namespace Sage {
 	{
 		YAML::Node sceneData = YAML::LoadFile(path);
 		YAML::Node entities = sceneData["Entities"];
+		YAML::Node assets = sceneData["Assets"];
+
 		std::string sceneName = sceneData["Scene"].as<std::string>();
 		outScene->SetName(sceneName);
 		
@@ -230,7 +247,7 @@ namespace Sage {
 		{
 			uint32_t id = entities[i]["Entity"][0].as<uint32_t>();
 			Entity created = outScene->CreateEntity();
-			DeserialiseEntity(created, entities[i]);
+			DeserialiseEntity(created, entities[i], assets);
 		}
 	}
 }

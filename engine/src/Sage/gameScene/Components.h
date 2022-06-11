@@ -13,6 +13,7 @@ namespace Sage {
 			COUNT
 		};
 		std::shared_ptr<Texture> texture = nullptr;
+		int hash = NULL;
 		glm::ivec4 Color{ 255, 255, 255, 255 };
 		Primitives primitive = None;
 	};
