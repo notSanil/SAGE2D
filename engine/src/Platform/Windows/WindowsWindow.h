@@ -24,11 +24,15 @@ namespace Sage {
 		virtual void SetFullscreen(bool fullscreen) override;
 		virtual bool IsFullscreen() override { return windowData.properties.isFullscreen; };
 
-		SDL_Window* GetNativeWindow() { return windowData.windowContext; }
+		void* GetNativeWindow() { return windowData.windowContext; }
+
+		virtual void Update() override;
 	private:
 		void InitSDL();
 		WindowData windowData;
+		SDL_GLContext glContext;
 		EventCallbackFn eventCallback;
 		friend class SdlRenderer;
+		friend class ImGuiOverlay;
 	};
 }

@@ -3,10 +3,10 @@
 #include <SDL.h>
 #include "Sage/engine.hpp"
 #include "Platform/Windows/WindowsWindow.h"
-#include "Platform/SDL/SdlRenderer.h"
 #include <backends/imgui_impl_sdl.h>
-#include <backends/imgui_impl_sdlrenderer.h>
+#include <backends/imgui_impl_opengl3.h>
 #include "Sage/Core/Log.h"
+#include <glad/glad.h>
 
 namespace Sage {
 	ImGuiOverlay::ImGuiOverlay()
@@ -15,25 +15,26 @@ namespace Sage {
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
 		ImGui::StyleColorsDark();
-		SDL_Window* window = ((WindowsWindow*)Engine::Get().window.get())->GetNativeWindow();
+		SDL_Window* window = (SDL_Window*)(Engine::Get().window->GetNativeWindow());
+		const char* glsl_version = "#version 330";
 
-		ImGui_ImplSDL2_InitForSDLRenderer(window, SdlRenderer::GetSDLRenderer());
-		ImGui_ImplSDLRenderer_Init(SdlRenderer::GetSDLRenderer());
+		ImGui_ImplSDL2_InitForOpenGL(window, ((WindowsWindow*)Engine::Get().window.get())->glContext);
+		ImGui_ImplOpenGL3_Init(glsl_version);
 	}
 
 	ImGuiOverlay::~ImGuiOverlay()
 	{
-		ImGui_ImplSDLRenderer_Shutdown();
+		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplSDL2_Shutdown();
 		ImGui::DestroyContext();
 	}
 
 	void ImGuiOverlay::Begin()
 	{
-		ImGui_ImplSDLRenderer_NewFrame();
+		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplSDL2_NewFrame();
 		ImGui::NewFrame();
 	}
@@ -41,15 +42,15 @@ namespace Sage {
 	void ImGuiOverlay::End()
 	{
 		ImGui::Render();
-		SDL_SetRenderDrawColor(SdlRenderer::GetSDLRenderer(), (Uint8)(clear_color.x * 255), (Uint8)(clear_color.y * 255), (Uint8)(clear_color.z * 255), (Uint8)(clear_color.w * 255));
-		SDL_RenderClear(SdlRenderer::GetSDLRenderer());
-		ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
 		ImGuiIO& io = ImGui::GetIO();
+		glViewport(0, 0, (int)io.DisplaySize.x, (int)io.DisplaySize.y);
+		//glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
+		//glClear(GL_COLOR_BUFFER_BIT);
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 		{
 			ImGui::UpdatePlatformWindows();
 			ImGui::RenderPlatformWindowsDefault();
 		}
-		//SDL_RenderPresent(SdlRenderer::GetSDLRenderer());
 	}
 }

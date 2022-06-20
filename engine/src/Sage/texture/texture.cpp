@@ -2,21 +2,46 @@
 #include "Sage/renderer/renderer.hpp"
 #include "Sage/Core/Log.h"
 #include "Platform/SDL/SdlTexture.h"
+#include "Platform/OpenGL/OpenGLTexture.h"
 
 namespace Sage {
     std::unique_ptr<Texture> Texture::Create(uint32_t width, uint32_t height)
     {
-        return std::make_unique<SdlTexture>(width, height);
+        switch (RenderAPI::GetApi())
+        {
+        case API::SDL:
+            return std::make_unique<SdlTexture>(width, height);
+        case API::OpenGL:
+            return std::make_unique<OpenGLTexture>(width, height);
+        default:
+            return nullptr;
+        }
     }
 
     std::unique_ptr<Texture> Texture::Create(uint32_t width, uint32_t height, AccessFormat format)
     {
-        return std::make_unique<SdlTexture>(width, height, format);
+        switch (RenderAPI::GetApi())
+        {
+        case API::SDL:
+            return std::make_unique<SdlTexture>(width, height);
+        case API::OpenGL:
+            return std::make_unique<OpenGLTexture>(width, height, format);
+        default:
+            return nullptr;
+        }
     }
 
     std::unique_ptr<Texture> Texture::Create(const std::string& path)
     {
-        return std::make_unique<SdlTexture>(path);
+        switch (RenderAPI::GetApi())
+        {
+        case API::SDL:
+            return std::make_unique<SdlTexture>(path);
+        case API::OpenGL:
+            return std::make_unique<OpenGLTexture>(path);
+        default:
+            return nullptr;
+        }
     }
 
 

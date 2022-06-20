@@ -7,6 +7,7 @@
 #include "Sage/Core/Keycodes.h"
 #include "Sage/Core/MouseCodes.h"
 #include <backends/imgui_impl_sdl.h>
+#include <glad/glad.h>
 
 
 namespace Sage{
@@ -170,26 +171,42 @@ namespace Sage{
 	WindowsWindow::WindowsWindow(WindowProperties& properties)
 	{
 		InitSDL();
+
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+
 		windowData.properties = properties;
 
-		Uint32 flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
+		Uint32 flags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL;
 		flags |= properties.isFullscreen ? SDL_WINDOW_MAXIMIZED : 0;
-		
+
 		SDL_Window* window = SDL_CreateWindow(properties.name.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 
 			properties.width, properties.height, flags);
 		if (window == NULL)
 		{
 			SAGE_CORE_CRIT("Window creation failed!");
 		}		
+		
+		glContext = SDL_GL_CreateContext(window);
+		int failed = SDL_GL_MakeCurrent(window, glContext);
+		if (failed)
+		{
+			SAGE_CORE_CRIT("Failed to make glContext current.");
+		}
+
 		windowData.windowContext = window;
-		SDL_DisplayMode s;
-		SDL_GetWindowDisplayMode(window, &s);
-		SAGE_CORE_INFO("{0} {1}", s.w, s.h);
+
+		if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress)) {
+			SAGE_CORE_CRIT("Failed to load OpenGL context");
+		}
+
 		SetupKeyCodeMap();
 	}
 
 	WindowsWindow::~WindowsWindow()
 	{
+		SDL_GL_DeleteContext(glContext);
 		SDL_DestroyWindow(windowData.windowContext);
 		windowData.windowContext = nullptr;
 
@@ -297,6 +314,11 @@ namespace Sage{
 			SDL_MaximizeWindow(windowData.windowContext);
 		else
 			SDL_RestoreWindow(windowData.windowContext);
+	}
+
+	void WindowsWindow::Update()
+	{
+		SDL_GL_SwapWindow(windowData.windowContext);
 	}
 
 	void WindowsWindow::InitSDL()

@@ -29,5 +29,8 @@ namespace Sage {
 		virtual void PollEvents() = 0;
 		virtual void SetFullscreen(bool fullscreen) = 0;
 		virtual bool IsFullscreen() = 0;
+		virtual void* GetNativeWindow() = 0;
+
+		virtual void Update() = 0;
 	};
 }

@@ -75,7 +75,7 @@ namespace Sage {
 			ImGuiOverlay->End();
 
 			Renderer::EndScene();
-
+			window->Update();
 		}
 	}
 	void Engine::PushLayer(std::unique_ptr<Layer> layer)
