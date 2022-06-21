@@ -14,7 +14,7 @@ namespace Sage {
 
 		virtual void Resize(uint32_t width, uint32_t height) override;
 
-		virtual void* GetTextureId() override { return (void*)colorAttachmentId; };
+		virtual void* GetTextureId() override { return (void*)(uint64_t)colorAttachmentId; };
 
 		virtual void Bind() override;
 		virtual void Unbind() override;

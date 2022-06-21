@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include "Sage/Core/Log.h"
 
 namespace Sage {
 	enum class DataType
@@ -36,6 +37,9 @@ namespace Sage {
 			return 4 * 4;
 		case Sage::DataType::Bool:
 			return 1;
+		default:
+			SAGE_CORE_CRIT("Unknown data type, size not known");
+			return 0;
 		}
 	}
 

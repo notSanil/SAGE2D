@@ -123,7 +123,7 @@ namespace Sage {
 
 		ImGui::Separator();
 		DrawComponent<TransformComponent>("Transform", false, selected, [](auto& component) {
-			ImGui::DragInt2("Position", (int*)&component.Position);
+			ImGui::DragFloat2("Position", (float*)&component.Position, 0.025);
 			if (ImGui::IsItemClicked(1))
 			{
 				component.Position.x = 0;
@@ -144,13 +144,11 @@ namespace Sage {
 
 		ImGui::Separator();
 		DrawComponent<SpriteRendererComponent>("Sprite Renderer", true, selected, [](auto& component) {
-			glm::vec3 color{ (float)component.Color.r / 255.0f, (float)component.Color.g / 255.0f,
-				(float)component.Color.b / 255.0f };
-			if (ImGui::ColorEdit3("Color", &color.r))
+			if (ImGui::ColorEdit3("Color", &component.Color.r))
 			{
-				component.Color.r = (int)(color.r * 255.0f);
+				/*component.Color.r = color.r;
 				component.Color.g = (int)(color.g * 255.0f);
-				component.Color.b = (int)(color.b * 255.0f);
+				component.Color.b = (int)(color.b * 255.0f);*/
 			}
 			ImGui::Text("Texture:");
 			if (ImGui::BeginDragDropTarget())

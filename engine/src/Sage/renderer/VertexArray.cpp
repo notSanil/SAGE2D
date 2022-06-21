@@ -8,11 +8,9 @@ namespace Sage {
 	{
 		switch (RenderAPI::GetApi())
 		{
-		case API::SDL:
-			break;
 		case API::OpenGL:
 			return std::make_unique<OpenGLVertexArray>();
-		case API::None:
+		default:
 			SAGE_CORE_CRIT("No RenderAPI selected");
 			return nullptr;
 		}

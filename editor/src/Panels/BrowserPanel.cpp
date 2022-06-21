@@ -24,7 +24,7 @@ namespace Sage {
 		}
 
 		static float padding = 16.0f;
-		static float thumbnailSize = 64;
+		static float thumbnailSize = 64.0f;
 		float cellSize = thumbnailSize + padding;
 
 		float panelWidth = ImGui::GetContentRegionAvail().x;
@@ -41,7 +41,7 @@ namespace Sage {
 			if (std::filesystem::is_directory(dir_entry.path()))
 			{
 				ImGui::PushID(dir_entry.path().string().c_str());
-				if (ImGui::ImageButton(folderIcon->GetRendererID(), { thumbnailSize, thumbnailSize }, { 0, 0 }, { 1, 1 }, -1, { 0, 0, 0, 0 }, {0.1, 0.3, 0.6, 1}))
+				if (ImGui::ImageButton(folderIcon->GetRendererID(), { thumbnailSize, thumbnailSize }, { 0, 0 }, { 1, 1 }, -1, { 0, 0, 0, 0 }, {0.1f, 0.3f, 0.6f, 1.0f}))
 				{
 					currentPath /= name;
 				}

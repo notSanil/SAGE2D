@@ -14,7 +14,7 @@ namespace Sage {
 		};
 		std::shared_ptr<Texture> texture = nullptr;
 		int hash = NULL;
-		glm::ivec4 Color{ 255, 255, 255, 255 };
+		glm::vec4 Color{ 1, 1, 1, 1 };
 		Primitives primitive = None;
 	};
 
@@ -25,16 +25,7 @@ namespace Sage {
 			: Position{ x, y }
 		{}
 
-		operator glm::imat3x2()
-		{
-			glm::imat3x2 t;
-			t[0] = Position;
-			t[1] = Scale;
-			t[2][0] = Rotation;
-			return t;
-		}
-
-		glm::ivec2 Position{ 0, 0 };
+		glm::vec2 Position{ 0, 0 };
 		glm::vec2 Scale{ 1, 1 };
 		float Rotation = 0.0f;
 	};

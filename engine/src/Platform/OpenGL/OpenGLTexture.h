@@ -10,10 +10,12 @@ namespace Sage {
         OpenGLTexture(const std::string& path);
         virtual ~OpenGLTexture() override;
 
+        virtual void Bind() override;
+        virtual void Unbind() override;
         virtual uint32_t getWidth() override { return width; };
         virtual uint32_t getHeight() override { return height; };
         virtual void setData(void* data) override;
-        virtual void* GetRendererID() override { return (void*)id; };
+        virtual void* GetRendererID() override { return (void*)(uint64_t)id; };
     private:
         uint32_t id;
         uint32_t width, height;

@@ -32,9 +32,7 @@ namespace Sage {
 		frameBuffer->Bind();
 		Renderer::StartScene();
 		mainScene->OnRender();
-		Renderer::RenderRect({ 0, 0 }, { 0.5, 0.5 }, 0.4, 0.4, 0.4);
 		Renderer::EndScene();
-
 		frameBuffer->Unbind();
 	}
 
@@ -139,7 +137,6 @@ namespace Sage {
 		
 		if (browserPanelVisible)
 			browserPanel.OnImGuiRender();
-		//ImGui::ShowDemoWindow();
 	}
 
 	void EditorLayer::OnEvent(Event& e)

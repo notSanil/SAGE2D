@@ -20,6 +20,8 @@ namespace Sage {
 		static std::unique_ptr<Texture> Create(const std::string& path);
 		virtual ~Texture() = 0 {};
 
+		virtual void Bind() = 0;
+		virtual void Unbind() = 0;
 		virtual uint32_t getWidth() = 0;
 		virtual uint32_t getHeight() = 0;
 		virtual void setData(void* data) = 0;

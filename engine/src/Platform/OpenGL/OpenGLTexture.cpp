@@ -35,7 +35,7 @@ namespace Sage {
 		int w, h;
 		int noOfChannels;
 		void* data = stbi_load(path.c_str(), &w, &h, &noOfChannels, STBI_rgb_alpha);
-
+		//stbi_set_flip_vertically_on_load(1);
 		if (data == nullptr)
 		{
 			SAGE_CORE_ERROR("Failed to load texture. {0}", path);
@@ -56,10 +56,21 @@ namespace Sage {
 		stbi_image_free(data);
 	}
 
-
 	OpenGLTexture::~OpenGLTexture()
 	{
 		glDeleteTextures(1, &id);
+	}
+
+	void OpenGLTexture::Bind()
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, id);
+	}
+	
+	void OpenGLTexture::Unbind()
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	void OpenGLTexture::setData(void* data)

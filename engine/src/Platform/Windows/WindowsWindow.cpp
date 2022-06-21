@@ -1,4 +1,5 @@
 #include "WindowsWindow.h"
+#include <Windows.h>
 #include "Sage/Core/Log.h"
 
 #include "Sage/Events/KeyEvent.h"

@@ -1,14 +1,23 @@
 #include "renderer.hpp"
 
 #include "Sage/Core/Log.h"
+#include <glm/gtx/matrix_transform_2d.hpp>
 
 namespace Sage {
 	std::unique_ptr<RenderAPI> Renderer::renderAPI;
 	std::unique_ptr<VertexArray> Renderer::vao;
 	std::unique_ptr<VertexBuffer> Renderer::vertexBuffer;
 	std::unique_ptr<IndexBuffer> Renderer::indexBuffer;
-
 	std::unique_ptr<Shader> Renderer::shader;
+
+	static glm::vec3 quadPositions[4];
+	static glm::vec3 texCoords[4];
+	struct Vertex
+	{
+		glm::vec2 pos;
+		glm::vec4 color;
+		glm::vec2 texCoords;
+	};
 
 	void Renderer::init(Window* window)
 	{
@@ -19,10 +28,11 @@ namespace Sage {
 
 		vao = VertexArray::Create();
 
-		vertexBuffer = VertexBuffer::Create(24 * sizeof(float));
+		vertexBuffer = VertexBuffer::Create(4 * sizeof(Vertex));
 		vertexBuffer->SetLayout({ 
 			{"pos", DataType::Float2},
-			{"color", DataType::Float4}
+			{"color", DataType::Float4},
+			{"textureCoord", DataType::Float2}
 		});
 		vao->AddVertexBuffer(vertexBuffer.get());
 
@@ -32,7 +42,16 @@ namespace Sage {
 		vao->SetIndexBuffer(indexBuffer.get());
 
 		shader = Shader::Create("resources/shaders/VertexShader.glsl", "resources/shaders/FragShader.glsl");
-		shader->Bind();
+
+		quadPositions[0] = {-0.5f,  0.5f, 1.0f }; 
+		quadPositions[1] = { 0.5f,  0.5f, 1.0f };
+		quadPositions[2] = { 0.5f, -0.5f, 1.0f };
+		quadPositions[3] = {-0.5f, -0.5f, 1.0f };
+
+		texCoords[0] = {0.0f, 1.0f, 1.0f};
+		texCoords[1] = {1.0f, 1.0f, 1.0f};
+		texCoords[2] = {1.0f, 0.0f, 1.0f};
+		texCoords[3] = {0.0f, 0.0f, 1.0f};
 	}
 
 	Renderer::Renderer() 
@@ -55,37 +74,61 @@ namespace Sage {
 	//    SdlRenderer::RenderText(font, text, col, pos);
 	//}
 
-	void Renderer::RenderTexture(Texture* texture, glm::ivec2 pos, glm::ivec2 dims, glm::ivec4 color)
+	void Renderer::RenderTexture(Texture* texture, const glm::vec2& pos, const glm::vec2& dims, const glm::vec4& color)
 	{
-		//SdlRenderer::RenderTexture((SdlTexture*)texture, pos, dims, color);
+		glm::mat3 transform = glm::translate(glm::mat3(1.0f), pos) * glm::scale(glm::mat3(1.0f), dims);		
+		RenderTexture(texture, glm::mat3(1.0f), transform, color);
 	}
 
-	void Renderer::RenderTexture(Texture* texture, glm::ivec4 texSize, glm::ivec4 destSize, glm::ivec4 color)
+	void Renderer::RenderTexture(Texture* texture, const glm::vec4& texSize, const glm::vec4& destSize, const glm::vec4& color)
 	{
-		//SdlRenderer::RenderTexture((SdlTexture*)texture, texSize, destSize, color);
+		glm::mat3 transform = glm::translate(glm::mat3(1.0f), { destSize.x, destSize.y }) * 
+			glm::scale(glm::mat3(1.0f), { destSize.z, destSize.w });
+		RenderTexture(texture, texSize, transform, color);
 	}
 
-	void Renderer::RenderTexture(Texture* texture, glm::ivec4 texSize, glm::imat3x2& transform, glm::ivec4 color)
+	void Renderer::RenderTexture(Texture* texture, const glm::vec4& texSize, const glm::mat3& transform, const glm::vec4& color)
 	{
-		//SdlRenderer::RenderTexture((SdlTexture*)texture, texSize, transform, color);
+		glm::mat3 textureTransform = glm::translate(glm::mat3(1.0f), { texSize.x, texSize.y }) *
+			glm::scale(glm::mat3(1.0f), { texSize.z, texSize.w });
+		RenderTexture(texture, textureTransform, transform, color);
 	}
 
-	void Renderer::RenderRotatedTexture(Texture* texture, glm::ivec4 texSize, glm::imat3x2& transform, glm::ivec4 color)
+	void Renderer::RenderRotatedTexture(Texture* texture, const glm::vec4& texSize, const glm::mat3& transform, const glm::vec4& color)
 	{
-		//SdlRenderer::RenderRotatedTexture((SdlTexture*)texture, texSize, transform, color);
+		glm::mat3 textureTransform = glm::translate(glm::mat3(1.0f), { texSize.x, texSize.y }) *
+			glm::scale(glm::mat3(1.0f), { texSize.z, texSize.w });
+		RenderTexture(texture, textureTransform, transform, color);
 	}
 
-	void Renderer::RenderRect(glm::vec2 pos, glm::vec2 dims, float r, float g, float b)
+	void Renderer::RenderTexture(Texture* texture, const glm::mat3& textureTransform, const glm::mat3& transform, const glm::vec4& color)
 	{
-		float vertexData[] = {
-			pos.x,			pos.y,			r, g, b, 1.0f, //TopLeft
-			pos.x + dims.x, pos.y,			r, g, b, 1.0f, //TopRight
-			pos.x + dims.x,	pos.y + dims.y, r, g, b, 1.0f, //BottomRight
-			pos.x,			pos.y + dims.y, r, g, b, 1.0f, //BottomLeft
-		};
+		Vertex vertices[4];
+		for (int i = 0; i < 4; ++i)
+		{
+			vertices[i].pos = transform * quadPositions[i];
+			vertices[i].color = color;
+			vertices[i].texCoords = textureTransform * texCoords[i];
+		}
+		vertexBuffer->SetData(vertices, sizeof(vertices));
+		texture->Bind();
+		renderAPI->Draw(vao.get());
+		texture->Unbind();
+	}
 
-		vertexBuffer->SetData(vertexData, sizeof(vertexData));
+	void Renderer::RenderRect(const glm::vec2& pos, const glm::vec2& dims, const glm::vec4& color)
+	{
+		Vertex vertices[4];
 
+		glm::mat3 transform = glm::translate(glm::mat3(1.0f), pos) * glm::scale(glm::mat3(1.0f), dims);
+		for (int i = 0; i < 4; ++i)
+		{
+			vertices[i].pos = transform * quadPositions[i];
+			vertices[i].color = color;
+			vertices[i].texCoords = texCoords[i];
+		}
+		vertexBuffer->SetData(vertices, sizeof(vertices));
+		TextureManager::loadWhiteTexture()->Bind();
 		renderAPI->Draw(vao.get());
 	}
 

@@ -4,6 +4,7 @@
 #include "Components.h"
 #include "Sage/renderer/renderer.hpp"
 #include "Sage/System/AnimatorSystem.h"
+#include <glm/gtx/matrix_transform_2d.hpp>
 
 namespace Sage {
 	GameScene::GameScene()
@@ -41,10 +42,8 @@ namespace Sage {
 
 			for (auto entity : group)
 			{
-				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+				auto [transformComponent, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 				std::shared_ptr<Texture> toBeRendered = nullptr;
-				int width = 1;
-				int height = 1;
 
 				if (!sprite.texture)
 				{
@@ -53,10 +52,11 @@ namespace Sage {
 				else
 				{
 					toBeRendered = sprite.texture;
-					width = (int)sprite.texture->getWidth();
-					height = (int)sprite.texture->getHeight();
 				}
-				Renderer::RenderRotatedTexture(toBeRendered.get(), { 0, 0, width, height }, (glm::imat3x2)transform, sprite.Color);
+				glm::mat3 transform = glm::translate(glm::mat3(1.0f), transformComponent.Position) * 
+					glm::rotate(glm::mat3(1.0f), transformComponent.Rotation) * 
+					glm::scale(glm::mat3(1.0f), transformComponent.Scale);
+				Renderer::RenderRotatedTexture(toBeRendered.get(), { 0, 0, 1.0f, 1.0f }, transform, sprite.Color);
 			}
 		}
 
