@@ -11,6 +11,8 @@ namespace Sage {
 		Window& window = Engine::Get().GetWindow();
 		frameBuffer = Sage::Framebuffer::Create(window.GetWidth(), window.GetHeight());
 		entityPanel = EntityPanel(mainScene.get());
+
+		camera = Camera(800, 800);
 	}
 
 	EditorLayer::~EditorLayer()
@@ -24,13 +26,14 @@ namespace Sage {
 			(frameBuffer->GetWidth() != viewportSize.x || frameBuffer->GetHeight() != viewportSize.y))
 		{
 			frameBuffer->Resize((uint32_t)viewportSize.x, (uint32_t)viewportSize.y);
+			camera.Resize(viewportSize.x, viewportSize.y);
 		}
 	}
 
 	void EditorLayer::OnRender()
 	{
 		frameBuffer->Bind();
-		Renderer::StartScene();
+		Renderer::StartScene(camera);
 		mainScene->OnRender();
 		Renderer::EndScene();
 		frameBuffer->Unbind();
@@ -126,12 +129,38 @@ namespace Sage {
 		ImGui::Begin("Viewport");
 		ImGui::PopStyleVar();
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
-		
+		ImVec2 test = ImGui::GetWindowSize();
+		ImVec2 vMin = ImGui::GetWindowContentRegionMin();
+		ImVec2 vMax = ImGui::GetWindowContentRegionMax();
+		ImVec2 size = {vMax.x - vMin.x, vMax.y - vMin.y};
+		vMin.x += ImGui::GetWindowPos().x;
+		vMin.y += ImGui::GetWindowPos().y;
+		vMax.x += ImGui::GetWindowPos().x;
+		vMax.y += ImGui::GetWindowPos().y;
+
 		viewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 		
 		ImGui::Image(frameBuffer->GetTextureId(), ImVec2{ (float)viewportSize.x, (float)viewportSize.y });
 		ImGui::End();
 
+		ImGui::Begin("Debug");
+		ImGui::Text("%f, %f", size.x, size.y);
+
+		glm::vec2 transform = camera.GetTranslate();
+		if (ImGui::DragFloat2("Position", (float*)&transform))
+		{
+			camera.SetTranslate(transform);
+		}
+
+		float rotation = glm::degrees(camera.GetRotation());
+		if (ImGui::DragFloat("Rotation", &rotation))
+		{
+			camera.SetRotation(glm::radians(rotation));
+		}
+		ImGui::End();
+
+
+		ImGui::ShowDemoWindow();
 		if (entityPanelVisible)
 			entityPanel.OnImGuiRender();
 		

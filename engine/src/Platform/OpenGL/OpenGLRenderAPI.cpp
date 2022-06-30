@@ -1,6 +1,7 @@
 #include "OpenGLRenderAPI.h"
 #include <glad/glad.h>
 #include "Sage/Core/Log.h"
+#include <glm/gtc/type_ptr.hpp>
 namespace Sage {
 	void OpenGLMessageCallback(
 		unsigned source,
@@ -57,5 +58,10 @@ namespace Sage {
 		vertexArray->Bind();
 		glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 		vertexArray->Unbind();
+	}
+
+	void OpenGLRenderAPI::SetUniformMat4(uint32_t location, glm::mat4& matrix)
+	{
+		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
 }

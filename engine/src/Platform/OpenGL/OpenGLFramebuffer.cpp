@@ -43,6 +43,7 @@ namespace Sage {
 	void OpenGLFramebuffer::Bind()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, id);
+		glViewport(0, 0, width, height);
 	}
 
 	void OpenGLFramebuffer::Unbind()

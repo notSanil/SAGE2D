@@ -1,5 +1,6 @@
 #pragma once
 #include <Sage/Sage.h>
+#include "Sage/Core/Camera.h"
 #include "Panels/EntityPanel.h"
 #include "Sage/animator/animator.hpp"
 #include "Panels/BrowserPanel.h"
@@ -19,6 +20,7 @@ namespace Sage {
 		std::unique_ptr<Framebuffer> frameBuffer;
 		std::unique_ptr<GameScene> mainScene;
 		glm::vec2 viewportSize;
+		Camera camera;
 
 		EntityPanel entityPanel;
 		BrowserPanel browserPanel;

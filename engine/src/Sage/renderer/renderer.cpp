@@ -52,6 +52,8 @@ namespace Sage {
 		texCoords[1] = {1.0f, 1.0f, 1.0f};
 		texCoords[2] = {1.0f, 0.0f, 1.0f};
 		texCoords[3] = {0.0f, 0.0f, 1.0f};
+
+		shader->Bind();
 	}
 
 	Renderer::Renderer() 
@@ -63,6 +65,13 @@ namespace Sage {
 	{
 		renderAPI->ClearScreen();
 		shader->Bind();
+	}
+	
+	void Renderer::StartScene(Camera& camera)
+	{
+		renderAPI->ClearScreen();
+		shader->Bind();
+		renderAPI->SetUniformMat4(0, camera.GetViewProjection());
 	}
 
 	void Renderer::EndScene()

@@ -13,5 +13,6 @@ namespace Sage {
         void ClearScreen() override;
 
         void Draw(VertexArray* vertexArray) override;
+        void SetUniformMat4(uint32_t location, glm::mat4& matrix) override;
 	};
 }

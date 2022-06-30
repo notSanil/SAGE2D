@@ -4,11 +4,11 @@ Entities:
     NameComponent:
       Name: NewEntity
     TransformComponent:
-      Position: [0, 0]
-      Scale: [1, 1]
+      Position: [228.5, 136]
+      Scale: [101.599998, 101.599998]
       Rotation: 0
     SpriteRendererComponent:
       Texture: -514579486
-      Color: [255, 255, 255, 255]
+      Color: [1, 1, 1, 255]
 Assets:
   -514579486: assets\images\Burger.png

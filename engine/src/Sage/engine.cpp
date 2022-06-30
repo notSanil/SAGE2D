@@ -61,7 +61,6 @@ namespace Sage {
 				layer->OnStep(deltaTime);
 			}
 
-			Renderer::StartScene();
 			for (const auto& layer : layerStack)
 			{
 				layer->OnRender();
@@ -74,7 +73,6 @@ namespace Sage {
 			}
 			ImGuiOverlay->End();
 
-			Renderer::EndScene();
 			window->Update();
 		}
 	}

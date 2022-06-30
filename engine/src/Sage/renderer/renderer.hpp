@@ -3,6 +3,7 @@
 
 #include <glm/glm.hpp>
 #include "Sage/Core/Window.h"
+#include "Sage/Core/Camera.h"
 #include "Sage/texture/Texture.hpp"
 #include "Sage/renderer/Shader.h"
 #include "RenderAPI.h"
@@ -18,6 +19,7 @@ namespace Sage {
         static void destroy();
 
         static void StartScene();
+        static void StartScene(Camera& camera);
         static void EndScene();
 
         //static void RenderText(const Font* font, std::string const& text, Vec4 const& col, Point const pos);

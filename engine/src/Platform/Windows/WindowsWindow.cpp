@@ -165,7 +165,6 @@ namespace Sage{
 		SdlMouseToSage[SDL_BUTTON_RIGHT] =	MouseCode::ButtonRight;
 		SdlMouseToSage[SDL_BUTTON_X1] =		MouseCode::Button3;
 		SdlMouseToSage[SDL_BUTTON_X2] =		MouseCode::Button4;
-
 	}
 
 

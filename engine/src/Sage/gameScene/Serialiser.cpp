@@ -241,7 +241,7 @@ namespace Sage {
 		{
 			YAML::Node transformComponentData = data["TransformComponent"];
 			auto& transform = entity.GetComponent<TransformComponent>();
-			transform.Position = transformComponentData["Position"].as<glm::ivec2>();
+			transform.Position = transformComponentData["Position"].as<glm::vec2>();
 			transform.Scale = transformComponentData["Scale"].as<glm::vec2>();
 			transform.Rotation = transformComponentData["Rotation"].as<float>();
 		}
@@ -250,7 +250,7 @@ namespace Sage {
 		{
 			YAML::Node spriteRendererData = data["SpriteRendererComponent"];
 			auto& spriteRenderer = entity.AddComponent<SpriteRendererComponent>();
-			spriteRenderer.Color = spriteRendererData["Color"].as<glm::ivec4>();
+			spriteRenderer.Color = spriteRendererData["Color"].as<glm::vec4>();
 			spriteRenderer.hash = spriteRendererData["Texture"].as<int>();
 			std::string texturePath = assets[spriteRenderer.hash].as<std::string>();
 			spriteRenderer.texture = TextureManager::load(texturePath);
