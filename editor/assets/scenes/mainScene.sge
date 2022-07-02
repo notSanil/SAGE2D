@@ -4,8 +4,8 @@ Entities:
     NameComponent:
       Name: NewEntity
     TransformComponent:
-      Position: [228.5, 136]
-      Scale: [101.599998, 101.599998]
+      Position: [0, 0]
+      Scale: [1, 1]
       Rotation: 0
     SpriteRendererComponent:
       Texture: -514579486

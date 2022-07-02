@@ -19,7 +19,7 @@ namespace Sage {
         static void destroy();
 
         static void StartScene();
-        static void StartScene(Camera& camera);
+        static void StartScene(const Camera& camera);
         static void EndScene();
 
         //static void RenderText(const Font* font, std::string const& text, Vec4 const& col, Point const pos);

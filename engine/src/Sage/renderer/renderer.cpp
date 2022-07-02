@@ -67,7 +67,7 @@ namespace Sage {
 		shader->Bind();
 	}
 	
-	void Renderer::StartScene(Camera& camera)
+	void Renderer::StartScene(const Camera& camera)
 	{
 		renderAPI->ClearScreen();
 		shader->Bind();

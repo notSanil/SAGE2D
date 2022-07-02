@@ -1,12 +1,11 @@
 #include "engine.hpp"
 
 #include <functional>
-
 #include "Sage/renderer/renderer.hpp"
 #include "Sage/gameScene/sceneManager.hpp"
 #include "Sage/texture/texture.hpp"
 #include "Sage/Core/Log.h"
-#include <imgui.h>
+#include "Sage/Core/Input.h"
 
 namespace Sage {
 	Engine::Engine(uint32_t width, uint32_t height, const std::string& name)
@@ -27,14 +26,20 @@ namespace Sage {
 	void Engine::EventCallback(Sage::Event& e)
 	{
 		Sage::Dispatcher dispatcher(e);
-		dispatcher.Dispatch<Sage::WindowCloseEvent>(std::bind(&Engine::WindowCloseEventCallback, this, std::placeholders::_1));
+		dispatcher.Dispatch<WindowCloseEvent>(std::bind(&Engine::WindowCloseEventCallback, this, std::placeholders::_1));
+
+		dispatcher.Dispatch<KeyPressedEvent>(std::bind((void(*)(KeyPressedEvent&))&Input::OnKeyPressed, std::placeholders::_1));
+		dispatcher.Dispatch<KeyReleasedEvent>(std::bind((void(*)(KeyReleasedEvent&)) & Input::OnKeyReleased, std::placeholders::_1));
+		dispatcher.Dispatch<MouseButtonPressedEvent>(std::bind((void(*)(MouseButtonPressedEvent&)) &Input::OnMouseButtonPressed, std::placeholders::_1));
+		dispatcher.Dispatch<MouseButtonReleasedEvent>(std::bind((void(*)(MouseButtonReleasedEvent&)) &Input::OnMouseButtonReleased, std::placeholders::_1));
+
 		for (const auto& layer : layerStack)
 		{
 			layer->OnEvent(e);
 		}
 	}
 
-	void Engine::WindowCloseEventCallback(Sage::WindowCloseEvent& e)
+	void Engine::WindowCloseEventCallback(WindowCloseEvent& e)
 	{
 		running = false;
 	}
