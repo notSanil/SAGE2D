@@ -17,10 +17,17 @@ namespace Sage {
 		const Camera& GetCamera() const { return camera; }
 	private:
 		void OnMouseScroll(MouseScrollEvent& e);
+		void OnMouseMove(MouseMovedEvent& e);
 
 	private:
 		Camera camera;
-		const float moveSpeed = 5.0f;
+		const float baseMoveSpeed = 4.0f;
+		float moveSpeed = baseMoveSpeed;
 		const float rotateSpeed = 45.0f;
+
+		float zoom = 1.0f;
+		float aspectRatio = 1.0f;
+
+		float viewportWidth = 0.0f, viewportHeight = 0.0f;
 	};
 }

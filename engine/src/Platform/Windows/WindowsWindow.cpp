@@ -263,7 +263,7 @@ namespace Sage{
 				}
 				case SDL_MOUSEMOTION:
 				{
-					MouseMovedEvent ev((float)e.motion.x, (float)e.motion.y);
+					MouseMovedEvent ev((float)e.motion.xrel, (float)e.motion.yrel);
 					eventCallback(ev);
 					break;
 				}

@@ -9,6 +9,6 @@ Entities:
       Rotation: 0
     SpriteRendererComponent:
       Texture: -514579486
-      Color: [1, 1, 1, 255]
+      Color: [1, 1, 1, 1]
 Assets:
   -514579486: assets\images\Burger.png
