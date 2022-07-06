@@ -8,6 +8,7 @@ namespace Sage {
         OpenGLTexture(uint32_t width, uint32_t height);
         OpenGLTexture(uint32_t width, uint32_t height, AccessFormat format);
         OpenGLTexture(const std::string& path);
+        OpenGLTexture(const std::string& path, ResizingPolicy resizingPolicy);
         virtual ~OpenGLTexture() override;
 
         virtual void Bind() override;

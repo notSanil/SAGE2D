@@ -16,6 +16,9 @@ namespace Sage {
 		virtual void OnEvent(Event & e) override;
 
 	private:
+		void RenderMenu();
+
+	private:
 		std::unique_ptr<Framebuffer> frameBuffer;
 		std::unique_ptr<GameScene> mainScene;
 		glm::vec2 viewportSize;
@@ -25,5 +28,10 @@ namespace Sage {
 		BrowserPanel browserPanel;
 		bool entityPanelVisible = true;
 		bool browserPanelVisible = true;
+
+		bool viewportHovered = false;
+		bool viewportFocused = false;
+
+		std::unique_ptr<Texture> background = nullptr;
 	};
 }

@@ -2,7 +2,7 @@ Scene: Sample Scene
 Entities:
   - Entity: [0]
     NameComponent:
-      Name: NewEntity
+      Name: Burger
     TransformComponent:
       Position: [0, 0]
       Scale: [1, 1]

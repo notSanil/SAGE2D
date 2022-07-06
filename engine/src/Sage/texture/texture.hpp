@@ -12,12 +12,19 @@ namespace Sage {
 		Target
 	};
 
+	enum class ResizingPolicy
+	{
+		Linear,
+		Nearest
+	};
+
 	class Texture
 	{
 	public:
 		static std::unique_ptr<Texture> Create(uint32_t width, uint32_t height);
 		static std::unique_ptr<Texture> Create(uint32_t width, uint32_t height, AccessFormat format);
 		static std::unique_ptr<Texture> Create(const std::string& path);
+		static std::unique_ptr<Texture> Create(const std::string& path, ResizingPolicy resizingPolicy);
 		virtual ~Texture() = 0 {};
 
 		virtual void Bind() = 0;

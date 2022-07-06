@@ -11,6 +11,8 @@ namespace Sage {
 		Window& window = Engine::Get().GetWindow();
 		frameBuffer = Sage::Framebuffer::Create(window.GetWidth(), window.GetHeight());
 		entityPanel = EntityPanel(mainScene.get());
+
+		background = Texture::Create("resources/checkBackground.png", ResizingPolicy::Nearest);
 	}
 
 	EditorLayer::~EditorLayer()
@@ -26,13 +28,15 @@ namespace Sage {
 			frameBuffer->Resize((uint32_t)viewportSize.x, (uint32_t)viewportSize.y);
 			cameraController.OnWindowResize(viewportSize.x, viewportSize.y);
 		}
-		cameraController.OnStep(dt);
+		if (viewportHovered)
+			cameraController.OnStep(dt);
 	}
 
 	void EditorLayer::OnRender()
 	{
 		frameBuffer->Bind();
 		Renderer::StartScene(cameraController.GetCamera());
+		Renderer::RenderTexture(background.get(), { 0.0f, 0.0f }, { 1.0f, 1.0f });
 		mainScene->OnRender();
 		Renderer::EndScene();
 		frameBuffer->Unbind();
@@ -46,12 +50,11 @@ namespace Sage {
 		ImGui::SetNextWindowViewport(viewport->ID);
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
 		ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking
 			| ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize |
 			ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
-
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-		ImGui::Begin("DockSpace Demo", NULL, window_flags);
+		ImGui::Begin("DockSpace", NULL, window_flags);
 		ImGui::PopStyleVar(3);
 
 		// Submit the DockSpace
@@ -61,7 +64,29 @@ namespace Sage {
 			ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
 			ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f));
 		}
+		RenderMenu();
+		ImGui::End();
 
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+		ImGui::Begin("Viewport");
+		ImGui::PopStyleVar();
+
+		viewportHovered = ImGui::IsWindowHovered();
+		viewportFocused = ImGui::IsWindowFocused();
+		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
+		viewportSize = { viewportPanelSize.x, viewportPanelSize.y };		
+		ImGui::Image(frameBuffer->GetTextureId(), ImVec2{ (float)viewportSize.x, (float)viewportSize.y });
+		ImGui::End();
+
+		if (entityPanelVisible)
+			entityPanel.OnImGuiRender();
+		
+		if (browserPanelVisible)
+			browserPanel.OnImGuiRender();
+	}
+
+	void EditorLayer::RenderMenu()
+	{
 		if (ImGui::BeginMenuBar())
 		{
 			if (ImGui::BeginMenu("File"))
@@ -109,26 +134,11 @@ namespace Sage {
 			}
 			ImGui::EndMenuBar();
 		}
-		ImGui::End();
-
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-		ImGui::Begin("Viewport");
-		ImGui::PopStyleVar();
-		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
-		viewportSize = { viewportPanelSize.x, viewportPanelSize.y };		
-		ImGui::Image(frameBuffer->GetTextureId(), ImVec2{ (float)viewportSize.x, (float)viewportSize.y });
-		ImGui::End();
-
-		if (entityPanelVisible)
-			entityPanel.OnImGuiRender();
-		
-		if (browserPanelVisible)
-			browserPanel.OnImGuiRender();
 	}
 
 	void EditorLayer::OnEvent(Event& e)
 	{
-		cameraController.OnEvent(e);
+		if (viewportHovered)
+			cameraController.OnEvent(e);
 	}
-
 }

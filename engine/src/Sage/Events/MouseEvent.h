@@ -10,8 +10,8 @@ namespace Sage {
 			mouseX(x), mouseY(y)
 		{}
 
-		float GetMouseX() const { return mouseX; }
-		float GetMouseY() const { return mouseY; }
+		float GetMouseXDelta() const { return mouseX; }
+		float GetMouseYDelta() const { return mouseY; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryMouse)
 		EVENT_CLASS_TYPE(MouseMoved)

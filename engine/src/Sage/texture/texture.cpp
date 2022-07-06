@@ -43,6 +43,19 @@ namespace Sage {
             return nullptr;
         }
     }
+    
+    std::unique_ptr<Texture> Texture::Create(const std::string& path, ResizingPolicy resizingPolicy)
+    {
+        switch (RenderAPI::GetApi())
+        {
+        case API::SDL:
+            return nullptr;
+        case API::OpenGL:
+            return std::make_unique<OpenGLTexture>(path, resizingPolicy);
+        default:
+            return nullptr;
+        }
+    }
 
 
     //////////////////////Texture Manager////////////////////////////////
