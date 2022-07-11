@@ -1,7 +1,6 @@
 #include "EditorLayer.h"
-#include <entt.hpp>
-#include "Sage/System/AnimatorSystem.h"
 #include "Sage/gameScene/Serialiser.h"
+#include "Sage/Core/Input.h"
 
 namespace Sage {
 	EditorLayer::EditorLayer()
@@ -13,6 +12,39 @@ namespace Sage {
 		entityPanel = EntityPanel(mainScene.get());
 
 		background = Texture::Create("resources/checkBackground.png", ResizingPolicy::Nearest);
+
+		class moveScript : public NativeScript
+		{
+		public:
+			virtual void OnStep(float dt) 
+			{
+				float delY = 0.0f;
+				constexpr float speed = 2.0f;
+				if (Input::IsKeyPressed(KeyCode::w))
+				{
+					delY -= speed * dt;
+				}
+				
+				if (Input::IsKeyPressed(KeyCode::s))
+					delY += speed * dt;
+
+				auto& transform = entity.GetComponent<TransformComponent>();
+				transform.Position.y += delY;
+			};
+
+			virtual void OnRender() 
+			{
+				auto& transform = entity.GetComponent<TransformComponent>();
+				Renderer::RenderRect(transform.Position, { 0.5f, 1.5f }, { 1.0f, 1.0f, 1.0f, 1.0f });
+			};
+		};
+
+
+
+
+
+		Entity e = mainScene->CreateEntity();
+		e.AddComponent<NativeScriptComponent>().Bind<moveScript>();
 	}
 
 	EditorLayer::~EditorLayer()
@@ -30,6 +62,8 @@ namespace Sage {
 		}
 		if (viewportHovered)
 			cameraController.OnStep(dt);
+
+		mainScene->OnStep(dt);
 	}
 
 	void EditorLayer::OnRender()

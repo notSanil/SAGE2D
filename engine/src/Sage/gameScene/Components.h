@@ -2,6 +2,7 @@
 #include <memory>
 #include "Sage/texture/Texture.hpp"
 #include <glm/glm.hpp>
+#include "Sage/gameScene/NativeScript.h"
 
 namespace Sage {
 	struct SpriteRendererComponent
@@ -43,5 +44,24 @@ namespace Sage {
 		glm::ivec2 SheetGrid{ 1, 1 };
 		int Speed = 1;
 		int CurrentFrame = 0;
+	};
+
+	struct NativeScriptComponent
+	{
+		NativeScript* script = nullptr;
+
+		NativeScript* (*CreateScript)();
+		void (*DestroyScript)(NativeScriptComponent*);
+
+
+		template <typename T>
+		void Bind()
+		{
+			CreateScript = []() {return (NativeScript*)new T; };
+			DestroyScript = [](NativeScriptComponent* component) {
+				delete component->script;
+				component->script = nullptr;
+			};
+		}
 	};
 }

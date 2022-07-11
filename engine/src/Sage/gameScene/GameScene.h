@@ -21,6 +21,7 @@ namespace Sage {
 		void SetName(const std::string& newName) { name = newName; }
 
 		void OnRender();
+		void OnStep(float dt);
 	private:
 		entt::registry registry;
 		std::string name;

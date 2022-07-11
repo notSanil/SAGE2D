@@ -70,5 +70,32 @@ namespace Sage {
 				AnimatorSystem::MoveToNextFrame(animation, animation.Speed);
 			}
 		}
+
+		{
+			auto view = registry.view<NativeScriptComponent>();
+			for (auto entity : view)
+			{
+				auto nativeScriptComponent = view.get<NativeScriptComponent>(entity);
+
+				nativeScriptComponent.script->OnRender();
+			}
+		}
+	}
+
+	void GameScene::OnStep(float dt)
+	{
+		auto view = registry.view<NativeScriptComponent>();
+		for (auto entity : view)
+		{
+			auto& nativeScriptComponent = view.get<NativeScriptComponent>(entity);
+			if (!nativeScriptComponent.script)
+			{
+				nativeScriptComponent.script = nativeScriptComponent.CreateScript();
+				nativeScriptComponent.script->entity = { entity, this };
+				nativeScriptComponent.script->OnCreate();
+			}
+
+			nativeScriptComponent.script->OnStep(dt);
+		}
 	}
 }
