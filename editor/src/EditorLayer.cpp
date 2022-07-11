@@ -36,7 +36,7 @@ namespace Sage {
 	{
 		frameBuffer->Bind();
 		Renderer::StartScene(cameraController.GetCamera());
-		Renderer::RenderTexture(background.get(), { 0.0f, 0.0f }, { 1.0f, 1.0f });
+		//Renderer::RenderTexture(background.get(), { 0.0f, 0.0f }, { 1.0f, 1.0f });
 		mainScene->OnRender();
 		Renderer::EndScene();
 		frameBuffer->Unbind();

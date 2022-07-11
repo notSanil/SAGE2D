@@ -218,7 +218,7 @@ namespace Sage {
 		std::hash <std::string> hasher;
 		for (auto& [path, texture] : TextureManager::loadedTextures)
 		{
-			int id = hasher(path);
+			int id = (int)hasher(path);
 			out << YAML::Key << id << YAML::Value << path;
 		}
 		out << YAML::EndMap;
@@ -276,7 +276,7 @@ namespace Sage {
 		outScene->SetName(sceneName);
 		
 		//The entities are saved in reverse order so we iterate backwards
-		for (int i = entities.size() - 1; i >= 0; --i)
+		for (int i = (int)entities.size() - 1; i >= 0; --i)
 		{
 			uint32_t id = entities[i]["Entity"][0].as<uint32_t>();
 			Entity created = outScene->CreateEntity();

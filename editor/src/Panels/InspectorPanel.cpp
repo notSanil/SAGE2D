@@ -123,19 +123,23 @@ namespace Sage {
 
 		ImGui::Separator();
 		DrawComponent<TransformComponent>("Transform", false, selected, [](auto& component) {
-			ImGui::DragFloat2("Position", (float*)&component.Position, 0.025);
+			ImGui::DragFloat2("Position", (float*)&component.Position, 0.025f);
 			if (ImGui::IsItemClicked(1))
 			{
-				component.Position.x = 0;
-				component.Position.y = 0;
+				component.Position.x = 0.0f;
+				component.Position.y = 0.0f;
 			}
 			ImGui::DragFloat2("Scale", (float*)&component.Scale, 0.005f, 0.0f, FLT_MAX, "%.2f", ImGuiSliderFlags_AlwaysClamp);
 			if (ImGui::IsItemClicked(1))
 			{
-				component.Scale.x = 1.0;
-				component.Scale.y = 1.0;
+				component.Scale.x = 1.0f;
+				component.Scale.y = 1.0f;
 			}
-			ImGui::DragFloat("Rotation", &component.Rotation);
+			float rotation = glm::degrees(component.Rotation);
+			if (ImGui::DragFloat("Rotation", &rotation))
+			{
+				component.Rotation = glm::radians(rotation);
+			}
 			if (ImGui::IsItemClicked(1))
 			{
 				component.Rotation = 0.0f;
@@ -158,7 +162,7 @@ namespace Sage {
 					const char* data = (const char*)payload->Data;
 					component.texture = TextureManager::load(data);
 					std::hash<std::string> hasher;
-					component.hash = hasher(data);
+					component.hash = (int)hasher(data);
 				}
 				ImGui::EndDragDropTarget();
 			}

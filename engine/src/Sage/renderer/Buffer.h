@@ -63,6 +63,7 @@ namespace Sage {
 			case Sage::DataType::Int3:		return 3;
 			case Sage::DataType::Int4:		return 4;
 			case Sage::DataType::Bool:		return 1;
+			default:						return 0;
 			}
 		}
 	};

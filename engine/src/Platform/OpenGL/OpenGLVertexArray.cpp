@@ -33,7 +33,7 @@ namespace Sage {
 			{
 				glEnableVertexAttribArray(attribIndex);
 				glVertexAttribPointer(attribIndex, element.GetElementCount(), GL_FLOAT, 
-					GL_FALSE, buffer->GetLayout().GetStride(), (const void*)element.Offset);
+					GL_FALSE, buffer->GetLayout().GetStride(), (const void*)(uint64_t)element.Offset);
 				++attribIndex;
 				break;
 			}
@@ -44,7 +44,7 @@ namespace Sage {
 			{
 				glEnableVertexAttribArray(attribIndex);
 				glVertexAttribIPointer(attribIndex, element.GetElementCount(), GL_INT, 
-					buffer->GetLayout().GetStride(), (const void*)element.Offset);
+					buffer->GetLayout().GetStride(), (const void*)(uint64_t)element.Offset);
 				++attribIndex;
 				break;
 			}
@@ -52,7 +52,7 @@ namespace Sage {
 			{
 				glEnableVertexAttribArray(attribIndex);
 				glVertexAttribIPointer(attribIndex, element.GetElementCount(), GL_BOOL,
-					buffer->GetLayout().GetStride(), (const void*)element.Offset);
+					buffer->GetLayout().GetStride(), (const void*)(uint64_t)element.Offset);
 				++attribIndex;
 				break;
 			}

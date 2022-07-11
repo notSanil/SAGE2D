@@ -12,9 +12,6 @@
 #include "Sage/gameScene/gameScene.hpp"
 #include "Sage/gameScene/sceneManager.hpp"
 
-/////////Camera//////////////////
-#include "Sage/camera/camera.hpp"
-
 /////////Log////////////////////
 #include "Sage/Core/Log.h"
 
