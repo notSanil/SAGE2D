@@ -8,8 +8,7 @@ namespace Sage {
     enum class API
     {
         None = 0,
-        SDL = 1,
-        OpenGL = 2,
+        OpenGL = 1,
     };
 
     class RenderAPI

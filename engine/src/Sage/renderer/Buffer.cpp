@@ -9,8 +9,6 @@ namespace Sage {
 		{
 		case API::None:
 			return nullptr;
-		case API::SDL:
-			return nullptr;
 		case API::OpenGL:
 			return std::make_unique<OpenGLVertexBuffer>(size);
 		default:
@@ -23,8 +21,6 @@ namespace Sage {
 		switch (RenderAPI::GetApi())
 		{
 		case API::None:
-			return nullptr;
-		case API::SDL:
 			return nullptr;
 		case API::OpenGL:
 			return std::make_unique<OpenGLVertexBuffer>(data, size);
@@ -41,8 +37,6 @@ namespace Sage {
 		switch (RenderAPI::GetApi())
 		{
 		case API::None:
-			return nullptr;
-		case API::SDL:
 			return nullptr;
 		case API::OpenGL:
 			return std::make_unique<OpenGLIndexBuffer>(indices, indexCount);

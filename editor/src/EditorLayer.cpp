@@ -20,12 +20,12 @@ namespace Sage {
 			{
 				float delY = 0.0f;
 				constexpr float speed = 2.0f;
-				if (Input::IsKeyPressed(KeyCode::w))
+				if (Input::IsKeyPressed(KeyCode::Up))
 				{
 					delY -= speed * dt;
 				}
 				
-				if (Input::IsKeyPressed(KeyCode::s))
+				if (Input::IsKeyPressed(KeyCode::Down))
 					delY += speed * dt;
 
 				auto& transform = entity.GetComponent<TransformComponent>();
@@ -35,8 +35,10 @@ namespace Sage {
 			virtual void OnRender() 
 			{
 				auto& transform = entity.GetComponent<TransformComponent>();
-				Renderer::RenderRect(transform.Position, { 0.5f, 1.5f }, { 1.0f, 1.0f, 1.0f, 1.0f });
+				Renderer::RenderRect(transform.Position, { 0.5f * scale, 1.5f * scale }, { 1.0f, 1.0f, 1.0f, 1.0f });
 			};
+		private:
+			const float scale = 0.25f;
 		};
 
 

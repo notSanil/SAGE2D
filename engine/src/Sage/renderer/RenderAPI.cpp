@@ -9,8 +9,6 @@ namespace Sage {
 		{
 		case API::OpenGL:
 			return std::make_unique<OpenGLRenderAPI>();
-		case API::SDL:
-			return nullptr;
 		default:
 			SAGE_CORE_CRIT("No API selected");
 			return nullptr;

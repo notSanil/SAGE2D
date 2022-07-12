@@ -1,7 +1,6 @@
 #include "texture.hpp"
 #include "Sage/renderer/renderer.hpp"
 #include "Sage/Core/Log.h"
-#include "Platform/SDL/SdlTexture.h"
 #include "Platform/OpenGL/OpenGLTexture.h"
 
 namespace Sage {
@@ -9,8 +8,6 @@ namespace Sage {
     {
         switch (RenderAPI::GetApi())
         {
-        case API::SDL:
-            return std::make_unique<SdlTexture>(width, height);
         case API::OpenGL:
             return std::make_unique<OpenGLTexture>(width, height);
         default:
@@ -22,8 +19,6 @@ namespace Sage {
     {
         switch (RenderAPI::GetApi())
         {
-        case API::SDL:
-            return std::make_unique<SdlTexture>(width, height);
         case API::OpenGL:
             return std::make_unique<OpenGLTexture>(width, height, format);
         default:
@@ -35,8 +30,6 @@ namespace Sage {
     {
         switch (RenderAPI::GetApi())
         {
-        case API::SDL:
-            return std::make_unique<SdlTexture>(path);
         case API::OpenGL:
             return std::make_unique<OpenGLTexture>(path);
         default:
@@ -48,8 +41,6 @@ namespace Sage {
     {
         switch (RenderAPI::GetApi())
         {
-        case API::SDL:
-            return nullptr;
         case API::OpenGL:
             return std::make_unique<OpenGLTexture>(path, resizingPolicy);
         default:

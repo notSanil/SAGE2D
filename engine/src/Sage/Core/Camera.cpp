@@ -3,6 +3,7 @@
 
 namespace Sage {
 	Camera::Camera(float left, float right, float bottom, float top)
+		:Left(left), Right(right), Bottom(bottom), Top(top)
 	{
 		projection = glm::ortho(left, right, bottom, top);
 		view = glm::mat4(1.0f);
@@ -10,6 +11,10 @@ namespace Sage {
 
 	void Camera::Resize(float left, float right, float bottom, float top)
 	{
+		Left = left;
+		Right = right;
+		Bottom = bottom;
+		Top = top;
 		projection = glm::ortho(left, right, bottom, top);
 	}
 

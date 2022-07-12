@@ -19,12 +19,16 @@ namespace Sage {
 		void SetTranslate(glm::vec2 newTranslate) { translation = newTranslate; RecalculateView(); }
 		glm::vec2 GetTranslate() const { return translation; }
 
+		glm::vec2 GetTopLeft() { return { Left, Top }; }
+		glm::vec2 GetBottomRight() { return { Right, Bottom }; }
+
 	private:
 		void RecalculateView();
 	private:
 		glm::mat4 projection = glm::mat4(1.0f);
 		glm::mat4 view = glm::mat4(1.0f);
 
+		float Left, Right, Top, Bottom;
 		glm::vec2 translation = glm::vec2();
 		float rotation = 0.0f;
 	};
