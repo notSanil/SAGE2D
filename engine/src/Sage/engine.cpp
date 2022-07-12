@@ -2,7 +2,6 @@
 
 #include <functional>
 #include "Sage/renderer/renderer.hpp"
-#include "Sage/gameScene/sceneManager.hpp"
 #include "Sage/texture/texture.hpp"
 #include "Sage/Core/Log.h"
 #include "Sage/Core/Input.h"
@@ -46,7 +45,6 @@ namespace Sage {
 
 	Engine::~Engine()
 	{
-		sceneManager::quit();
 		Renderer::destroy();
 		//Font::freeAllFonts();
 	}

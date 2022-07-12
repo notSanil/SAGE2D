@@ -1,16 +1,8 @@
 /////////////Rendering///////////////
-#include "Sage/animator/animator.hpp"
 #include "Sage/renderer/renderer.hpp"
 #include "Sage/renderer/FrameBuffer.h"
 //#include "Sage/renderer/font.hpp"
 #include "Sage/texture/Texture.hpp"
-
-////////////GameObject//////////////
-#include "Sage/gameObject/gameObject.hpp"
-
-///////////GameScene///////////////
-#include "Sage/gameScene/gameScene.hpp"
-#include "Sage/gameScene/sceneManager.hpp"
 
 /////////Log////////////////////
 #include "Sage/Core/Log.h"
