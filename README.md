@@ -9,7 +9,9 @@ Sanil's Awesome Game Engine (SAGE), a 2D game engine created in C++, with OpenGL
 * Scene serialiser and desiraliser to save and load scenes easily
 
 # Screenshots
-
+![Sample Scene](/repo/EngineLevel.png?raw=true "A level created in SAGE")
+![Sample Script](/repo/LuaScript.png?raw=true "A sample script")
+![Customising the editor](/repo/DockableTabs.png?raw=true "All tabs are moveable and dockable")
 
 # Building
 * Clone the repository using `git clone --recursive https://github.com/notSanil/SAGE2D.git`
