@@ -8,3 +8,5 @@
 x64
 bin
 bin-int
+/editor/assets/images
+/editor/assets/scripts

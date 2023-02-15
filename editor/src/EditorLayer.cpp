@@ -1,6 +1,7 @@
 #include "EditorLayer.h"
 #include "Sage/gameScene/Serialiser.h"
 #include "Sage/Core/Input.h"
+#include "Sage/Scripting/ScriptEngine.h"
 
 namespace Sage {
 	EditorLayer::EditorLayer()
@@ -74,6 +75,7 @@ namespace Sage {
 		Renderer::StartScene(cameraController.GetCamera());
 		//Renderer::RenderTexture(background.get(), { 0.0f, 0.0f }, { 1.0f, 1.0f });
 		mainScene->OnRender();
+		ScriptEngine::ExecuteScript("assets/scripts/test.lua");
 		Renderer::EndScene();
 		frameBuffer->Unbind();
 	}

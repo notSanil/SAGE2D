@@ -1,10 +1,10 @@
 #include "engine.hpp"
-
 #include <functional>
 #include "Sage/renderer/renderer.hpp"
 #include "Sage/texture/texture.hpp"
 #include "Sage/Core/Log.h"
 #include "Sage/Core/Input.h"
+#include "Sage/Scripting/ScriptEngine.h"
 
 namespace Sage {
 	Engine::Engine(uint32_t width, uint32_t height, const std::string& name)
@@ -18,6 +18,7 @@ namespace Sage {
 
 		Renderer::init(window.get());
 		timer.Reset();
+		ScriptEngine::Init();
 
 		ImGuiOverlay = std::make_unique<Sage::ImGuiOverlay>();
 	}
@@ -46,6 +47,7 @@ namespace Sage {
 	Engine::~Engine()
 	{
 		Renderer::destroy();
+		ScriptEngine::Destroy();
 		//Font::freeAllFonts();
 	}
 

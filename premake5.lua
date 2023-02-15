@@ -5,7 +5,6 @@ workspace "Sage"
    defines{ "YAML_CPP_STATIC_DEFINE" }
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
-   
 
 filter "configurations:Debug"
    runtime "Debug"
@@ -41,13 +40,16 @@ project "Sage"
         "engine/dependencies/glm/",
         "engine/dependencies/Glad/include/",
         "engine/dependencies/yaml-cpp/include/",
+        "engine/dependencies/lua/src/",
+        "engine/dependencies/lua/Sol/include",
     }
     links {
         "SDL",
         "SDLmain",
         "ImGui",
         "Glad",
-        "yaml-cpp"
+        "yaml-cpp",
+        "Lua"
     }
     targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
     objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
@@ -99,6 +101,8 @@ project "SageEditor"
         "engine/dependencies/stb_image/",
         "engine/dependencies/glm/",
         "engine/dependencies/Glad/include/",
+        "engine/dependencies/lua/src/",
+        "engine/dependencies/lua/Sol/include",
     }
     links {
         "Sage"
@@ -182,4 +186,23 @@ project "yaml-cpp"
     }
     includedirs {
         "engine/dependencies/yaml-cpp/include",
+    }
+
+project "Lua"
+    kind "StaticLib"
+    location "engine/dependencies/lua"
+    language "C"
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+    files {
+        "engine/dependencies/lua/src/*.c",
+        "engine/dependencies/lua/src/*.h",
+        "engine/dependencies/lua/src/*.hpp",
+    }
+    removefiles{
+        "engine/dependencies/lua/src/luac.c",
+        "engine/dependencies/lua/src/lua.c",
+    }
+    includedirs{
+        "engine/dependencies/lua/src/"
     }

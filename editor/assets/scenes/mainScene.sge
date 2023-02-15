@@ -1,14 +1,39 @@
 Scene: Sample Scene
 Entities:
-  - Entity: [0]
+  - Entity: [2]
     NameComponent:
-      Name: Burger
+      Name: Sky
     TransformComponent:
       Position: [0, 0]
-      Scale: [1, 1]
+      Scale: [8.80000019, 2.6400001]
       Rotation: 0
     SpriteRendererComponent:
-      Texture: -514579486
+      Texture: -1789287418
       Color: [1, 1, 1, 1]
+  - Entity: [1]
+    NameComponent:
+      Name: Ground
+    TransformComponent:
+      Position: [1.42499995, 1.02499998]
+      Scale: [8.89999962, 0.910000026]
+      Rotation: 0
+    SpriteRendererComponent:
+      Texture: -1599788100
+      Color: [1, 1, 1, 1]
+  - Entity: [0]
+    NameComponent:
+      Name: Alien
+    TransformComponent:
+      Position: [1.45000005, 0.449999988]
+      Scale: [0.660000026, 1.07000005]
+      Rotation: 0
+    SpriteRendererComponent:
+      Texture: -251647936
+      Color: [1, 1, 1, 1]
+    AnimatorComponent:
+      SheetGrid: [6, 4]
+      Speed: 1
 Assets:
-  -514579486: assets\images\Burger.png
+  -251647936: assets\images\alien.png
+  -1599788100: assets\images\ground.png
+  -1789287418: assets\images\sky.png
